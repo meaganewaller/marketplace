@@ -39,6 +39,18 @@
 			"strict": true,
 			"tags": ["decision", "documentation", "adr", "tradeoffs"],
 			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "development",
+			"description": "Commands for interacting with GitHub issues and PRs using the gh CLI",
+			"name": "github",
+			"source": "./plugins/github",
+			"strict": true,
+			"tags": ["github", "gh", "issues", "pull-requests", "cli"],
+			"version": "1.0.0"
 		}
 	]
 }

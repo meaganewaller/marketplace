@@ -59,6 +59,34 @@ Captures tradeoffs and related decisions into markdown automatically.
 
 ---
 
+### github
+
+[🧭 Plugin README](plugins/github/README.md)
+
+**Category:** development
+
+Commands for interacting with GitHub issues and PRs using the gh CLI.
+
+**Contains:**
+
+- **Commands:**
+  - `/gh-issue-list` - List issues in the current GitHub repository
+  - `/gh-issue-create` - Create a new issue in the current GitHub repository
+  - `/gh-issue-view` - View details of a GitHub issue
+  - `/gh-pr-list` - List pull requests in the current GitHub repository
+  - `/gh-pr-create` - Create a new pull request from the current branch
+  - `/gh-pr-view` - View details of a GitHub pull request
+  - `/gh-pr-checkout` - Checkout a pull request locally
+  - `/gh-pr-address-comments` - Address outstanding PR review comments
+
+**Installation:**
+
+```bash
+/plugin install github@meaganewaller-marketplace
+```
+
+---
+
 > **Note:** The `example-plugin` in `plugins/example-plugin/` is a template for creating new plugins and is not published to the marketplace.
 
 ## development
