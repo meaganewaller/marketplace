@@ -12,11 +12,12 @@
 		"misc",
 		"node",
 		"npm",
+		"bun",
 		"softwareTerms",
 		"typescript"
 	],
 	"ignorePaths": [],
 	"ignoreRandomStrings": true,
-	"ignoreWords": [],
+	"ignoreWords": ["mycompany", "mydb", "nothrow"],
 	"words": ["meaganewaller", "bunx"]
 }

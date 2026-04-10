@@ -13,9 +13,30 @@ add this marketplace
 
 ## available plugins
 
+### bun
+
+[🧭 Plugin README](plugins/bun/README.md)
+
+**Category:** development
+
+Bun runtime patterns, bunx, shell scripting, lockfile management, and testing guidance.
+
+**Contains:**
+
+- **Skills:**
+  - `bun-runtime` - Provides Bun runtime guidance including bunx, shell scripting, lockfile management, resolution, and testing patterns. Includes 5 reference files for progressive disclosure.
+
+**Installation:**
+
+```bash
+/plugin install bun@meaganewaller-marketplace
+```
+
+---
+
 ### decision-journal
 
-[Plugin README](plugins/decision-journal/README.md)
+[🧭 Plugin README](plugins/decision-journal/README.md)
 
 **Category:** utility
 

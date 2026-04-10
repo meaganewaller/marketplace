@@ -1,0 +1,18 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Bun runtime patterns, bunx, shell scripting, lockfile management, and testing guidance",
+	"keywords": [
+		"bun",
+		"runtime",
+		"bunx",
+		"shell",
+		"testing",
+		"lockfile",
+		"mise"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "bun",
+	"version": "1.0.0"
+}

@@ -12,6 +12,26 @@
 			"author": {
 				"name": "meaganewaller"
 			},
+			"category": "development",
+			"description": "Bun runtime patterns, bunx, shell scripting, lockfile management, and testing guidance",
+			"name": "bun",
+			"source": "./plugins/bun",
+			"strict": true,
+			"tags": [
+				"bun",
+				"runtime",
+				"bunx",
+				"shell",
+				"testing",
+				"lockfile",
+				"mise"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
 			"category": "utility",
 			"description": "captures tradeoffs and related decisions into markdown automatically",
 			"name": "decision-journal",
