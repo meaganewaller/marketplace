@@ -1,0 +1,81 @@
+{
+	"name": "@meaganewaller/marketplace",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "my marketplace plugins",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/meaganewaller/marketplace.git"
+	},
+	"author": "Meagan Waller <meagan@meaganwaller.com>",
+	"private": true,
+	"workspaces": [
+		"plugins/*"
+	],
+	"scripts": {
+		"commitlint": "commitlint",
+		"fix": "run-s -sl \"fix:*\"",
+		"fix:biome": "bunx --bun @biomejs/biome lint --write",
+		"fix:markdown": "markdownlint-cli2 --fix \"**/*.md\"",
+		"fix:pkg": "bun pkg fix",
+		"fix:format": "bunx --bun @biomejs/biome format --write",
+		"lint": "run-p -sl --aggregate-output \"lint:*\"",
+		"lint-staged": "lint-staged",
+		"lint:biome": "bunx --bun @biomejs/biome lint",
+		"lint:knip": "knip",
+		"lint:markdown": "markdownlint-cli2 \"**/*.md\"",
+		"lint:check": "bunx --bun @biomejs/biome check",
+		"lint:spelling": "cspell . \"./.*/**\"",
+		"lint:types": "tsc --noEmit",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.11",
+		"@commitlint/cli": "^20.5.0",
+		"@commitlint/config-conventional": "^20.5.0",
+		"@types/bun": "latest",
+		"cspell": "^10.0.0",
+		"globals": "^17.4.0",
+		"husky": "^9.1.7",
+		"knip": "^6.3.1",
+		"lint-staged": "^16.4.0",
+		"markdownlint-cli2": "^0.22.0",
+		"markdownlint-cli2-formatter-pretty": "^0.0.10",
+		"npm-run-all2": "^8.0.4"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"knip": {
+		"ignoreDependencies": [
+			"markdownlint-cli2-formatter-pretty"
+		],
+		"ignore": [
+			"**/*.d.ts",
+			".worktrees/**/*"
+		],
+		"tags": [
+			"-knipignore"
+		],
+		"ignoreFiles": [
+			"plugins/**/scripts/*"
+		],
+		"node": {
+			"entry": []
+		}
+	},
+	"lint-staged": {
+		"*.{ts,js,yml,json5}": [
+			"biome check --write",
+			"cspell lint --no-must-find-files"
+		],
+		"**/!(package-lock).json": [
+			"biome check --write ",
+			"cspell lint --no-must-find-files"
+		],
+		"*.md": [
+			"markdownlint-cli2 --fix",
+			"cspell lint --no-must-find-files"
+		]
+	}
+}

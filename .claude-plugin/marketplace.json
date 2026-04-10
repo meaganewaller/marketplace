@@ -1,0 +1,24 @@
+{
+	"metadata": {
+		"description": "my marketplace plugins",
+		"version": "0.1.0"
+	},
+	"name": "meaganewaller-marketplace",
+	"owner": {
+		"name": "meagan waller"
+	},
+	"plugins": [
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "utility",
+			"description": "captures tradeoffs and related decisions into markdown automatically",
+			"name": "decision-journal",
+			"source": "./plugins/decision-journal",
+			"strict": true,
+			"tags": ["decision", "documentation", "adr", "tradeoffs"],
+			"version": "1.0.0"
+		}
+	]
+}

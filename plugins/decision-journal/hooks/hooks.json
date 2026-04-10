@@ -1,0 +1,30 @@
+{
+	"hooks": [
+		{
+			"matcher": "Write|Edit",
+			"hooks": [
+				{
+					"type": "command",
+					"command": "$PLUGIN_DIR/hooks/scripts/post-tool-use.sh"
+				}
+			]
+		}
+	],
+	"pre_compact_hooks": [
+		{
+			"matcher": "auto",
+			"hooks": [
+				{
+					"type": "command",
+					"command": "$PLUGIN_DIR/hooks/scripts/pre-compact.sh"
+				}
+			]
+		}
+	],
+	"stop_hooks": [
+		{
+			"type": "command",
+			"command": "$PLUGIN_DIR/hooks/scripts/stop.sh"
+		}
+	]
+}

@@ -1,0 +1,10 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "captures tradeoffs and related decisions into markdown automatically",
+	"keywords": [],
+	"license": "BlueOak-1.0.0",
+	"name": "decision-journal",
+	"version": "1.0.0"
+}
