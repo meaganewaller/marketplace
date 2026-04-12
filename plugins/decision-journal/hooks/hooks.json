@@ -6,7 +6,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "./hooks/scripts/post-tool-use.sh"
+						"command": "\"$CLAUDE_PLUGIN_ROOT\"/hooks/scripts/post-tool-use.sh"
 					}
 				]
 			}
@@ -17,7 +17,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "./hooks/scripts/pre-compact.sh"
+						"command": "\"$CLAUDE_PLUGIN_ROOT\"/hooks/scripts/pre-compact.sh"
 					}
 				]
 			}
@@ -28,7 +28,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "./hooks/scripts/stop.sh"
+						"command": "\"$CLAUDE_PLUGIN_ROOT\"/hooks/scripts/stop.sh"
 					}
 				]
 			}
