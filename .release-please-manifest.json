@@ -1,5 +1,5 @@
 {
-	"plugins/decision-journal": "1.1.1",
+	"plugins/decision-journal": "1.1.2",
 	"plugins/bun": "1.1.0",
 	"plugins/github": "1.1.0"
 }

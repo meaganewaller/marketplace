@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/meaganewaller/marketplace/compare/decision-journal-v1.1.1...decision-journal-v1.1.2) (2026-04-12)
+
+
+### Bug Fixes
+
+* update command paths in hooks to use CLAUDE_PLUGIN_ROOT variable ([9ab8cdc](https://github.com/meaganewaller/marketplace/commit/9ab8cdcb402359ebdcf088ebb74abc5806642c98))
+
 ## [1.1.1](https://github.com/meaganewaller/marketplace/compare/decision-journal-v1.1.0...decision-journal-v1.1.1) (2026-04-10)
 
 
