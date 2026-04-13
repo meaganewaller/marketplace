@@ -3,8 +3,14 @@
 		"name": "meaganewaller"
 	},
 	"description": "Commands for interacting with GitHub issues and PRs using the gh CLI",
-	"keywords": ["github", "gh", "issues", "pull-requests", "cli"],
+	"keywords": [
+		"github",
+		"gh",
+		"issues",
+		"pull-requests",
+		"cli"
+	],
 	"license": "BlueOak-1.0.0",
 	"name": "github",
-	"version": "1.1.0"
+	"version": "1.2.0"
 }
