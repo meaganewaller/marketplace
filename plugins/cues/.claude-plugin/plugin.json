@@ -1,0 +1,9 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Cues are contextual guidance injected automatically based on triggers",
+	"keywords": ["cues", "contextual", "guidance", "triggers", "automation"],
+	"name": "cues",
+	"version": "1.0.0"
+}
