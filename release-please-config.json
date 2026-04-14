@@ -37,18 +37,6 @@
 			],
 			"initial-version": "1.0.0",
 			"release-type": "simple"
-		},
-		"plugins/cues": {
-			"component": "cues",
-			"extra-files": [
-				{
-					"jsonpath": "$.version",
-					"path": ".claude-plugin/plugin.json",
-					"type": "json"
-				}
-			],
-			"initial-version": "1.0.0",
-			"release-type": "simple"
 		}
 	}
 }

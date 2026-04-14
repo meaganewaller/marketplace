@@ -33,25 +33,6 @@
 				"name": "meaganewaller"
 			},
 			"category": "utility",
-			"description": "Contextual guidance injected automatically based on triggers",
-			"name": "cues",
-			"source": "./plugins/cues",
-			"strict": true,
-			"tags": [
-				"cues",
-				"contextual",
-				"guidance",
-				"triggers",
-				"automation",
-				"hooks"
-			],
-			"version": "0.1.0"
-		},
-		{
-			"author": {
-				"name": "meaganewaller"
-			},
-			"category": "utility",
 			"description": "captures tradeoffs and related decisions into markdown automatically",
 			"name": "decision-journal",
 			"source": "./plugins/decision-journal",
