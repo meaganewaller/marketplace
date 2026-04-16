@@ -17,7 +17,6 @@
 		"fix": "run-s -sl \"fix:*\"",
 		"fix:biome": "bunx --bun @biomejs/biome lint --write",
 		"fix:markdown": "markdownlint-cli2 --fix \"**/*.md\"",
-		"fix:pkg": "bun pkg fix",
 		"fix:format": "bunx --bun @biomejs/biome format --write",
 		"lint": "run-p -sl --aggregate-output \"lint:*\"",
 		"lint-staged": "lint-staged",
