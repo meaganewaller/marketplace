@@ -18,6 +18,6 @@
 	],
 	"ignorePaths": [],
 	"ignoreRandomStrings": true,
-	"ignoreWords": ["mycompany", "mydb", "nothrow"],
+	"ignoreWords": ["mycompany", "mydb", "nothrow", "pyproject", "GHSA", "PKCE"],
 	"words": ["meaganewaller", "bunx"]
 }

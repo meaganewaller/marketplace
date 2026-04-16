@@ -65,7 +65,7 @@ Captures tradeoffs and related decisions into markdown automatically.
 
 **Category:** development
 
-Commands for interacting with GitHub issues and PRs using the gh CLI.
+Commands for interacting with GitHub issues and PRs using the gh CLI, plus agent skills for [release-please](https://github.com/googleapis/release-please) configuration and workflows.
 
 **Contains:**
 
@@ -78,6 +78,10 @@ Commands for interacting with GitHub issues and PRs using the gh CLI.
   - `/gh-pr-view` - View details of a GitHub pull request
   - `/gh-pr-checkout` - Checkout a pull request locally
   - `/gh-pr-address-comments` - Address outstanding PR review comments
+- **Skills:**
+  - `release-please-configuration` - Configure release-please for monorepos and single-package repos (manifests, component tags, changelog sections, `extra-files`)
+  - `release-please-pr-workflow` - Merge release-please PRs in monorepos (batch merges, conflict handling, iterating until pending release PRs clear)
+  - `release-please-protection` - Avoid manual edits to release-please-managed files and align changes with conventional commits
 
 **Installation:**
 

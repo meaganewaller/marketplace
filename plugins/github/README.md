@@ -1,6 +1,6 @@
 # GitHub
 
-Commands for interacting with GitHub issues and PRs using the gh CLI.
+Commands for interacting with GitHub issues and PRs using the gh CLI, and agent skills for [release-please](https://github.com/googleapis/release-please) setup and workflows.
 
 ## Installation
 
@@ -24,6 +24,14 @@ Commands for interacting with GitHub issues and PRs using the gh CLI.
 - `/gh-pr-view` - View details of a pull request
 - `/gh-pr-checkout` - Checkout a pull request locally
 - `/gh-pr-address-comments` - Address outstanding PR review comments
+
+### Skills
+
+Agent skills live under `skills/` and apply when the agent is working on release automation or related edits (they are not slash commands).
+
+- `release-please-configuration` — Configure release-please for monorepos and single-package repos: manifest files, component tagging, changelog sections, and `extra-files`.
+- `release-please-pr-workflow` — Manage release-please PR merging in monorepos: batch merges, conflict handling via close/recreate, and iterating until pending release PRs are cleared.
+- `release-please-protection` — Detect and avoid manual edits to release-please–managed files (for example `CHANGELOG.md` and version fields), with guidance on conventional commits and safe workflows.
 
 ## Usage
 
