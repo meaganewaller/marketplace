@@ -1,0 +1,20 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "TypeScript architecture, SOLID principles, design patterns, and clean code standards for building maintainable Bun/TypeScript applications",
+	"keywords": [
+		"typescript",
+		"architecture",
+		"solid",
+		"design-patterns",
+		"clean-code",
+		"frontend",
+		"backend",
+		"audit",
+		"bun"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "typescript-architect",
+	"version": "1.0.0"
+}

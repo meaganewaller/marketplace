@@ -51,6 +51,28 @@
 			"strict": true,
 			"tags": ["github", "gh", "issues", "pull-requests", "cli"],
 			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "development",
+			"description": "TypeScript architecture, SOLID principles, design patterns, and clean code standards for building maintainable Bun/TypeScript applications",
+			"name": "typescript-architect",
+			"source": "./plugins/typescript-architect",
+			"strict": true,
+			"tags": [
+				"typescript",
+				"architecture",
+				"solid",
+				"design-patterns",
+				"clean-code",
+				"frontend",
+				"backend",
+				"audit",
+				"bun"
+			],
+			"version": "1.0.0"
 		}
 	]
 }

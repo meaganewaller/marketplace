@@ -91,6 +91,37 @@ Commands for interacting with GitHub issues and PRs using the gh CLI, plus agent
 
 ---
 
+### typescript-architect
+
+[🧭 Plugin README](plugins/typescript-architect/README.md)
+
+**Category:** development
+
+TypeScript architecture, SOLID principles, design patterns, and clean code standards for building maintainable Bun/TypeScript applications.
+
+**Contains:**
+
+- **Skills:**
+  - `solid-principles` - Analyze and apply SOLID principles to TypeScript code (5 reference files: SRP, OCP, LSP, ISP, DIP)
+  - `design-patterns` - Select and implement design patterns in TypeScript (3 reference files: creational, structural, behavioral)
+  - `type-system-design` - Design advanced TypeScript types for safety and expressiveness (3 reference files: generics, branded types, advanced types)
+  - `frontend-architecture` - Design frontend architecture for React/TypeScript applications served by Bun (3 reference files: component patterns, state management, project structure)
+  - `backend-architecture` - Design backend architecture for Bun/TypeScript servers (3 reference files: service patterns, repository patterns, error handling)
+  - `code-quality-audit` - Audit TypeScript code for quality, complexity, coupling, and clean code violations (3 reference files: clean code checklist, anti-patterns, metrics)
+- **Commands:**
+  - `/typescript-architect:audit` - Run a code quality audit on TypeScript files
+  - `/typescript-architect:architect` - Get architecture guidance for designing a feature or module
+- **Agents:**
+  - `architecture-reviewer` - Read-only agent that reviews TypeScript code for architectural quality, SOLID compliance, pattern usage, and clean code standards
+
+**Installation:**
+
+```bash
+/plugin install typescript-architect@meaganewaller-marketplace
+```
+
+---
+
 > **Note:** The `example-plugin` in `plugins/example-plugin/` is a template for creating new plugins and is not published to the marketplace.
 
 ## development

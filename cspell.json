@@ -16,8 +16,21 @@
 		"softwareTerms",
 		"typescript"
 	],
-	"ignorePaths": [],
+	"ignorePaths": [
+		"plugins/typescript-architect/skills/code-quality-audit/references/anti-patterns.md"
+	],
 	"ignoreRandomStrings": true,
-	"ignoreWords": ["mycompany", "mydb", "nothrow", "pyproject", "GHSA", "PKCE"],
+	"ignoreWords": [
+		"mycompany",
+		"mydb",
+		"nothrow",
+		"pyproject",
+		"GHSA",
+		"PKCE",
+		"creational",
+		"Liskov",
+		"unrepresentable",
+		"creds"
+	],
 	"words": ["meaganewaller", "bunx"]
 }
