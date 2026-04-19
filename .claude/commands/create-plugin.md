@@ -138,15 +138,55 @@ Add an entry to `.claude-plugin/marketplace.json`:
 - Choose appropriate category: `utility`, `development`, `testing`, `documentation`, etc.
 - Add relevant tags based on functionality
 
-### 6. Format Files
+### 6. Register in Release-Please
 
-Run biome to format all created files:
+Add the new plugin to `release-please-config.json` under `packages` (alphabetically by path):
 
-```bash
-bun run format
+```json
+"plugins/<plugin-name>": {
+  "component": "<plugin-name>",
+  "extra-files": [
+    {
+      "jsonpath": "$.version",
+      "path": ".claude-plugin/plugin.json",
+      "type": "json"
+    }
+  ],
+  "initial-version": "1.0.0",
+  "release-type": "simple"
+}
 ```
 
-### 7. Provide Next Steps
+Add the new plugin to `.release-please-manifest.json` (alphabetically by path):
+
+```json
+"plugins/<plugin-name>": "1.0.0"
+```
+
+### 7. Lint, Format, and Spell Check
+
+Stage all new and modified files, then run lint-staged to validate everything:
+
+```bash
+git add plugins/<plugin-name>/ .claude-plugin/marketplace.json release-please-config.json .release-please-manifest.json
+bun run lint-staged
+```
+
+Lint-staged runs the following checks based on file type:
+
+- **JSON files** (`marketplace.json`, `plugin.json`, `release-please-config.json`, `.release-please-manifest.json`): `biome check --write` (formatting + linting) and `cspell lint` (spelling)
+- **Markdown files** (`README.md`, commands, skills, references): `markdownlint-cli2 --fix` (markdown linting) and `cspell lint` (spelling)
+- **TypeScript/JS files** (if any, e.g. MCP servers): `biome check --write` and `cspell lint`
+
+**Common failures and fixes:**
+
+- **MD040 (fenced-code-language)**: Add a language specifier to all fenced code blocks (e.g., ` ```json `, ` ```bash `, ` ```text ` for directory trees)
+- **cspell (unknown word)**: Add the word to the project's cspell dictionary or rephrase. Check that plugin names, technical terms, and abbreviations are recognized.
+- **biome formatting**: Usually auto-fixed by `--write`. If it persists, check for syntax errors in JSON files.
+
+Re-run `bun run lint-staged` after fixing issues until all checks pass.
+
+### 8. Provide Next Steps
 
 After creation, inform the user:
 
