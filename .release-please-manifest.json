@@ -2,5 +2,6 @@
 	"plugins/decision-journal": "1.1.2",
 	"plugins/bun": "1.1.0",
 	"plugins/github": "1.2.0",
-	"plugins/typescript-architect": "1.0.0"
+	"plugins/typescript-architect": "1.0.0",
+	"plugins/skill-creator": "1.0.0"
 }

@@ -1,0 +1,16 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Scaffolds Claude Code skills with proper structure, frontmatter, and progressive disclosure patterns",
+	"keywords": [
+		"skills",
+		"scaffolding",
+		"claude-code",
+		"agent-skills",
+		"commands"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "skill-creator",
+	"version": "1.0.0"
+}

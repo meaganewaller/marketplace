@@ -57,6 +57,24 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
+			"description": "Scaffolds Claude Code skills with proper structure, frontmatter, and progressive disclosure patterns",
+			"name": "skill-creator",
+			"source": "./plugins/skill-creator",
+			"strict": true,
+			"tags": [
+				"skills",
+				"scaffolding",
+				"claude-code",
+				"agent-skills",
+				"commands"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "development",
 			"description": "TypeScript architecture, SOLID principles, design patterns, and clean code standards for building maintainable Bun/TypeScript applications",
 			"name": "typescript-architect",
 			"source": "./plugins/typescript-architect",
