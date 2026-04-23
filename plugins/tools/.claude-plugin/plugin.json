@@ -1,0 +1,22 @@
+{
+	"name": "tools",
+	"version": "1.0.0",
+	"description": "General purpose tools for the command line",
+	"license": "BlueOak-1.0.0",
+	"author": {
+		"name": "meaganewaller"
+	},
+	"repository": "https://github.com/meaganewaller/marketplace",
+	"keywords": [
+		"tools",
+		"utilities",
+		"fd",
+		"ripgrep",
+		"jq",
+		"yq",
+		"shell",
+		"imagemagick",
+		"mermaid",
+		"diagrams"
+	]
+}

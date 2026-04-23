@@ -17,7 +17,8 @@
 		"typescript"
 	],
 	"ignorePaths": [
-		"plugins/typescript-architect/skills/code-quality-audit/references/anti-patterns.md"
+		"plugins/typescript-architect/skills/code-quality-audit/references/anti-patterns.md",
+		"plugins/tools/skills/rg-code-search/SKILL.md"
 	],
 	"ignoreRandomStrings": true,
 	"ignoreWords": [
@@ -35,6 +36,16 @@
 		"creational",
 		"Liskov",
 		"unrepresentable",
+		"moreutils",
+		"mogrify",
+		"EXIF",
+		"magick",
+		"pycache",
+		"nvim",
+		"sqsh",
+		"JFIF",
+		"hsqs",
+		"LZMA",
 		"creds",
 		"xhigh",
 		"PRRT",
@@ -49,7 +60,18 @@
 		"acked",
 		"unstaging",
 		"unpushed",
-		"reprioritize"
+		"reprioritize",
+		"myapp",
+		"gsub",
+		"myconfig",
+		"mikefarah",
+		"envsubst",
+		"OSTYPE",
+		"mmdc",
+		"armv",
+		"esac",
+		"noclobber",
+		"msys"
 	],
-	"words": ["meaganewaller", "bunx"]
+	"words": ["gantt", "numpy", "meaganewaller", "bunx"]
 }

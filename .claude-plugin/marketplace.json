@@ -101,6 +101,29 @@
 				"bun"
 			],
 			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "development",
+			"description": "General purpose tools for the command line",
+			"name": "tools",
+			"source": "./plugins/tools",
+			"strict": true,
+			"tags": [
+				"tools",
+				"utilities",
+				"fd",
+				"ripgrep",
+				"jq",
+				"yq",
+				"shell",
+				"imagemagick",
+				"mermaid",
+				"diagrams"
+			],
+			"version": "1.0.0"
 		}
 	]
 }
