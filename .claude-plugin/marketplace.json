@@ -84,6 +84,29 @@
 			"author": {
 				"name": "meaganewaller"
 			},
+			"category": "utility",
+			"description": "General purpose CLI tools: fd, ripgrep, jq, yq, shell scripting, ImageMagick, Mermaid diagrams, and universal dependency installation",
+			"name": "tools",
+			"source": "./plugins/tools",
+			"strict": true,
+			"tags": [
+				"tools",
+				"utilities",
+				"fd",
+				"ripgrep",
+				"jq",
+				"yq",
+				"shell",
+				"imagemagick",
+				"mermaid",
+				"diagrams"
+			],
+			"version": "1.1.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
 			"category": "development",
 			"description": "TypeScript architecture, SOLID principles, design patterns, and clean code standards for building maintainable Bun/TypeScript applications",
 			"name": "typescript-architect",
@@ -99,29 +122,6 @@
 				"backend",
 				"audit",
 				"bun"
-			],
-			"version": "1.0.0"
-		},
-		{
-			"author": {
-				"name": "meaganewaller"
-			},
-			"category": "development",
-			"description": "General purpose tools for the command line",
-			"name": "tools",
-			"source": "./plugins/tools",
-			"strict": true,
-			"tags": [
-				"tools",
-				"utilities",
-				"fd",
-				"ripgrep",
-				"jq",
-				"yq",
-				"shell",
-				"imagemagick",
-				"mermaid",
-				"diagrams"
 			],
 			"version": "1.0.0"
 		}

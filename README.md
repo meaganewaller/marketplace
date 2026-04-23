@@ -128,6 +128,35 @@ Git and GitHub workflows: commits, branches, PRs, issues, release automation, an
 
 ---
 
+### tools
+
+[🧭 Plugin README](plugins/tools/README.md)
+
+**Category:** utility
+
+General purpose CLI tools: fd, ripgrep, jq, yq, shell scripting, ImageMagick, Mermaid diagrams, and universal dependency installation.
+
+**Contains:**
+
+- **Skills:**
+  - `binary-analysis` - Reverse engineering and binary exploration using strings, binwalk, hexdump, xxd, file, and objdump
+  - `deps-install` - Universal dependency installer that auto-detects the project's package manager (uv, bun, npm, yarn, pnpm, cargo, go, bundler, brew)
+  - `fd-file-finding` - Fast file finding using fd with smart defaults, gitignore awareness, and parallel execution
+  - `imagemagick-conversion` - Convert and manipulate images with ImageMagick (format conversion, resizing, batch processing)
+  - `jq-json-processing` - JSON querying, filtering, and transformation with jq
+  - `mermaid-diagrams` - Generate diagrams from text using Mermaid CLI (flowcharts, sequence, ERD, class, state, Gantt, git graphs) as SVG/PNG/PDF
+  - `rg-code-search` - Fast code search using ripgrep with smart defaults, regex patterns, and file filtering
+  - `shell-expert` - Shell scripting expertise, CLI automation, and cross-platform bash/zsh/POSIX best practices
+  - `yq-yaml-processing` - YAML querying, filtering, and transformation with yq (Kubernetes manifests, GitHub Actions workflows)
+
+**Installation:**
+
+```bash
+/plugin install tools@meaganewaller-marketplace
+```
+
+---
+
 ### typescript-architect
 
 [🧭 Plugin README](plugins/typescript-architect/README.md)
