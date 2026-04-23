@@ -59,34 +59,71 @@ Captures tradeoffs and related decisions into markdown automatically.
 
 ---
 
-### github
+### git
 
-[🧭 Plugin README](plugins/github/README.md)
+[🧭 Plugin README](plugins/git/README.md)
 
 **Category:** development
 
-Commands for interacting with GitHub issues and PRs using the gh CLI, plus agent skills for [release-please](https://github.com/googleapis/release-please) configuration and workflows.
+Git and GitHub workflows: commits, branches, PRs, issues, release automation, and repository management.
 
 **Contains:**
 
 - **Commands:**
-  - `/gh-issue-list` - List issues in the current GitHub repository
-  - `/gh-issue-create` - Create a new issue in the current GitHub repository
-  - `/gh-issue-view` - View details of a GitHub issue
-  - `/gh-pr-list` - List pull requests in the current GitHub repository
-  - `/gh-pr-create` - Create a new pull request from the current branch
-  - `/gh-pr-view` - View details of a GitHub pull request
-  - `/gh-pr-checkout` - Checkout a pull request locally
-  - `/gh-pr-address-comments` - Address outstanding PR review comments
+  - `/git:gh-issue-list` - List issues in the current GitHub repository
+  - `/git:gh-issue-create` - Create a new issue in the current GitHub repository
+  - `/git:gh-issue-view` - View details of a GitHub issue
+  - `/git:gh-pr-list` - List pull requests in the current GitHub repository
+  - `/git:gh-pr-create` - Create a new pull request from the current branch
+  - `/git:gh-pr-view` - View details of a GitHub pull request
+  - `/git:gh-pr-checkout` - Checkout a pull request locally
+  - `/git:gh-pr-address-comments` - Address outstanding PR review comments
 - **Skills:**
-  - `release-please-configuration` - Configure release-please for monorepos and single-package repos (manifests, component tags, changelog sections, `extra-files`)
-  - `release-please-pr-workflow` - Merge release-please PRs in monorepos (batch merges, conflict handling, iterating until pending release PRs clear)
-  - `release-please-protection` - Avoid manual edits to release-please-managed files and align changes with conventional commits
+  - `git-commit` - Create commits with conventional messages and issue references
+  - `git-push` - Push local commits to remote repositories with branch tracking
+  - `git-pr` - Create pull requests with descriptions, labels, and issue references
+  - `git-commit-push-pr` - Complete workflow from uncommitted changes to open PR in one step
+  - `git-branch-pr-workflow` - Branch management, PR workflows, and GitHub integration
+  - `git-branch-naming` - Branch naming conventions with type prefixes and issue linking
+  - `git-commit-workflow` - Commit message conventions, staging practices, and conventional commits
+  - `git-commit-trailers` - Git commit trailer conventions (BREAKING CHANGE, Release-As, Co-authored-by)
+  - `git-conflicts` - Resolve merge conflicts file-by-file with modern git tooling
+  - `git-resolve-conflicts` - Resolve merge conflicts in pull requests
+  - `git-rebase-patterns` - Advanced rebase patterns for linear history and stacked PRs
+  - `git-fork-workflow` - Fork management and upstream synchronization
+  - `git-upstream-pr` - Submit clean PRs to upstream repositories from a fork
+  - `git-issue` - Process GitHub issues end-to-end with TDD and parallel work support
+  - `git-issue-manage` - Administrative operations on GitHub issues (transfer, pin, lock, bulk ops)
+  - `git-issue-hierarchy` - Manage sub-issues and GitHub dependency relationships (blocked_by/blocking)
+  - `git-pr-feedback` - Review PR workflow results and address reviewer comments
+  - `git-fix-pr` - Analyze and fix failing PR checks
+  - `git-triage` - Triage open GitHub issues and PRs in one sweep with backlog grooming
+  - `git-maintain` - Repository maintenance and cleanup (gc, prune, branch cleanup)
+  - `git-security-checks` - Pre-commit security validation and secret detection via gitleaks
+  - `git-derive-docs` - Derive undocumented rules, PRDs, ADRs, and PRPs from git history
+  - `git-coworker-check` - Detect whether another Claude agent is working in the same repo clone
+  - `git-api-pr` - Create PRs via GitHub API without local git operations
+  - `git-repo-detection` - Detect GitHub repository name and owner from git remotes
+  - `git-cli-agentic` - Git commands optimized for AI agent workflows with porcelain output
+  - `gh-cli-agentic` - GitHub CLI commands optimized for AI agent workflows with JSON output
+  - `gh-workflow-monitoring` - Monitor GitHub Actions workflow runs with blocking watch commands
+  - `github-issue-autodetect` - Automatically detect GitHub issues that staged changes may fix
+  - `github-issue-writing` - Create well-structured GitHub issues with clear titles and acceptance criteria
+  - `github-labels` - Discover and apply labels to GitHub PRs and issues
+  - `github-pr-title` - Craft PR titles using conventional commits format for release-please automation
+  - `release-please-configuration` - Configure release-please for monorepos and single-package repos
+  - `release-please-pr-workflow` - Merge release-please PRs in monorepos with conflict handling
+  - `release-please-protection` - Avoid manual edits to release-please-managed files
+- **Agents:**
+  - `git-ops` - Specialized agent for complex git write operations (conflicts, rebases, bisect, cherry-picks)
+- **Hooks:**
+  - PreToolUse (Bash): Validates PR issue links and checks PR metadata on push
+  - PreToolUse (mcp__github__create_pull_request): Ensures PR body contains issue closing keywords
 
 **Installation:**
 
 ```bash
-/plugin install github@meaganewaller-marketplace
+/plugin install git@meaganewaller-marketplace
 ```
 
 ---
