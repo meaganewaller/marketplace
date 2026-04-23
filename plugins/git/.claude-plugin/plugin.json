@@ -5,6 +5,6 @@
 	"description": "Commands for interacting with GitHub issues and PRs using the gh CLI",
 	"keywords": ["github", "gh", "issues", "pull-requests", "cli"],
 	"license": "BlueOak-1.0.0",
-	"name": "github",
+	"name": "git",
 	"version": "1.2.0"
 }

@@ -1,6 +1,6 @@
-# GitHub
+# Git Plugin
 
-Commands for interacting with GitHub issues and PRs using the gh CLI, and agent skills for [release-please](https://github.com/googleapis/release-please) setup and workflows.
+Commands, skills, and agents for Git workflows, commits, branches, PR, and repository management.
 
 ## Installation
 

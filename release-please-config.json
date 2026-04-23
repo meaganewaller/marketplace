@@ -26,8 +26,8 @@
 			"initial-version": "1.0.0",
 			"release-type": "simple"
 		},
-		"plugins/github": {
-			"component": "github",
+		"plugins/git": {
+			"component": "git",
 			"extra-files": [
 				{
 					"jsonpath": "$.version",
