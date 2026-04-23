@@ -3,5 +3,5 @@
 	"plugins/bun": "1.1.0",
 	"plugins/git": "1.2.0",
 	"plugins/typescript-architect": "1.0.0",
-	"plugins/tools": "1.1.0"
+	"plugins/tools": "1.2.0"
 }
