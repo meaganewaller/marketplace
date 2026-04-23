@@ -45,12 +45,22 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
-			"description": "Commands for interacting with GitHub issues and PRs using the gh CLI",
-			"name": "github",
-			"source": "./plugins/github",
+			"description": "Git and GitHub workflows: commits, branches, PRs, issues, release automation, and repository management",
+			"name": "git",
+			"source": "./plugins/git",
 			"strict": true,
-			"tags": ["github", "gh", "issues", "pull-requests", "cli"],
-			"version": "1.0.0"
+			"tags": [
+				"git",
+				"github",
+				"gh",
+				"issues",
+				"pull-requests",
+				"commits",
+				"branches",
+				"release-please",
+				"cli"
+			],
+			"version": "1.2.0"
 		},
 		{
 			"author": {
