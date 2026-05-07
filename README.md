@@ -59,6 +59,27 @@ Captures tradeoffs and related decisions into markdown automatically.
 
 ---
 
+### fnox-configuration
+
+[🧭 Plugin README](plugins/fnox-configuration/README.md)
+
+**Category:** utility
+
+Configuring Fnox secrets management via `fnox.toml` — file structure, secrets definition, profiles, and hierarchical configurations via mise integration.
+
+**Contains:**
+
+- **Skills:**
+  - `fnox-configuration` - Guides fnox secrets management configuration via fnox.toml — profiles, hierarchical config, mise integration, import/export, and sync. Includes 5 reference files for progressive disclosure.
+
+**Installation:**
+
+```bash
+/plugin install fnox-configuration@meaganewaller-marketplace
+```
+
+---
+
 ### git
 
 [🧭 Plugin README](plugins/git/README.md)

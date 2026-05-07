@@ -1,0 +1,18 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Configuring Fnox secrets management via fnox.toml — file structure, secrets definition, profiles, and hierarchical configurations via mise integration",
+	"keywords": [
+		"fnox",
+		"secrets",
+		"mise",
+		"profiles",
+		"hierarchical-config",
+		"environment",
+		"security"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "fnox-configuration",
+	"version": "1.0.0"
+}
