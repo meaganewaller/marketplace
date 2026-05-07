@@ -59,23 +59,25 @@ Captures tradeoffs and related decisions into markdown automatically.
 
 ---
 
-### fnox-configuration
+### fnox
 
-[🧭 Plugin README](plugins/fnox-configuration/README.md)
+[🧭 Plugin README](plugins/fnox/README.md)
 
 **Category:** utility
 
-Configuring Fnox secrets management via `fnox.toml` — file structure, secrets definition, profiles, and hierarchical configurations via mise integration.
+Fnox secrets management — configuration, provider setup, and security best practices via mise integration.
 
 **Contains:**
 
 - **Skills:**
-  - `fnox-configuration` - Guides fnox secrets management configuration via fnox.toml — profiles, hierarchical config, mise integration, import/export, and sync. Includes 5 reference files for progressive disclosure.
+  - `fnox-configuration` - Guides fnox.toml configuration — file structure, profiles, hierarchical config, mise integration, import/export, and sync. Includes 5 reference files for progressive disclosure.
+  - `fnox-providers` - Provider selection and setup guide for age, AWS, 1Password, and other backends. Includes 4 reference files covering provider categories.
+  - `fnox-security` - Security best practices: key rotation, gitignore rules, CI/CD patterns, access control, and avoiding common mistakes.
 
 **Installation:**
 
 ```bash
-/plugin install fnox-configuration@meaganewaller-marketplace
+/plugin install fnox@meaganewaller-marketplace
 ```
 
 ---

@@ -45,9 +45,9 @@
 				"name": "meaganewaller"
 			},
 			"category": "utility",
-			"description": "Configuring Fnox secrets management via fnox.toml — file structure, secrets definition, profiles, and hierarchical configurations via mise integration",
-			"name": "fnox-configuration",
-			"source": "./plugins/fnox-configuration",
+			"description": "Fnox secrets management — configuration, provider setup, and security best practices via mise integration",
+			"name": "fnox",
+			"source": "./plugins/fnox",
 			"strict": true,
 			"tags": [
 				"fnox",
@@ -56,7 +56,10 @@
 				"profiles",
 				"hierarchical-config",
 				"environment",
-				"security"
+				"security",
+				"providers",
+				"age",
+				"encryption"
 			],
 			"version": "1.0.0"
 		},

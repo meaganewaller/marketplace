@@ -26,8 +26,8 @@
 			"initial-version": "1.0.0",
 			"release-type": "simple"
 		},
-		"plugins/fnox-configuration": {
-			"component": "fnox-configuration",
+		"plugins/fnox": {
+			"component": "fnox",
 			"extra-files": [
 				{
 					"jsonpath": "$.version",
