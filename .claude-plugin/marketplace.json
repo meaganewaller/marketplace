@@ -44,6 +44,29 @@
 			"author": {
 				"name": "meaganewaller"
 			},
+			"category": "utility",
+			"description": "Fnox secrets management — configuration, provider setup, and security best practices via mise integration",
+			"name": "fnox",
+			"source": "./plugins/fnox",
+			"strict": true,
+			"tags": [
+				"fnox",
+				"secrets",
+				"mise",
+				"profiles",
+				"hierarchical-config",
+				"environment",
+				"security",
+				"providers",
+				"age",
+				"encryption"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
 			"category": "development",
 			"description": "Git and GitHub workflows: commits, branches, PRs, issues, release automation, and repository management",
 			"name": "git",

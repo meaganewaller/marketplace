@@ -1,0 +1,21 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Fnox secrets management — configuration, provider setup, and security best practices via mise integration",
+	"keywords": [
+		"fnox",
+		"secrets",
+		"mise",
+		"profiles",
+		"hierarchical-config",
+		"environment",
+		"security",
+		"providers",
+		"age",
+		"encryption"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "fnox",
+	"version": "1.0.0"
+}

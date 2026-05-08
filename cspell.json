@@ -73,5 +73,17 @@
 		"noclobber",
 		"msys"
 	],
-	"words": ["gantt", "numpy", "meaganewaller", "bunx"]
+	"words": [
+		"gantt",
+		"numpy",
+		"meaganewaller",
+		"bunx",
+		"fnox",
+		"Fnox",
+		"FNOX",
+		"yubikey",
+		"YubiKey",
+		"mylocal",
+		"Yubi"
+	]
 }
