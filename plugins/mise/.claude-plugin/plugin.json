@@ -1,0 +1,18 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "mise dev environment management — tool versions, environment variables, tasks, and project configuration",
+	"keywords": [
+		"mise",
+		"tools",
+		"versions",
+		"env",
+		"tasks",
+		"devtools",
+		"runtime"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "mise",
+	"version": "1.0.0"
+}

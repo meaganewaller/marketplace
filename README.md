@@ -151,6 +151,37 @@ Git and GitHub workflows: commits, branches, PRs, issues, release automation, an
 
 ---
 
+### mise
+
+[🧭 Plugin README](plugins/mise/README.md)
+
+**Category:** development
+
+mise dev environment management — tool versions, environment variables, tasks, and project configuration.
+
+**Contains:**
+
+- **Skills:**
+  - `mise-config` - mise.toml structure, config hierarchy, env vars, and idiomatic version file integration (2 reference files: config cascade, idiomatic version files)
+  - `mise-tasks` - Writing and running mise tasks in mise.toml and mise-tasks/, task arguments, dependencies, and usage tool integration (1 reference file: task syntax)
+  - `mise-tools` - Installing, pinning, and upgrading tool versions; backends including npm, cargo, pip, ubi, and asdf (1 reference file: backends)
+- **Commands:**
+  - `/mise:mise-init` - Scaffold mise.toml for the current project, detecting existing tool config files (.nvmrc, .ruby-version, etc.)
+  - `/mise:mise-doctor` - Run mise doctor, interpret the output, and suggest fixes for any issues found
+  - `/mise:mise-run` - List available mise tasks and run one interactively
+- **Agents:**
+  - `mise-setup` - Autonomous end-to-end mise setup — inspects project, detects tools, generates config, runs mise install and mise trust
+- **Hooks:**
+  - SessionStart: Silent when healthy; nudges if mise.toml is missing from a code project; surfaces mise doctor issues
+
+**Installation:**
+
+```bash
+/plugin install mise@meaganewaller-marketplace
+```
+
+---
+
 ### tools
 
 [🧭 Plugin README](plugins/tools/README.md)
