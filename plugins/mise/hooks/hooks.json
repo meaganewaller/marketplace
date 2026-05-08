@@ -1,0 +1,16 @@
+{
+	"description": "mise-plugin hooks — session start project health check",
+	"hooks": {
+		"SessionStart": [
+			{
+				"hooks": [
+					{
+						"command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/session-start-check.sh",
+						"timeout": 10,
+						"type": "command"
+					}
+				]
+			}
+		]
+	}
+}

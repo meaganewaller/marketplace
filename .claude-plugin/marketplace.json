@@ -90,6 +90,29 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
+			"description": "mise dev environment management — tool versions, environment variables, tasks, and project configuration",
+			"name": "mise",
+			"source": "./plugins/mise",
+			"strict": true,
+			"tags": [
+				"mise",
+				"tools",
+				"versions",
+				"env",
+				"tasks",
+				"devtools",
+				"runtime",
+				"node",
+				"python",
+				"ruby"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "development",
 			"description": "Scaffolds Claude Code skills with proper structure, frontmatter, and progressive disclosure patterns",
 			"name": "skill-creator",
 			"source": "./plugins/skill-creator",

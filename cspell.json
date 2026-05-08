@@ -84,6 +84,17 @@
 		"yubikey",
 		"YubiKey",
 		"mylocal",
-		"Yubi"
+		"Yubi",
+		"pyenv",
+		"nodenv",
+		"jenv",
+		"goenv",
+		"kerl",
+		"kiex",
+		"tfenv",
+		"pdoc",
+		"tokei",
+		"awscli",
+		"stedolan"
 	]
 }
