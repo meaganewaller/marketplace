@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.2.0...ruby-rails-v1.3.0) (2026-05-27)
+
+
+### Features
+
+* **ruby-rails:** integrate Solargraph LSP for Ruby ([#21](https://github.com/meaganewaller/marketplace/issues/21)) ([9776a94](https://github.com/meaganewaller/marketplace/commit/9776a9400eadddf25d06c49dc4af93662f834cb9))
+
 ## [1.2.0](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.1.0...ruby-rails-v1.2.0) (2026-05-27)
 
 
