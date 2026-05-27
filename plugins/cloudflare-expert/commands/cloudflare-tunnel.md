@@ -25,6 +25,7 @@ Set up a Cloudflare Tunnel to securely expose local services without opening fir
    - `hostname`: Public domain to route traffic
 
 2. **Check cloudflared installation**:
+
    ```bash
    # Check if installed
    cloudflared --version
@@ -33,6 +34,7 @@ Set up a Cloudflare Tunnel to securely expose local services without opening fir
    ```
 
 3. **Authenticate with Cloudflare**:
+
    ```bash
    cloudflared tunnel login
    # Opens browser for authentication
@@ -40,12 +42,14 @@ Set up a Cloudflare Tunnel to securely expose local services without opening fir
    ```
 
 4. **Create the tunnel**:
+
    ```bash
    cloudflared tunnel create {name}
    # Creates credentials file: ~/.cloudflared/<TUNNEL_ID>.json
    ```
 
 5. **Configure DNS routing**:
+
    ```bash
    cloudflared tunnel route dns {name} {hostname}
    ```
@@ -65,6 +69,7 @@ Set up a Cloudflare Tunnel to securely expose local services without opening fir
    ```
 
 7. **Run the tunnel**:
+
    ```bash
    # Foreground (for testing)
    cloudflared tunnel run {name}
@@ -245,6 +250,7 @@ curl http://localhost:2000/metrics
 ### Common Issues
 
 1. **DNS not resolving**:
+
    ```bash
    dig {hostname}
    # Should show CNAME to cfargotunnel.com
@@ -260,6 +266,7 @@ curl http://localhost:2000/metrics
 
 4. **Service not available**:
    - Run with debug logging:
+
    ```bash
    cloudflared tunnel run {name} --loglevel debug
    ```

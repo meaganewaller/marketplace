@@ -17,21 +17,23 @@ Generate production-ready code for various AI tasks using Workers AI.
 ## Instructions
 
 1. **Parse task type**:
-  - `tts` - Text-to-Speech
-  - `stt` - Speech-to-Text
-  - `image` - Image generation or processing
-  - `chat` - LLM chat/completion
-  - `vision` - Image understanding
-  - `embedding` - Text embeddings
-  - `rag` - RAG with vectorize
 
-2. **Select appropriate model** (if not specified, choose best default based on task).
+- `tts` - Text-to-Speech
+- `stt` - Speech-to-Text
+- `image` - Image generation or processing
+- `chat` - LLM chat/completion
+- `vision` - Image understanding
+- `embedding` - Text embeddings
+- `rag` - RAG with vectorize
 
-3. **Generate complete Worker Code** with:
-  - Type definitions
-  - Request handling
-  - Error handling
-  - Response formatting
+1. **Select appropriate model** (if not specified, choose best default based on task).
+
+2. **Generate complete Worker Code** with:
+
+- Type definitions
+- Request handling
+- Error handling
+- Response formatting
 
 ## Task Templates
 
@@ -467,4 +469,3 @@ export default {
 | LLM | @cf/meta/llama-3.3-70b-instruct-fp8-fast | @cf/meta/llama-3.1-8b-instruct | 70B for complex |
 | Vision | @cf/meta/llama-3.2-11b-vision-instruct | - | Q&A, captioning |
 | Embeddings | @cf/baai/bge-large-en-v1.5 | @cf/baai/bge-small-en-v1.5 | 1024 vs 384 dims |
-

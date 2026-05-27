@@ -581,6 +581,7 @@ Connect to Cloudflare's built-in MCP servers:
 ```
 
 Available tools:
+
 - Workers management (deploy, list, logs)
 - R2 bucket operations
 - D1 database queries

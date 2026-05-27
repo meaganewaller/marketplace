@@ -27,6 +27,7 @@ Deploy the current Worker project to Cloudflare with proper environment configur
    - `preview` - Temporary preview URL
 
 3. **Pre-deployment checks**:
+
    ```bash
    # Type check
    npx tsc --noEmit
@@ -39,6 +40,7 @@ Deploy the current Worker project to Cloudflare with proper environment configur
    ```
 
 4. **Execute deployment**:
+
    ```bash
    # Production
    npx wrangler deploy
@@ -185,6 +187,7 @@ npx wrangler rollback --version <version-id>
 ### Common Issues
 
 1. **Authentication error**:
+
    ```bash
    npx wrangler login
    ```

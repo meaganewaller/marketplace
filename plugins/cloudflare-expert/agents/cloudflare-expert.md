@@ -102,4 +102,3 @@ Wrangler is the canonical CLI. Use `wrangler deploy` from CI (GitHub Actions, Wo
 ## Key principles
 
 Pick the smallest primitive that satisfies the requirement; pin compatibility dates; bindings over hard-coded URLs; idempotency on every mutation; observe everything; budget early.
-
