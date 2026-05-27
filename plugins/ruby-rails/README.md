@@ -35,6 +35,19 @@ Expert guidance for **Ruby 4.0+** and **Rails 8+** development using **mise** as
 | **ruby-minitest-testing** | Minitest (Rails 8 default test stack) |
 | **ruby-gem-development** | Gem authoring, gemspec, releases |
 
+#### Type signatures (RBS and Sorbet)
+
+Adapted from [ruby-type-signature-skills](https://github.com/DmitryPogrebnoy/ruby-agent-skills/tree/main/plugins/ruby-type-signature-skills) (MIT).
+
+| Skill | Focus |
+| ----- | ----- |
+| **generating-rbs** | `sig/**/*.rbs` signatures for Steep/RBS |
+| **generating-rbs-inline** | `# @rbs` / rbs-inline comments in `.rb` files |
+| **generating-sorbet** | `rbi/**/*.rbi` shim files without editing source |
+| **generating-sorbet-inline** | `sig { }` blocks and `# typed:` sigils in source |
+
+Each skill includes reference material for syntax and production examples. Pick **one** system per project (RBS vs Sorbet; inline vs separate files).
+
 #### Rails application core
 
 | Skill | Focus |

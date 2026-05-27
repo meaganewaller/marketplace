@@ -217,11 +217,21 @@ mise dev environment management — tool versions, environment variables, tasks,
 
 **Category:** development
 
-Ruby 4+ and Rails 8+ expert skills: mise toolchain, Active Record, Hotwire, testing, security, performance, and Kamal deployment.
+Ruby 4+ and Rails 8+ expert skills: mise toolchain, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and Kamal deployment.
 
 **Contains:**
 
 - **Skills:**
+
+  Type signatures (RBS and Sorbet — pick one system per project; adapted from [ruby-type-signature-skills](https://github.com/DmitryPogrebnoy/ruby-agent-skills), MIT):
+
+  - `generating-rbs` - Generates or updates RBS type signatures in separate `.rbs` files under `sig/` for Steep/RBS. Step-by-step workflow with validation; extensive reference examples.
+  - `generating-rbs-inline` - Generates or updates RBS-inline `# @rbs` comment annotations in Ruby source (`# rbs_inline: enabled`). For projects that type in-file, not `sig/*.rbs`. Includes 26 reference files.
+  - `generating-sorbet` - Generates or updates Sorbet `.rbi` shim files in `rbi/` without editing application source (gems, legacy code). Includes RBI syntax guides and production examples.
+  - `generating-sorbet-inline` - Generates Sorbet `sig { }` blocks and `extend T::Sig` in source; preserves existing `# typed:` strictness. Includes 66 reference files.
+
+  Rails and Ruby:
+
   - `rails-action-cable` - Action Cable, Solid Cable, and Turbo Streams broadcasts. Use for WebSockets and live UI.
   - `rails-active-storage` - Active Storage, direct uploads, image variants, and Action Mailbox/Text. Use for files and rich text.
   - `rails-activerecord` - Active Record: models, associations, validations, callbacks, scopes, and query interfaces. Use when working with persistence layer.
