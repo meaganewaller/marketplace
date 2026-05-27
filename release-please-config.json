@@ -62,6 +62,18 @@
 			"initial-version": "1.0.0",
 			"release-type": "simple"
 		},
+		"plugins/ruby-rails": {
+			"component": "ruby-rails",
+			"extra-files": [
+				{
+					"jsonpath": "$.version",
+					"path": ".claude-plugin/plugin.json",
+					"type": "json"
+				}
+			],
+			"initial-version": "1.0.0",
+			"release-type": "simple"
+		},
 		"plugins/typescript-architect": {
 			"component": "typescript-architect",
 			"extra-files": [
