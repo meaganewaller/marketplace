@@ -138,7 +138,7 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
-			"description": "Ruby 4+ and Rails 8+ expert skills: mise toolchain, Active Record, Hotwire, testing, security, performance, and Kamal deployment",
+			"description": "Ruby 4+ and Rails 8+ expert skills: mise toolchain, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and Kamal deployment",
 			"name": "ruby-rails",
 			"source": "./plugins/ruby-rails",
 			"strict": true,
@@ -147,6 +147,9 @@
 				"rails",
 				"ruby-on-rails",
 				"mise",
+				"rbs",
+				"sorbet",
+				"steep",
 				"hotwire",
 				"turbo",
 				"stimulus",

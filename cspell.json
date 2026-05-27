@@ -18,7 +18,12 @@
 	],
 	"ignorePaths": [
 		"plugins/typescript-architect/skills/code-quality-audit/references/anti-patterns.md",
-		"plugins/tools/skills/rg-code-search/SKILL.md"
+		"plugins/tools/skills/rg-code-search/SKILL.md",
+		"plugins/ruby-rails/skills/generating-rbs/references/**",
+		"plugins/ruby-rails/skills/generating-rbs-inline/references/**",
+		"plugins/ruby-rails/skills/generating-rbs/generating-rbs-inline/**",
+		"plugins/ruby-rails/skills/generating-sorbet-inline/references/**",
+		"plugins/ruby-rails/skills/generating-sorbet/references/**"
 	],
 	"ignoreRandomStrings": true,
 	"ignoreWords": [
@@ -91,6 +96,19 @@
 		"prosopite",
 		"Rubo",
 		"rubocop",
+		"rbs",
+		"RBS",
+		"sorbet",
+		"Sorbet",
+		"steep",
+		"Steep",
+		"sigils",
+		"Pogrebnoy",
+		"Dmitry",
+		"rbs-inline",
+		"untyped",
+		"kwargs",
+		"noreturn",
 		"yubikey",
 		"YubiKey",
 		"mylocal",

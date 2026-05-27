@@ -24,6 +24,12 @@ ignores:
   - '.worktrees/**/*.md'
   - '.claude/**/*.md'
   - '.plans/**/*.md'
+  # Vendored reference corpora (upstream ruby-type-signature-skills, MIT)
+  - 'plugins/ruby-rails/skills/generating-rbs/references/**'
+  - 'plugins/ruby-rails/skills/generating-rbs-inline/references/**'
+  - 'plugins/ruby-rails/skills/generating-rbs/generating-rbs-inline/**'
+  - 'plugins/ruby-rails/skills/generating-sorbet-inline/references/**'
+  - 'plugins/ruby-rails/skills/generating-sorbet/references/**'
 outputFormatters:
   - - 'markdownlint-cli2-formatter-pretty'
     - appendLink: true

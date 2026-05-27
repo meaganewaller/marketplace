@@ -1,6 +1,6 @@
 ---
 description: Ruby 4+ and Rails 8+ development with mise as the default toolchain manager.
-globs: "*.rb,*.rake,Gemfile,Gemfile.lock,Rakefile,config/**/*.yml,config/**/*.rb,app/**/*.rb,spec/**/*.rb,test/**/*.rb,.ruby-version,mise.toml,.mise.toml"
+globs: "*.rb,*.rake,*.rbs,*.rbi,sig/**/*.rbs,rbi/**/*.rbi,Steepfile,sorbet/config,Gemfile,Gemfile.lock,Rakefile,config/**/*.yml,config/**/*.rb,app/**/*.rb,spec/**/*.rb,test/**/*.rb,.ruby-version,mise.toml,.mise.toml"
 alwaysApply: false
 ---
 
