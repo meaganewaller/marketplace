@@ -26,6 +26,18 @@
 			"initial-version": "1.0.0",
 			"release-type": "simple"
 		},
+		"plugins/cloudflare-expert": {
+			"component": "cloudflare-expert",
+			"extra-files": [
+				{
+					"jsonpath": "$.version",
+					"path": ".claude-plugin/plugin.json",
+					"type": "json"
+				}
+			],
+			"initial-version": "1.0.0",
+			"release-type": "simple"
+		},
 		"plugins/fnox": {
 			"component": "fnox",
 			"extra-files": [

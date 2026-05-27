@@ -1,0 +1,22 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Expert guidance for Cloudflare Workers, storage, AI, Zero Trust, wrangler, and deployment workflows",
+	"keywords": [
+		"cloudflare",
+		"workers",
+		"wrangler",
+		"r2",
+		"d1",
+		"kv",
+		"zero-trust",
+		"tunnel",
+		"workers-ai",
+		"vectorize",
+		"mcp"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "cloudflare-expert",
+	"version": "1.0.0"
+}

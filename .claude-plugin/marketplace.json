@@ -32,6 +32,31 @@
 			"author": {
 				"name": "meaganewaller"
 			},
+			"category": "development",
+			"description": "Expert guidance for Cloudflare Workers, storage, AI, Zero Trust, wrangler, and deployment workflows",
+			"name": "cloudflare-expert",
+			"source": "./plugins/cloudflare-expert",
+			"strict": true,
+			"tags": [
+				"cloudflare",
+				"workers",
+				"wrangler",
+				"r2",
+				"d1",
+				"kv",
+				"zero-trust",
+				"tunnel",
+				"workers-ai",
+				"vectorize",
+				"mcp",
+				"edge"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
 			"category": "utility",
 			"description": "captures tradeoffs and related decisions into markdown automatically",
 			"name": "decision-journal",
