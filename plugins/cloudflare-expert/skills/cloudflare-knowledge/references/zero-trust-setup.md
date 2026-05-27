@@ -279,6 +279,7 @@ include:
 ```
 
 Generate service token:
+
 1. Go to Access > Service Auth
 2. Create Service Token
 3. Use in requests:

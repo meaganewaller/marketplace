@@ -95,6 +95,7 @@ export default {
 ```
 
 **AI Gateway Benefits:**
+
 - Request logging and analytics
 - Response caching (reduce API costs)
 - Rate limiting
@@ -252,6 +253,7 @@ curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1/chat/compl
 ```
 
 **Recommended models for ElevenLabs agents:**
+
 - `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b` - Strong reasoning, function calling
 - `@cf/meta/llama-3.3-70b-instruct-fp8-fast` - General purpose, fast
 
@@ -562,27 +564,32 @@ async function getCachedOrGenerate(
 ## Best Practices
 
 ### 1. Use AI Gateway for Third-Party APIs
+
 - Centralizes logging and analytics
 - Enables caching to reduce costs
 - Provides rate limiting protection
 - Simplifies fallback configuration
 
 ### 2. Stream Large Responses
+
 - Don't buffer entire audio files in memory
 - Use `response.body` streams directly
 - Workers have 128MB memory limit
 
 ### 3. Cache Aggressively
+
 - Audio generation is expensive
 - Use R2 for long-term caching
 - Use KV for metadata/mappings
 
 ### 4. Monitor Costs
+
 - Set up billing alerts
 - Track per-provider usage
 - Use AI Gateway analytics
 
 ### 5. Handle Failures Gracefully
+
 - Implement retry with exponential backoff
 - Have fallback providers
 - Return cached/default audio on failure

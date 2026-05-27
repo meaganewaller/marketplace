@@ -5,6 +5,7 @@ Reference for KV, R2, D1, Durable Objects, Queues, and Hyperdrive — characteri
 ## KV (Key-Value Store)
 
 **Characteristics:**
+
 - Eventually consistent (up to 60s propagation)
 - Max value size: 25 MiB
 - Max key size: 512 bytes
@@ -53,6 +54,7 @@ await env.MY_KV.delete("key");
 ## R2 (Object Storage)
 
 **Characteristics:**
+
 - S3-compatible API
 - Zero egress fees
 - Max object size: 5 TB
@@ -125,6 +127,7 @@ await upload.abort();
 ## D1 (SQLite Database)
 
 **Characteristics:**
+
 - Serverless SQLite
 - Strong consistency
 - Max database size: 10 GB (GA)
@@ -183,6 +186,7 @@ PRAGMA optimize;
 ## Durable Objects
 
 **Characteristics:**
+
 - Single-threaded, globally unique instances
 - Built-in SQLite storage
 - WebSocket support with Hibernation
@@ -277,6 +281,7 @@ export class ChatRoom {
 ## Queues
 
 **Characteristics:**
+
 - Async message processing
 - At-least-once delivery
 - Automatic retries with dead letter queues
@@ -375,12 +380,14 @@ export default {
 ### When to Use Hyperdrive
 
 **Use Hyperdrive when:**
+
 - Connecting to remote PostgreSQL/MySQL databases
 - High-latency database connections (different regions)
 - Frequent identical read queries (caching)
 - Many concurrent database connections needed
 
 **Don't use Hyperdrive when:**
+
 - Using D1 (already edge-native)
 - Local development (use direct connection)
 - Need prepared statements across requests (transaction mode limitation)

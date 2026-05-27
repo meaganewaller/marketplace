@@ -177,6 +177,7 @@ export default {
 ### Cloudflare's Managed MCP Servers
 
 Available at `https://mcp.cloudflare.com/`:
+
 - Workers management
 - R2 bucket operations
 - D1 database queries

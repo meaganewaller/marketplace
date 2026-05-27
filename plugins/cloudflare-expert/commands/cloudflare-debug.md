@@ -56,6 +56,7 @@ npx tsc --noEmit
 **Common deployment fixes:**
 
 1. **Bundle too large**:
+
    ```typescript
    // Use dynamic imports
    const heavyLib = await import('./heavy-lib');
@@ -65,6 +66,7 @@ npx tsc --noEmit
    ```
 
 2. **Compatibility flags missing**:
+
    ```jsonc
    // wrangler.jsonc
    {
@@ -73,6 +75,7 @@ npx tsc --noEmit
    ```
 
 3. **Entry point not found**:
+
    ```jsonc
    // Ensure main points to correct file
    {
@@ -99,6 +102,7 @@ cat wrangler.jsonc | grep -A5 "kv_namespaces\|d1_databases\|r2_buckets"
 **Common binding fixes:**
 
 1. **KV not found**:
+
    ```bash
    # Create namespace
    npx wrangler kv namespace create CACHE
@@ -107,6 +111,7 @@ cat wrangler.jsonc | grep -A5 "kv_namespaces\|d1_databases\|r2_buckets"
    ```
 
 2. **D1 connection error**:
+
    ```bash
    # Verify database exists
    npx wrangler d1 info my-database
@@ -116,6 +121,7 @@ cat wrangler.jsonc | grep -A5 "kv_namespaces\|d1_databases\|r2_buckets"
    ```
 
 3. **R2 permission denied**:
+
    ```bash
    # Check bucket exists
    npx wrangler r2 bucket list
@@ -139,6 +145,7 @@ npx wrangler tail --format json | jq '.logs[] | select(.level == "log")'
 **Performance optimization:**
 
 1. **Slow cold starts**:
+
    ```typescript
    // Move initialization outside handler
    const client = new MyClient(); // ✅ Outside
@@ -152,6 +159,7 @@ npx wrangler tail --format json | jq '.logs[] | select(.level == "log")'
    ```
 
 2. **High CPU time**:
+
    ```typescript
    // Use streaming for large responses
    return new Response(stream, {
@@ -164,6 +172,7 @@ npx wrangler tail --format json | jq '.logs[] | select(.level == "log")'
    ```
 
 3. **Memory issues**:
+
    ```typescript
    // Stream large files instead of buffering
    const object = await env.BUCKET.get(key);
@@ -218,6 +227,7 @@ export default {
 ### Timeout Issues
 
 **CPU time limits:**
+
 - Free: 10ms CPU time
 - Paid: 30s CPU time (soft), 15 minutes (hard with Cron)
 
@@ -231,6 +241,7 @@ npx wrangler tail --format json | jq '.cpuTime'
 **Solutions:**
 
 1. **Offload to Queue**:
+
    ```typescript
    // Instead of processing inline
    await env.QUEUE.send({ task: "process", data: payload });
@@ -238,6 +249,7 @@ npx wrangler tail --format json | jq '.cpuTime'
    ```
 
 2. **Use Durable Objects for long operations**:
+
    ```typescript
    const id = env.PROCESSOR.idFromName("task-1");
    const stub = env.PROCESSOR.get(id);
@@ -245,6 +257,7 @@ npx wrangler tail --format json | jq '.cpuTime'
    ```
 
 3. **Split into multiple requests**:
+
    ```typescript
    // Pagination for large datasets
    const { cursor } = await request.json();
@@ -270,6 +283,7 @@ npx wrangler tail --format json | jq '.logs'
 **Solutions:**
 
 1. **Stream large responses**:
+
    ```typescript
    // Stream R2 object directly
    const object = await env.BUCKET.get(key);
@@ -277,6 +291,7 @@ npx wrangler tail --format json | jq '.logs'
    ```
 
 2. **Process in chunks**:
+
    ```typescript
    // Read file in chunks
    const reader = object.body.getReader();
@@ -288,6 +303,7 @@ npx wrangler tail --format json | jq '.logs'
    ```
 
 3. **Avoid large JSON parsing**:
+
    ```typescript
    // Use streaming JSON parser for large payloads
    import { JSONParser } from "@streamparser/json";

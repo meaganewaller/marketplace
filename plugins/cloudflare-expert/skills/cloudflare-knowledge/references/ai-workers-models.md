@@ -380,6 +380,7 @@ export default {
 ### When Cloudflare AI Workers SAVES Money
 
 #### Scenario 1: High-Volume English TTS
+
 ```yaml
 Use Case: 1M characters/day English TTS for automated phone system
 
@@ -398,6 +399,7 @@ SAVINGS: 83-94% by using Cloudflare AI Workers
 ```
 
 #### Scenario 2: Multilingual TTS (Supported Languages)
+
 ```yaml
 Use Case: 100K chars/day in French, Spanish, Chinese, Japanese, Korean
 
@@ -411,6 +413,7 @@ SAVINGS: 99.8% by using Cloudflare AI Workers
 ```
 
 #### Scenario 3: LLM Inference for RAG
+
 ```yaml
 Use Case: Customer support bot, 10M tokens/month input + 2M output
 
@@ -431,6 +434,7 @@ For quality comparable to GPT-4o, Llama 3.3 70B offers massive savings.
 ```
 
 #### Scenario 4: Speech-to-Text Transcription
+
 ```yaml
 Use Case: Transcribe 500 hours of audio/month
 
@@ -447,6 +451,7 @@ SAVINGS: 13-20% by using Cloudflare AI Workers
 ```
 
 #### Scenario 5: Embeddings at Scale
+
 ```yaml
 Use Case: Embed 100M tokens for search index
 
@@ -468,6 +473,7 @@ SAVINGS: 50-92% by using Cloudflare AI Workers
 ### When Third-Party is WORTH the Extra Cost
 
 #### Scenario 1: Premium Voice Quality Requirements
+
 ```text
 Use Case: Audiobook narration, premium customer experience
 
@@ -486,6 +492,7 @@ When to pay premium:
 ```
 
 #### Scenario 2: Real-Time Voice Agents
+
 ```text
 Use Case: Live conversational AI with <100ms latency
 
@@ -503,6 +510,7 @@ Use Cloudflare for batch processing, ElevenLabs for live.
 ```
 
 #### Scenario 3: Languages Not Supported by Cloudflare
+
 ```text
 Use Case: TTS in Portuguese, Italian, Hindi, Arabic
 
@@ -518,6 +526,7 @@ Cost-Effective Path:
 ```
 
 #### Scenario 4: Cutting-Edge Reasoning Models
+
 ```text
 Use Case: Complex mathematical reasoning, code generation
 
@@ -706,6 +715,7 @@ Cloudflare charges $0.011 per 1,000 Neurons. Understanding neuron consumption he
 Workers AI includes **10,000 free neurons per day**.
 
 Daily free allocation examples:
+
 - ~400K tokens of Llama 3.1 8B inference
 - ~21 minutes of Whisper transcription
 - ~3,600 characters of Aura-2 TTS
@@ -728,6 +738,7 @@ Example: 5M neurons/month
 ## Pricing Notes
 
 AI Workers pricing varies by model (via neuron consumption):
+
 - Text generation: $0.05-0.35 per 1M tokens (model dependent)
 - TTS Aura-2: $0.030 per 1K characters
 - TTS Aura-1: $0.015 per 1K characters

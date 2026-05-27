@@ -24,15 +24,15 @@
 
 | Provider | Model | Monthly Cost | Notes |
 |----------|-------|--------------|-------|
-| Cloudflare MeloTTS | ~$0.60 | Based on ~100 min audio/month |
-| Cloudflare Aura-1 | $45 | |
-| Cloudflare Aura-2 | $90 | Best quality on Cloudflare |
-| OpenAI tts-1 | $45 | |
-| OpenAI tts-1-hd | $90 | |
-| fal.ai Kokoro | $60 | No subscription |
-| fal.ai ElevenLabs | $300 | Premium quality, no subscription |
-| ElevenLabs Pro | $99 | 500K chars included |
-| ElevenLabs Scale | $330 | 2M chars included |
+| Cloudflare | MeloTTS | ~$0.60 | Based on ~100 min audio/month |
+| Cloudflare | Aura-1 | $45 | |
+| Cloudflare | Aura-2 | $90 | Best quality on Cloudflare |
+| OpenAI | tts-1 | $45 | |
+| OpenAI | tts-1-hd | $90 | |
+| fal.ai | Kokoro | $60 | No subscription |
+| fal.ai | ElevenLabs | $300 | Premium quality, no subscription |
+| ElevenLabs | Pro | $99 | 500K chars included |
+| ElevenLabs | Scale | $330 | 2M chars included |
 
 ### Cost Decision Tree
 
@@ -71,6 +71,7 @@ Is English sufficient?
 Cloudflare charges $0.011 per 1,000 Neurons with 10,000 free daily neurons.
 
 **Converting to familiar terms:**
+
 - Llama 3.3 70B: ~24,545 neurons per 1M tokens
 - Llama 3.1 8B: ~4,545 neurons per 1M tokens
 - Whisper: ~472 neurons per minute
@@ -94,10 +95,10 @@ Cloudflare charges $0.011 per 1,000 Neurons with 10,000 free daily neurons.
 
 | Provider | Model | Monthly Cost |
 |----------|-------|--------------|
-| Cloudflare Whisper | $31.20 |
-| Cloudflare Deepgram | $31.20 |
-| OpenAI Whisper | $36.00 |
-| Deepgram Nova-2 | $25.80 |
+| Cloudflare | Whisper | $31.20 |
+| Cloudflare | Deepgram | $31.20 |
+| OpenAI | Whisper | $36.00 |
+| Deepgram | Nova-2 | $25.80 |
 
 ---
 
@@ -155,6 +156,7 @@ Cloudflare charges $0.011 per 1,000 Neurons with 10,000 free daily neurons.
 | WebSocket messages | $0.15/million |
 
 **WebSocket Cost Example:**
+
 - 1M concurrent connections for 1 hour
 - ~$11,500 (128MB × 3600s × 1M / 1B × $12.50)
 
@@ -175,11 +177,13 @@ Savings:                 82%
 ### 2. Cache Aggressively with R2
 
 **For TTS with R2 caching:**
+
 - R2 storage: $0.015/GB/month
 - R2 Class A ops: $4.50/million
 - R2 Class B ops: $0.36/million
 
 **Break-even analysis:**
+
 - 1KB audio file
 - Cloudflare Aura-2: $0.030 to generate
 - R2 retrieval: $0.00000036
@@ -188,6 +192,7 @@ Savings:                 82%
 ### 3. Use AI Gateway for Third-Party APIs
 
 **Benefits:**
+
 - Response caching (reduce API calls by 30-50%)
 - Request logging (100K free, $0.60/million after)
 - Rate limiting (prevent overage charges)
@@ -205,6 +210,7 @@ Savings:                 82%
 ### 5. Batch Requests
 
 **Embeddings example:**
+
 ```typescript
 // Bad: 100 separate requests
 for (const text of texts) {
@@ -218,10 +224,12 @@ await env.AI.run("@cf/baai/bge-large-en-v1.5", { text: texts });
 ### 6. Use Queue for Non-Real-Time Tasks
 
 **Queue pricing:**
+
 - $0.40/million operations
 - No CPU time limits
 
 Move expensive AI tasks to queues:
+
 ```typescript
 // Worker receives request
 await env.AI_QUEUE.send({ task: "generate-audio", text });
