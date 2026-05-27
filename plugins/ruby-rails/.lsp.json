@@ -1,0 +1,12 @@
+{
+	"ruby": {
+		"command": "solargraph",
+		"args": ["stdio"],
+		"extensionToLanguage": {
+			".rb": "ruby",
+			".rake": "ruby",
+			".gemspec": "ruby",
+			".ru": "ruby"
+		}
+	}
+}
