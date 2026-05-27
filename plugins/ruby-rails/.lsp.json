@@ -1,7 +1,7 @@
 {
 	"ruby": {
-		"command": "solargraph",
-		"args": ["stdio"],
+		"command": "ruby-lsp",
+		"args": [],
 		"extensionToLanguage": {
 			".rb": "ruby",
 			".rake": "ruby",

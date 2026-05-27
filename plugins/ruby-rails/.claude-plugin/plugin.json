@@ -2,13 +2,13 @@
 	"author": {
 		"name": "meaganewaller"
 	},
-	"description": "Ruby 4+ and Rails 8+ expert guidance: mise tooling, Solargraph LSP, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and deployment",
+	"description": "Ruby 4+ and Rails 8+ expert guidance: mise toolchain, Ruby LSP, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and deployment",
 	"keywords": [
 		"ruby",
 		"rails",
 		"ruby-on-rails",
 		"mise",
-		"solargraph",
+		"ruby-lsp",
 		"lsp",
 		"rbs",
 		"rbs-inline",
