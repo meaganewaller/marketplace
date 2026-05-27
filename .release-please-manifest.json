@@ -1,6 +1,7 @@
 {
 	"plugins/decision-journal": "1.1.2",
 	"plugins/bun": "1.1.0",
+	"plugins/cloudflare-expert": "1.0.0",
 	"plugins/fnox": "1.0.0",
 	"plugins/git": "1.2.0",
 	"plugins/mise": "1.1.0",

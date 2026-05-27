@@ -34,6 +34,35 @@ Bun runtime patterns, bunx, shell scripting, lockfile management, and testing gu
 
 ---
 
+### cloudflare-expert
+
+[🧭 Plugin README](plugins/cloudflare-expert/README.md)
+
+**Category:** development
+
+Expert guidance for Cloudflare Workers, storage, AI, Zero Trust, wrangler, and deployment workflows.
+
+**Contains:**
+
+- **Skills:**
+  - `cloudflare-knowledge` - Cloudflare platform knowledge — Workers, Pages, R2, D1, KV, Durable Objects, AI, and Zero Trust. Includes 8 reference files for progressive disclosure.
+- **Commands:**
+  - `/cloudflare-expert:cloudflare-worker` - Create a new Cloudflare Worker with specified bindings and configuration
+  - `/cloudflare-expert:cloudflare-deploy` - Deploy a Cloudflare Worker with environment configuration and secrets
+  - `/cloudflare-expert:cloudflare-debug` - Debug Cloudflare Workers issues with diagnostic commands and solutions
+  - `/cloudflare-expert:cloudflare-tunnel` - Create and configure a Cloudflare Tunnel for Zero Trust access
+  - `/cloudflare-expert:cloudflare-ai` - Generate code for Cloudflare Workers AI tasks (TTS, STT, image, LLM)
+- **Agents:**
+  - `cloudflare-expert` - Expert agent for Cloudflare architecture, implementation, troubleshooting, and optimization
+
+**Installation:**
+
+```bash
+/plugin install cloudflare-expert@meaganewaller-marketplace
+```
+
+---
+
 ### decision-journal
 
 [🧭 Plugin README](plugins/decision-journal/README.md)
