@@ -98,25 +98,27 @@ Each skill includes reference material for syntax and production examples. Pick 
 
 ### Hooks
 
-- **SessionStart**: Ensures [Solargraph](https://solargraph.org/) is installed for LSP (via `mise exec -- gem install` when needed)
+- **SessionStart**: Ensures [Ruby LSP](https://github.com/Shopify/ruby-lsp) is installed (via `mise exec -- gem install` when needed)
 
 ### LSP (Language Server)
 
-[Solargraph](https://solargraph.org/) integration for Claude Code (requires Claude Code v2.1.0+ with LSP support). Adapted from [claude-code-lsps/solargraph](https://github.com/boostvolt/claude-code-lsps/tree/main/solargraph) (MIT).
+[Ruby LSP](https://github.com/Shopify/ruby-lsp) integration for Claude Code (requires Claude Code v2.1.0+ with LSP support). Adapted from [opendate-app/ruby-lsp-plugin](https://github.com/opendate-app/ruby-lsp-plugin) (MIT).
 
 | Language | Extensions | Server |
 | -------- | ---------- | ------ |
-| Ruby | `.rb`, `.rake`, `.gemspec`, `.ru` | Solargraph (`stdio`) |
+| Ruby | `.rb`, `.rake`, `.gemspec`, `.ru` | [Ruby LSP](https://github.com/Shopify/ruby-lsp) |
 
-**LSP capabilities** (via Claude's built-in LSP tool): `goToDefinition`, `findReferences`, `hover`, `documentSymbol`, `workspaceSymbol`, `goToImplementation`, call hierarchy, and automatic diagnostics.
+**LSP capabilities** (via Claude's built-in LSP tool): go to definition, find references, hover documentation, document/workspace symbols, call hierarchy, code completion, and automatic diagnostics.
 
 **Project setup** (recommended for Rails apps):
 
 ```bash
-mise exec -- gem install solargraph
-mise exec -- solargraph config
-# Add solargraph to Gemfile development group in team projects
+mise exec -- gem install ruby-lsp
+mise exec -- which ruby-lsp
+# Prefer adding to Gemfile: gem "ruby-lsp", group: :development
 ```
+
+**PATH / mise note:** Claude Code may not inherit your shell PATH. This plugin installs `ruby-lsp` onto the active mise Ruby. If the server still does not start, create a local override at `~/.claude/plugins/local/ruby-lsp/plugin.json` with the absolute path from `mise exec -- which ruby-lsp` (see upstream plugin README).
 
 ### MCP Servers
 
@@ -126,7 +128,7 @@ mise exec -- solargraph config
 
 Skills activate automatically when you work on matching Ruby/Rails tasks (routing, migrations, Hotwire, etc.). For project-wide defaults, the plugin includes `CLAUDE.md` scoped to common Ruby/Rails file globs.
 
-With this plugin installed, Claude Code starts Solargraph on session start for Ruby files when the gem is available.
+With this plugin installed, Claude Code starts Ruby LSP on session start for Ruby files when the gem is available.
 
 ### Example: pin Ruby with mise
 
