@@ -217,10 +217,14 @@ mise dev environment management — tool versions, environment variables, tasks,
 
 **Category:** development
 
-Ruby 4+ and Rails 8+ expert skills: mise toolchain, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and Kamal deployment.
+Ruby 4+ and Rails 8+ expert skills: mise toolchain, Solargraph LSP, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and Kamal deployment.
 
 **Contains:**
 
+- **LSP:**
+  - **Solargraph** — Ruby language server for `.rb`, `.rake`, `.gemspec`, `.ru` (goToDefinition, hover, references, symbols, diagnostics). Requires Claude Code v2.1.0+.
+- **Hooks:**
+  - SessionStart: Installs Solargraph via `mise exec -- gem install` when missing
 - **Skills:**
 
   Type signatures (RBS and Sorbet — pick one system per project; adapted from [ruby-type-signature-skills](https://github.com/DmitryPogrebnoy/ruby-agent-skills), MIT):
