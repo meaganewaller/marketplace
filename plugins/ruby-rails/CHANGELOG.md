@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.3.0...ruby-rails-v1.4.0) (2026-05-27)
+
+
+### Features
+
+* **ruby-rails:** integrate Ruby LSP for Claude Code ([#23](https://github.com/meaganewaller/marketplace/issues/23)) ([a9b25e1](https://github.com/meaganewaller/marketplace/commit/a9b25e1c9fb66a64133b956632fe0abef8275ec9))
+
 ## [1.3.0](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.2.0...ruby-rails-v1.3.0) (2026-05-27)
 
 
