@@ -113,16 +113,24 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
-			"description": "Scaffolds Claude Code skills with proper structure, frontmatter, and progressive disclosure patterns",
-			"name": "skill-creator",
-			"source": "./plugins/skill-creator",
+			"description": "Ruby 4+ and Rails 8+ expert skills: mise toolchain, Active Record, Hotwire, testing, security, performance, and Kamal deployment",
+			"name": "ruby-rails",
+			"source": "./plugins/ruby-rails",
 			"strict": true,
 			"tags": [
-				"skills",
-				"scaffolding",
-				"claude-code",
-				"agent-skills",
-				"commands"
+				"ruby",
+				"rails",
+				"ruby-on-rails",
+				"mise",
+				"hotwire",
+				"turbo",
+				"stimulus",
+				"activerecord",
+				"rspec",
+				"minitest",
+				"kamal",
+				"solid-queue",
+				"rails-8"
 			],
 			"version": "1.0.0"
 		},

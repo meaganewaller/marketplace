@@ -78,9 +78,19 @@
 		"numpy",
 		"meaganewaller",
 		"bunx",
+		"chruby",
+		"dbconsole",
+		"enumerables",
+		"erblint",
 		"fnox",
 		"Fnox",
 		"FNOX",
+		"jbuilder",
+		"kamal",
+		"Kamal",
+		"prosopite",
+		"Rubo",
+		"rubocop",
 		"yubikey",
 		"YubiKey",
 		"mylocal",
@@ -95,6 +105,7 @@
 		"pdoc",
 		"tokei",
 		"awscli",
-		"stedolan"
+		"stedolan",
+		"Zeitwerk"
 	]
 }

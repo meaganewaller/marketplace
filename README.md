@@ -182,6 +182,50 @@ mise dev environment management — tool versions, environment variables, tasks,
 
 ---
 
+### ruby-rails
+
+[🧭 Plugin README](plugins/ruby-rails/README.md)
+
+**Category:** development
+
+Ruby 4+ and Rails 8+ expert skills: mise toolchain, Active Record, Hotwire, testing, security, performance, and Kamal deployment.
+
+**Contains:**
+
+- **Skills:**
+  - `rails-action-cable` - Action Cable, Solid Cable, and Turbo Streams broadcasts. Use for WebSockets and live UI.
+  - `rails-active-storage` - Active Storage, direct uploads, image variants, and Action Mailbox/Text. Use for files and rich text.
+  - `rails-activerecord` - Active Record: models, associations, validations, callbacks, scopes, and query interfaces. Use when working with persistence layer.
+  - `rails-api-development` - API-only Rails apps, JSON rendering, versioning, and pagination. Use when building HTTP APIs without HTML.
+  - `rails-application-boot` - Bootstrapping and configuring Rails 8 apps: new apps, config, environments, credentials, and initial structure. Use when creating or reconfiguring a Rails application.
+  - `rails-authentication` - Rails 8 authentication generator, sessions, and authorization patterns (Pundit, Action Policy). Use when adding login or permissions.
+  - `rails-background-jobs` - Active Job with Solid Queue (Rails 8 default), retries, and idempotency. Use when enqueueing background work.
+  - `rails-caching` - Fragment, low-level, and HTTP caching with Solid Cache (Rails 8). Use when optimizing read-heavy paths.
+  - `rails-controllers` - Rails controllers: strong parameters, filters, respond_to, streaming, and HTTP semantics. Use when implementing request handling.
+  - `rails-database-migrations` - Schema migrations, multi-database, seeds, and structure.sql vs schema.rb. Use when changing the database shape.
+  - `rails-deployment-kamal` - Deploy Rails 8 with Kamal, Docker, and production checklist. Use when shipping or configuring production.
+  - `rails-engines-gems` - Rails engines, mountable apps, and internal gems. Use when extracting or packaging domain boundaries.
+  - `rails-hotwire-turbo` - Hotwire Turbo Drive, Frames, and Streams for Rails 8 HTML apps. Use when building interactive pages without a heavy SPA.
+  - `rails-performance` - N+1 detection, indexing, profiling, and query optimization. Use when app is slow or queries multiply.
+  - `rails-routing` - Rails routing: REST, resources, scopes, concerns, shallow routes, and route helpers. Use when designing URLs or debugging `routes.rb`.
+  - `rails-security` - Rails security: OWASP, CSRF, SQL injection, XSS, mass assignment, headers. Use when reviewing security or hardening apps.
+  - `rails-stimulus-javascript` - Stimulus controllers, import maps, and modest JavaScript in Rails 8. Use when adding client behavior.
+  - `rails-testing` - Rails testing stack: fixtures, factories, system tests, VCR, and test helpers. Use for integrated Rails test strategy.
+  - `rails-view-layer` - ERB, layouts, partials, ViewComponent, helpers, and presenters. Use when building server-rendered UI.
+  - `ruby-gem-development` - Authoring Ruby gems: gemspec, versioning, releases, and testing. Use when building libraries or extracting code from apps.
+  - `ruby-language-idioms` - Ruby 4+ language idioms, Enumerable patterns, blocks, classes, modules, and RuboCop-friendly style. Use when writing or refactoring Ruby outside Rails-specific APIs.
+  - `ruby-minitest-testing` - Minitest patterns for Ruby and Rails: assertions, parallel tests, fixtures, and Rails 8 default test stack. Use when working in `test/` directories or Minitest-only projects.
+  - `ruby-mise-environment` - mise setup for Ruby 4+, Bundler, binstubs, Gemfile, and project tasks. Use when configuring Ruby versions, installing gems, or debugging bundle/ruby path issues.
+  - `ruby-rspec-testing` - RSpec 3 patterns: expectations, contexts, shared examples, factories, and request specs. Use when writing or fixing RSpec tests in Ruby or Rails projects.
+
+**Installation:**
+
+```bash
+/plugin install ruby-rails@meaganewaller-marketplace
+```
+
+---
+
 ### tools
 
 [🧭 Plugin README](plugins/tools/README.md)
