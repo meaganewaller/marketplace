@@ -1,0 +1,21 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Chezmoi-managed dotfiles workflow: source-only edits, templates, run_onchange scripts, BATS tests, ADRs, and mise/Homebrew package routing",
+	"keywords": [
+		"dotfiles",
+		"chezmoi",
+		"mise",
+		"bats",
+		"adr",
+		"renovate",
+		"homebrew",
+		"shell",
+		"source-only",
+		"package-management"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "dotfiles",
+	"version": "1.0.0"
+}

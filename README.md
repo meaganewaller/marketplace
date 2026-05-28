@@ -88,6 +88,46 @@ Captures tradeoffs and related decisions into markdown automatically.
 
 ---
 
+### dotfiles
+
+[🧭 Plugin README](plugins/dotfiles/README.md)
+
+**Category:** utility
+
+Chezmoi-managed dotfiles workflow: source-only edits, templates, run_onchange scripts, BATS tests, ADRs, and mise/Homebrew package routing.
+
+**Contains:**
+
+- **Skills:**
+  - `dotfiles-config` - Resolves and stores the dotfiles repo path in `.claude/dotfiles.local.md`; other skills route through this for the working tree
+  - `chezmoi-workflow` - Day-to-day Chezmoi loop: edit → diff → apply → status; partial apply and drift recovery
+  - `chezmoi-templates` - Writing and debugging `.tmpl` files with Go `text/template` (lookPath, stat, joinPath, OS branching)
+  - `chezmoi-data` - Adding and editing YAML/TOML files under `home/.chezmoidata/` (aliases, packages, themes)
+  - `chezmoi-externals` - Managing `home/.chezmoiexternals/` for third-party content; pinning for Renovate compatibility
+  - `chezmoi-scripts` - Authoring `run_once_*` and `run_onchange_*` scripts: idempotency, strict mode, DEBUG awareness
+  - `bats-testing` - Writing BATS specs for the dotfiles repo; shared helpers and the `./bin/test` runner
+  - `package-management` - Routing new tools to mise / Homebrew / externals; when to escalate to the package-manager agent
+  - `adr-writing` - Numbered ADRs under `docs/adrs/` in the existing format with cross-linking
+- **Commands:**
+  - `/dotfiles:dotfiles-status` - `chezmoi diff` + `chezmoi status` + `mise doctor` in one snapshot
+  - `/dotfiles:dotfiles-apply` - Preview-then-apply loop: diff → confirm → apply → status
+  - `/dotfiles:dotfiles-new-managed-file` - Scaffold a new file under `home/` with the right `dot_` / `dot_config/` / `private_` prefix
+  - `/dotfiles:dotfiles-new-adr` - Scaffold the next-numbered ADR under `docs/adrs/`
+- **Agents:**
+  - `chezmoi-source-guardian` - Handles cross-file source-tree refactors (renames, template→data splits, `dot_*` → `private_*`)
+  - `package-manager` - Bulk and security-sensitive manifest edits (Docker Compose, devcontainer, GitHub Actions digests, Renovate config)
+- **Hooks:**
+  - PreToolUse (Write|Edit): Blocks writes to Chezmoi-managed paths under `~`; suggests the corresponding source path
+  - PostToolUse (Write|Edit): Prints a one-line reminder to run `chezmoi diff` after edits under `home/`
+
+**Installation:**
+
+```bash
+/plugin install dotfiles@meaganewaller-marketplace
+```
+
+---
+
 ### fnox
 
 [🧭 Plugin README](plugins/fnox/README.md)

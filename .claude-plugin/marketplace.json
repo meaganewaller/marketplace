@@ -70,6 +70,29 @@
 				"name": "meaganewaller"
 			},
 			"category": "utility",
+			"description": "Chezmoi-managed dotfiles workflow: source-only edits, templates, run_onchange scripts, BATS tests, ADRs, and mise/Homebrew package routing",
+			"name": "dotfiles",
+			"source": "./plugins/dotfiles",
+			"strict": true,
+			"tags": [
+				"dotfiles",
+				"chezmoi",
+				"mise",
+				"bats",
+				"adr",
+				"renovate",
+				"homebrew",
+				"shell",
+				"source-only",
+				"package-management"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "utility",
 			"description": "Fnox secrets management — configuration, provider setup, and security best practices via mise integration",
 			"name": "fnox",
 			"source": "./plugins/fnox",
