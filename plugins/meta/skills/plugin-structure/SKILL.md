@@ -106,7 +106,8 @@ When validating an existing plugin:
 4. Confirm README documents installed components
 5. Report findings by severity (critical, warning, suggestion)
 
-For a command-driven audit, use `/meta:validate-plugin`.
+For a command-driven audit, use `/meta:validate-plugin`. For scored validation with
+README reconciliation and JSON output, delegate to the **plugin-validator** agent.
 
 ## Common Patterns
 
