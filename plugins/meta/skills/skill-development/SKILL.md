@@ -93,3 +93,4 @@ Before finishing, evaluate the skill against
 ## Additional Resources
 
 - **`references/quality-checklist.md`** — Pass/fail criteria for skill audits
+- **modular-skill-framework** — Skill boundaries, composition, interfaces, and token efficiency when designing a plugin skill set
