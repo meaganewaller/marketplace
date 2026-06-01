@@ -12,11 +12,15 @@ Tools for building and evaluating Claude skills, hooks, agents, commands, and pl
 
 ### Commands
 
-(None yet)
+- **`/meta:validate-plugin`** — Audit plugin layout, manifest, and marketplace registration
+- **`/meta:audit-skill`** — Audit a skill for structure, triggers, and quality
 
 ### Skills
 
-(None yet)
+- **skill-development** — Author and evaluate `SKILL.md` files with progressive disclosure
+- **plugin-structure** — Plugin layout, manifest rules, and marketplace registration
+- **command-development** — Slash command structure, frontmatter, and patterns
+- **hook-development** — Hook events, `hooks.json` format, and `${CLAUDE_PLUGIN_ROOT}` paths
 
 ### Agents
 
@@ -39,6 +43,25 @@ This plugin activates when you are:
 - Applying modular patterns for progressive disclosure and reusable references
 - Running quality checks on skill descriptions, trigger phrases, and frontmatter
 - Validating marketplace plugin layout, `plugin.json`, and release configuration
+
+### Validate a marketplace plugin
+
+```text
+/meta:validate-plugin plugins/meta
+/meta:validate-plugin plugins/git
+```
+
+### Audit a skill
+
+```text
+/meta:audit-skill plugins/meta/skills/skill-development
+/meta:audit-skill plugins/git/skills/git-commit
+```
+
+### Ask for authoring guidance
+
+Skills auto-activate on phrases like "create a skill", "validate a plugin",
+"add a PreToolUse hook", or "create a slash command".
 
 ## Development
 
