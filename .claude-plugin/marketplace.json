@@ -161,6 +161,28 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
+			"description": "Tools for building and evaluating Claude skills, hooks, agents, commands, and plugins — modular patterns, quality checks, and plugin validation",
+			"name": "meta",
+			"source": "./plugins/meta",
+			"strict": true,
+			"tags": [
+				"meta",
+				"skills",
+				"hooks",
+				"agents",
+				"commands",
+				"plugins",
+				"validation",
+				"quality",
+				"claude-code"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "development",
 			"description": "Ruby 4+ and Rails 8+ expert skills: mise toolchain, Ruby LSP, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and Kamal deployment",
 			"name": "ruby-rails",
 			"source": "./plugins/ruby-rails",
