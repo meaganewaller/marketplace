@@ -1,0 +1,20 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Tools for building and evaluating Claude skills, hooks, agents, commands, and plugins — modular patterns, quality checks, and plugin validation",
+	"keywords": [
+		"meta",
+		"skills",
+		"hooks",
+		"agents",
+		"commands",
+		"plugins",
+		"validation",
+		"quality",
+		"claude-code"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "meta",
+	"version": "1.0.0"
+}
