@@ -33,11 +33,35 @@ Closes #42" -q
 git -C "$TMPDIR" remote add origin "$TMPDIR" 2>/dev/null || true
 git -C "$TMPDIR" symbolic-ref refs/remotes/origin/HEAD refs/heads/main
 
+MOCKBIN="$TMPDIR/mockbin"
+mkdir -p "$MOCKBIN"
+cat > "$MOCKBIN/gh" <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ "${1:-}" = "pr" ] && [ "${2:-}" = "view" ]; then
+    if [ "${GH_MOCK_PR_EXISTS:-0}" = "1" ]; then
+        if [ -n "${GH_MOCK_PR_VIEW_JSON:-}" ]; then
+            printf '%s\n' "$GH_MOCK_PR_VIEW_JSON"
+        else
+            printf '%s\n' '{"number":1,"title":"test","body":"","url":"https://example.com/pr/1"}'
+        fi
+        exit 0
+    fi
+    exit 1
+fi
+
+exit 1
+EOF
+chmod +x "$MOCKBIN/gh"
+
 assert_exit() {
     local desc="$1" expected="$2"
     local json="$3"
+    # Optional trailing arguments are env VAR=VALUE pairs for this invocation.
+    shift 3
     local exit_code=0
-    printf '%s' "$json" | bash "$HOOK" >/dev/null 2>&1 || exit_code=$?
+    printf '%s' "$json" | env "$@" bash "$HOOK" >/dev/null 2>&1 || exit_code=$?
     if [ "$exit_code" -eq "$expected" ]; then
         printf "  PASS: %s\n" "$desc"
         PASS=$((PASS + 1))
@@ -127,6 +151,26 @@ assert_exit \
 assert_exit \
     "chained command with git push is detected (no PR, allows)" 0 \
     "$(make_json "git add . && git push origin feature")"
+
+# ── Open PR acknowledgement paths ────────────────────────────────────────────
+echo ""
+echo "open PR acknowledgement handling:"
+PR_VIEW_JSON='{"number":123,"title":"feat: metadata check","body":"## Summary\nKept metadata in sync.\n\nCloses #42","url":"https://example.com/pr/123"}'
+
+assert_exit \
+    "git push with open PR blocks without acknowledgement" 2 \
+    "$(make_json "git push origin feature")" \
+    "PATH=$MOCKBIN:$PATH" \
+    "GH_MOCK_PR_EXISTS=1" \
+    "GH_MOCK_PR_VIEW_JSON=$PR_VIEW_JSON"
+
+assert_exit \
+    "git push with open PR is allowed when PR_METADATA_ACK=1" 0 \
+    "$(make_json "git push origin feature")" \
+    "PATH=$MOCKBIN:$PATH" \
+    "GH_MOCK_PR_EXISTS=1" \
+    "GH_MOCK_PR_VIEW_JSON=$PR_VIEW_JSON" \
+    "PR_METADATA_ACK=1"
 
 # ── Guard clause: empty/missing input ─────────────────────────────────────
 echo ""

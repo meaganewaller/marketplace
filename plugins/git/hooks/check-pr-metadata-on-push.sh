@@ -101,7 +101,7 @@ if [ -n "$PR_BODY" ]; then
     fi
 fi
 
-block "PR METADATA CHECK: You are pushing to a branch with an existing PR.
+WARNING_MESSAGE="PR METADATA CHECK: You are pushing to a branch with an existing PR.
 
 PR #${PR_NUMBER}: ${PR_TITLE}
 ${PR_URL}
@@ -117,5 +117,28 @@ Before pushing, verify:
 2. PR description/summary reflects what the commits actually do
 3. Issue references (Closes/Fixes/Resolves #N) are still correct
 
-If the PR metadata is already accurate, re-run the push command.
+If the PR metadata is already accurate, re-run with:
+  PR_METADATA_ACK=1 git push
 If updates are needed, update the PR title/description first, then push."
+
+if [ "${PR_METADATA_ACK:-}" = "1" ]; then
+    exit 0
+fi
+
+# Interactive sessions can acknowledge with a one-step terminal prompt.
+# Require stdio TTYs and a readable /dev/tty to avoid prompting non-interactive runs.
+if [ -t 0 ] && [ -t 2 ] && [ -r /dev/tty ]; then
+    echo "$WARNING_MESSAGE" >&2
+    printf "PR metadata reviewed. Push anyway? [y/N] " >&2
+    # If read fails, fall through to the default block below.
+    if read -r ANSWER < /dev/tty; then
+        case "$ANSWER" in
+            y|Y|yes|YES) exit 0 ;;
+            *) block "${WARNING_MESSAGE}
+
+Push cancelled: declined to proceed." ;;
+        esac
+    fi
+fi
+
+block "$WARNING_MESSAGE"
