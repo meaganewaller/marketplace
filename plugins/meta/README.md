@@ -12,9 +12,22 @@ Tools for building and evaluating Claude skills, hooks, agents, commands, and pl
 
 ### Commands
 
+**Scaffolding**
+
 - **`/meta:create-command`** — Scaffold a new slash command in a plugin
+
+**Static validation**
+
 - **`/meta:validate-plugin`** — Audit plugin layout, manifest, and marketplace registration
+- **`/meta:validate-hook`** — Audit `hooks/hooks.json`, scripts, and portable paths
 - **`/meta:audit-skill`** — Audit a skill for structure, triggers, and quality
+
+**Evaluation**
+
+- **`/meta:test-skill`** — Behavioral scenarios for a single skill
+- **`/meta:skills-eval`** — Batch-evaluate all skills in a plugin or directory
+- **`/meta:rules-eval`** — Evaluate Cursor rules, `CLAUDE.md`, and `AGENTS.md`
+- **`/meta:hooks-eval`** — Evaluate hooks with optional test script execution
 
 ### Skills
 
@@ -52,18 +65,28 @@ This plugin activates when you are:
 /meta:create-command plugins/git sync-labels Sync GitHub labels to local config
 ```
 
-### Validate a marketplace plugin
+### Validate a plugin or hooks
 
 ```text
 /meta:validate-plugin plugins/meta
-/meta:validate-plugin plugins/git
+/meta:validate-hook plugins/git
 ```
 
-### Audit a skill
+### Audit or test a skill
 
 ```text
 /meta:audit-skill plugins/meta/skills/skill-development
-/meta:audit-skill plugins/git/skills/git-commit
+/meta:test-skill plugins/git/skills/git-commit medium
+/meta:skills-eval plugins/meta
+/meta:skills-eval plugins/git --deep
+```
+
+### Evaluate rules and hooks
+
+```text
+/meta:rules-eval .cursor/rules
+/meta:rules-eval CLAUDE.md
+/meta:hooks-eval plugins/git --run-tests
 ```
 
 ### Ask for authoring guidance
