@@ -39,11 +39,13 @@ cat > "$MOCKBIN/gh" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
 
-DEFAULT_PR_VIEW_JSON='{"number":1,"title":"test","body":"","url":"https://example.com/pr/1"}'
-
 if [ "${1:-}" = "pr" ] && [ "${2:-}" = "view" ]; then
     if [ "${GH_MOCK_PR_EXISTS:-0}" = "1" ]; then
-        printf '%s\n' "${GH_MOCK_PR_VIEW_JSON:-$DEFAULT_PR_VIEW_JSON}"
+        if [ -n "${GH_MOCK_PR_VIEW_JSON:-}" ]; then
+            printf '%s\n' "$GH_MOCK_PR_VIEW_JSON"
+        else
+            printf '%s\n' '{"number":1,"title":"test","body":"","url":"https://example.com/pr/1"}'
+        fi
         exit 0
     fi
     exit 1
@@ -53,11 +55,10 @@ exit 1
 EOF
 chmod +x "$MOCKBIN/gh"
 
-PR_VIEW_JSON='{"number":123,"title":"feat: metadata check","body":"## Summary\nKept metadata in sync.\n\nCloses #42","url":"https://example.com/pr/123"}'
-
 assert_exit() {
     local desc="$1" expected="$2"
     local json="$3"
+    # Optional trailing arguments are env VAR=VALUE pairs for this invocation.
     shift 3
     local exit_code=0
     printf '%s' "$json" | env "$@" bash "$HOOK" >/dev/null 2>&1 || exit_code=$?
@@ -154,6 +155,7 @@ assert_exit \
 # ── Open PR acknowledgement paths ────────────────────────────────────────────
 echo ""
 echo "open PR acknowledgement handling:"
+PR_VIEW_JSON='{"number":123,"title":"feat: metadata check","body":"## Summary\nKept metadata in sync.\n\nCloses #42","url":"https://example.com/pr/123"}'
 
 assert_exit \
     "git push with open PR blocks without acknowledgement" 2 \

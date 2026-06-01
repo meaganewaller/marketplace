@@ -125,11 +125,18 @@ if [ "${PR_METADATA_ACK:-}" = "1" ]; then
     exit 0
 fi
 
+# Interactive sessions can acknowledge with a one-step terminal prompt.
+# Require stdio TTYs and a readable /dev/tty to avoid prompting non-interactive runs.
 if [ -t 0 ] && [ -t 2 ] && [ -r /dev/tty ]; then
     echo "$WARNING_MESSAGE" >&2
-    if read -r -p "PR metadata reviewed. Push anyway? [y/N] " ANSWER < /dev/tty; then
+    printf "PR metadata reviewed. Push anyway? [y/N] " >&2
+    # If read fails, fall through to the default block below.
+    if read -r ANSWER < /dev/tty; then
         case "$ANSWER" in
             y|Y|yes|YES) exit 0 ;;
+            *) block "${WARNING_MESSAGE}
+
+Push cancelled: declined to proceed." ;;
         esac
     fi
 fi
