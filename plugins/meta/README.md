@@ -12,6 +12,7 @@ Tools for building and evaluating Claude skills, hooks, agents, commands, and pl
 
 ### Commands
 
+- **`/meta:create-command`** — Scaffold a new slash command in a plugin
 - **`/meta:validate-plugin`** — Audit plugin layout, manifest, and marketplace registration
 - **`/meta:audit-skill`** — Audit a skill for structure, triggers, and quality
 
@@ -43,6 +44,13 @@ This plugin activates when you are:
 - Applying modular patterns for progressive disclosure and reusable references
 - Running quality checks on skill descriptions, trigger phrases, and frontmatter
 - Validating marketplace plugin layout, `plugin.json`, and release configuration
+
+### Scaffold a slash command
+
+```text
+/meta:create-command plugins/meta my-command Brief description of what it does
+/meta:create-command plugins/git sync-labels Sync GitHub labels to local config
+```
 
 ### Validate a marketplace plugin
 
