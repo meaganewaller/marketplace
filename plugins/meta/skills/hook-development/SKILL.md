@@ -92,3 +92,4 @@ Never hardcode absolute paths to the plugin directory.
 ## Additional Resources
 
 - **`references/events.md`** — Event types and when to use each
+- **`references/hook-checklist.md`** — Pass/fail criteria for hook audits
