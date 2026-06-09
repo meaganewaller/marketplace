@@ -1,0 +1,26 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Transforms your terminal into a professional engineering team: language domain experts (Ruby/Rails, Bash, Python, Rust, Go), strategic roles, quality and ops specialists, and SDLC lifecycle skills, summoned via a dispatcher and per-role commands",
+	"keywords": [
+		"engineering-team",
+		"agents",
+		"ruby",
+		"rails",
+		"bash",
+		"python",
+		"rust",
+		"go",
+		"architecture",
+		"tech-lead",
+		"code-review",
+		"sre",
+		"security",
+		"sdlc",
+		"orchestration"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "dev-collective",
+	"version": "1.0.0"
+}
