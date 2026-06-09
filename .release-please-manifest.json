@@ -1,5 +1,6 @@
 {
 	"plugins/decision-journal": "1.1.2",
+	"plugins/dev-collective": "1.0.0",
 	"plugins/dotfiles": "1.1.0",
 	"plugins/bun": "1.1.0",
 	"plugins/cloudflare-expert": "1.1.0",

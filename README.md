@@ -88,6 +88,54 @@ Captures tradeoffs and related decisions into markdown automatically.
 
 ---
 
+### dev-collective
+
+[🧭 Plugin README](plugins/dev-collective/README.md)
+
+**Category:** development
+
+Transforms your terminal into a professional engineering team: language domain experts (Ruby/Rails, Bash, Python, Rust, Go), strategic roles, quality and ops specialists, and SDLC lifecycle skills, summoned via a dispatcher and per-role commands.
+
+**Contains:**
+
+- **Skills:**
+  - `team-orchestration` - Routes any engineering task to the right roles and lifecycle phases, sequencing them and right-sizing the team
+  - `discovery` - Frame the problem, clarify requirements, define success, and cut scope before any code is written
+  - `technical-design` - Produce design docs and RFCs with trade-off analysis, alternatives, and non-functional requirements
+  - `implementation-workflow` - Break a goal into a sequenced work plan, pick the right language expert, and keep tests green to a definition of done
+  - `code-review-process` - Review gate with a blocking / should-fix / nit severity taxonomy and actionable feedback
+  - `shipping` - Release-readiness checklist, rollout strategy (canary, feature flags), observability, and rollback planning
+- **Commands:**
+  - `/dev-collective:assemble` - Dispatcher that reads a task, picks the team and phases, runs the matching agents, and synthesizes the result
+  - `/dev-collective:tech-lead` - Break a goal into a sequenced work plan with role assignments
+  - `/dev-collective:architect` - Produce a design doc / RFC with trade-offs and a recommendation
+  - `/dev-collective:cto` - Org-level technology strategy and build-vs-buy guidance
+  - `/dev-collective:review` - Severity-tagged, security-aware code review
+  - `/dev-collective:ship` - Release-readiness assessment with rollout and rollback plan
+- **Agents:**
+  - `rails-engineer` - Ruby 3.x/4 and Rails 8 specialist (Active Record, Hotwire/Turbo, service objects, RSpec)
+  - `python-engineer` - Modern Python 3.12+ specialist (type hints, async, uv/ruff/mypy/pytest)
+  - `rust-engineer` - Rust systems specialist (ownership, error handling, async/tokio, cargo/clippy)
+  - `go-engineer` - Go specialist (explicit errors, goroutines and channels, table-driven tests)
+  - `bash-engineer` - Bash/POSIX shell specialist (safe scripting, shellcheck, shfmt, bats)
+  - `cto` - Org and business-level technology strategy, build vs buy, and multi-quarter bets
+  - `principal-architect` - System and cross-service architecture, RFCs, and decision records
+  - `staff-engineer` - Hardest cross-cutting technical problems, standards, and prototyping unknowns
+  - `tech-lead` - Owns delivery of an effort — work breakdown, sequencing, and unblocking
+  - `product-manager` - Owns problem, user, scope, and success criteria — the "what" and "why"
+  - `code-reviewer` - Read-only review for correctness, design, readability, and coverage
+  - `qa-engineer` - Test strategy, the test pyramid, edge cases, and regression coverage
+  - `sre` - Reliability, observability, deployment, incident response, and SLOs
+  - `security-engineer` - Read-only threat modeling and vulnerability review (defensive)
+
+**Installation:**
+
+```bash
+/plugin install dev-collective@meaganewaller-marketplace
+```
+
+---
+
 ### dotfiles
 
 [🧭 Plugin README](plugins/dotfiles/README.md)

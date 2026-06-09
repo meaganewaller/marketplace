@@ -69,6 +69,34 @@
 			"author": {
 				"name": "meaganewaller"
 			},
+			"category": "development",
+			"description": "Transforms your terminal into a professional engineering team: language domain experts (Ruby/Rails, Bash, Python, Rust, Go), strategic roles, quality and ops specialists, and SDLC lifecycle skills, summoned via a dispatcher and per-role commands",
+			"name": "dev-collective",
+			"source": "./plugins/dev-collective",
+			"strict": true,
+			"tags": [
+				"engineering-team",
+				"agents",
+				"ruby",
+				"rails",
+				"bash",
+				"python",
+				"rust",
+				"go",
+				"architecture",
+				"tech-lead",
+				"code-review",
+				"sre",
+				"security",
+				"sdlc",
+				"orchestration"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
 			"category": "utility",
 			"description": "Chezmoi-managed dotfiles workflow: source-only edits, templates, run_onchange scripts, BATS tests, ADRs, and mise/Homebrew package routing",
 			"name": "dotfiles",
