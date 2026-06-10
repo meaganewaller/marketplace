@@ -1,6 +1,6 @@
 ---
 name: rails-testing
-description: Rails testing stack: fixtures, factories, system tests, VCR, and test helpers. Use for integrated Rails test strategy.
+description: "Rails testing stack: fixtures, factories, system tests, VCR, and test helpers. Use for integrated Rails test strategy."
 ---
 
 # Rails Testing

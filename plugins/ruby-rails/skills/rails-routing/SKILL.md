@@ -1,6 +1,6 @@
 ---
 name: rails-routing
-description: Rails routing: REST, resources, scopes, concerns, shallow routes, and route helpers. Use when designing URLs or debugging `routes.rb`.
+description: "Rails routing: REST, resources, scopes, concerns, shallow routes, and route helpers. Use when designing URLs or debugging `routes.rb`."
 ---
 
 # Rails Routing

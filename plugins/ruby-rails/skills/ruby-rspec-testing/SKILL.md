@@ -1,6 +1,6 @@
 ---
 name: ruby-rspec-testing
-description: RSpec 3 patterns: expectations, contexts, shared examples, factories, and request specs. Use when writing or fixing RSpec tests in Ruby or Rails projects.
+description: "RSpec 3 patterns: expectations, contexts, shared examples, factories, and request specs. Use when writing or fixing RSpec tests in Ruby or Rails projects."
 ---
 
 # RSpec Testing

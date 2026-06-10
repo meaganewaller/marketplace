@@ -1,6 +1,6 @@
 ---
 name: fnox-providers
-description: Guides fnox provider selection and setup — age encryption, AWS (Parameter Store and Secrets Manager), 1Password, Bitwarden, GCP, Azure, Doppler, Vault, and local options. Triggers on: "set up fnox provider", "fnox age", "fnox aws", "fnox 1password", "which fnox provider", "configure fnox provider", "fnox encryption", "add provider to fnox".
+description: 'Guides fnox provider selection and setup — age encryption, AWS (Parameter Store and Secrets Manager), 1Password, Bitwarden, GCP, Azure, Doppler, Vault, and local options. Triggers on: "set up fnox provider", "fnox age", "fnox aws", "fnox 1password", "which fnox provider", "configure fnox provider", "fnox encryption", "add provider to fnox".'
 ---
 
 # Fnox Providers

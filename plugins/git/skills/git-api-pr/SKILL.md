@@ -10,7 +10,7 @@ allowed-tools:
     - Bash(git remote *)
     - Bash(mktemp *)
     - Read, TodoWrite
-argument-hint: <files...> --title "type(scope): description"
+argument-hint: '<files...> --title "type(scope): description"'
 disable-model-invocation: true
 created: 2026-04-16
 modified: 2026-04-16

@@ -1,6 +1,6 @@
 ---
 name: fnox-security
-description: Security best practices for fnox — key rotation, gitignore rules, CI/CD secret handling, access control, missing-secret enforcement, and avoiding common mistakes. Triggers on: "fnox security", "rotate fnox keys", "fnox gitignore", "fnox ci secrets", "fnox key rotation", "fnox access control", "fnox reencrypt", "secure fnox setup", "fnox best practices".
+description: 'Security best practices for fnox — key rotation, gitignore rules, CI/CD secret handling, access control, missing-secret enforcement, and avoiding common mistakes. Triggers on: "fnox security", "rotate fnox keys", "fnox gitignore", "fnox ci secrets", "fnox key rotation", "fnox access control", "fnox reencrypt", "secure fnox setup", "fnox best practices".'
 ---
 
 # Fnox Security Best Practices
