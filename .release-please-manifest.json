@@ -1,14 +1,14 @@
 {
 	"plugins/decision-journal": "1.1.2",
 	"plugins/dev-collective": "1.1.0",
-	"plugins/dotfiles": "1.1.0",
+	"plugins/dotfiles": "1.1.1",
 	"plugins/bun": "1.1.0",
 	"plugins/cloudflare-expert": "1.1.0",
-	"plugins/fnox": "1.0.0",
-	"plugins/git": "1.2.0",
+	"plugins/fnox": "1.0.1",
+	"plugins/git": "1.2.1",
 	"plugins/mise": "1.1.0",
 	"plugins/meta": "1.1.0",
-	"plugins/ruby-rails": "1.4.0",
+	"plugins/ruby-rails": "1.4.1",
 	"plugins/typescript-architect": "1.0.0",
-	"plugins/tools": "1.2.0"
+	"plugins/tools": "1.2.1"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.0...ruby-rails-v1.4.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **skills:** quote frontmatter values that broke YAML parsing ([#34](https://github.com/meaganewaller/marketplace/issues/34)) ([983443b](https://github.com/meaganewaller/marketplace/commit/983443bcc416fee8335f757d80c126e2f14a15ab))
+
 ## [1.4.0](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.3.0...ruby-rails-v1.4.0) (2026-05-27)
 
 
