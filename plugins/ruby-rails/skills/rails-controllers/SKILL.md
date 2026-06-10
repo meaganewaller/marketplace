@@ -1,6 +1,6 @@
 ---
 name: rails-controllers
-description: Rails controllers: strong parameters, filters, respond_to, streaming, and HTTP semantics. Use when implementing request handling.
+description: "Rails controllers: strong parameters, filters, respond_to, streaming, and HTTP semantics. Use when implementing request handling."
 ---
 
 # Rails Controllers

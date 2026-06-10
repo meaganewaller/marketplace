@@ -1,6 +1,6 @@
 ---
 name: ruby-gem-development
-description: Authoring Ruby gems: gemspec, versioning, releases, and testing. Use when building libraries or extracting code from apps.
+description: "Authoring Ruby gems: gemspec, versioning, releases, and testing. Use when building libraries or extracting code from apps."
 ---
 
 # Ruby Gem Development

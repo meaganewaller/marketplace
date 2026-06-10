@@ -3,8 +3,8 @@ created: 2026-04-23
 modified: 2026-04-23
 reviewed: 2026-04-23
 allowed-tools: Bash(uv *), Bash(npm *), Bash(bun *), Bash(cargo *), Bash(go *), Bash(brew *), Bash(bundle *), Read, Write
-args: [package-names] [--dev] [--global]
-argument-hint: [package-names] [--dev] [--global]
+args: "[package-names] [--dev] [--global]"
+argument-hint: "[package-names] [--dev] [--global]"
 description: |
   Universal dependency installer that auto-detects the project's package manager (uv, bun,
   npm, yarn, pnpm, cargo, go, bundler, brew) and runs the correct install command for dev, global, or project-local installs. Use when the user wants to install dependencies without worrying which package manager the project uses, add a package as a dev dependency, install globally, sync the lockfile, or when they mention "install dependencies", "add package", or "run the right package manager here".

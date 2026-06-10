@@ -1,6 +1,6 @@
 ---
 name: rails-security
-description: Rails security: OWASP, CSRF, SQL injection, XSS, mass assignment, headers. Use when reviewing security or hardening apps.
+description: "Rails security: OWASP, CSRF, SQL injection, XSS, mass assignment, headers. Use when reviewing security or hardening apps."
 ---
 
 # Rails Security

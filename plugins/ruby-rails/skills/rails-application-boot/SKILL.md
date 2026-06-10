@@ -1,6 +1,6 @@
 ---
 name: rails-application-boot
-description: Bootstrapping and configuring Rails 8 apps: new apps, config, environments, credentials, and initial structure. Use when creating or reconfiguring a Rails application.
+description: "Bootstrapping and configuring Rails 8 apps: new apps, config, environments, credentials, and initial structure. Use when creating or reconfiguring a Rails application."
 ---
 
 # Rails Application Boot

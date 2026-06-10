@@ -1,6 +1,6 @@
 ---
 name: ruby-minitest-testing
-description: Minitest patterns for Ruby and Rails: assertions, parallel tests, fixtures, and Rails 8 default test stack. Use when working in `test/` directories or Minitest-only projects.
+description: "Minitest patterns for Ruby and Rails: assertions, parallel tests, fixtures, and Rails 8 default test stack. Use when working in `test/` directories or Minitest-only projects."
 ---
 
 # Minitest Testing

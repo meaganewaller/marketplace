@@ -1,6 +1,6 @@
 ---
 name: fnox-configuration
-description: Guides fnox secrets management configuration via fnox.toml — file structure, secrets definition, profiles, hierarchical config, mise integration, import/export, and sync. Always use fnox as a mise integration, never as standalone shell integration. Triggers on: "set up fnox", "fnox.toml", "configure fnox", "fnox profiles", "fnox secrets", "mise fnox", "migrate to fnox", "fnox sync", "fnox import", "fnox export".
+description: 'Guides fnox secrets management configuration via fnox.toml — file structure, secrets definition, profiles, hierarchical config, mise integration, import/export, and sync. Always use fnox as a mise integration, never as standalone shell integration. Triggers on: "set up fnox", "fnox.toml", "configure fnox", "fnox profiles", "fnox secrets", "mise fnox", "migrate to fnox", "fnox sync", "fnox import", "fnox export".'
 ---
 
 # Fnox Configuration

@@ -1,6 +1,6 @@
 ---
 name: rails-activerecord
-description: Active Record: models, associations, validations, callbacks, scopes, and query interfaces. Use when working with persistence layer.
+description: "Active Record: models, associations, validations, callbacks, scopes, and query interfaces. Use when working with persistence layer."
 ---
 
 # Active Record
