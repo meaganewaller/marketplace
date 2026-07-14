@@ -242,6 +242,29 @@
 				"name": "meaganewaller"
 			},
 			"category": "utility",
+			"description": "Filesystem-as-navigation-graph static sites for technical reports, audits, and dashboards — auto-discovered nav rail and sitemap, CDN-served CSS kernel, zero-build",
+			"name": "sitegraph",
+			"source": "./plugins/sitegraph",
+			"strict": true,
+			"tags": [
+				"static-site",
+				"navigation",
+				"sitemap",
+				"nav-rail",
+				"html",
+				"css",
+				"zero-build",
+				"file-protocol",
+				"reports",
+				"audits"
+			],
+			"version": "1.0.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "utility",
 			"description": "General purpose CLI tools: fd, ripgrep, jq, yq, shell scripting, ImageMagick, Mermaid diagrams, and universal dependency installation",
 			"name": "tools",
 			"source": "./plugins/tools",

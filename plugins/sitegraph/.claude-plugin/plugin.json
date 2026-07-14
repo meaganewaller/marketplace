@@ -1,0 +1,21 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Filesystem-as-navigation-graph static sites for technical reports, audits, and dashboards — an auto-discovered, auto-fitting nav rail and sitemap kept in sync by a zero-dependency rebuild script, styled by a single CDN-served CSS kernel. No JS framework, no SSG, no build step.",
+	"keywords": [
+		"static-site",
+		"navigation",
+		"sitemap",
+		"nav-rail",
+		"html",
+		"css",
+		"zero-build",
+		"file-protocol",
+		"reports",
+		"audits"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "sitegraph",
+	"version": "1.0.0"
+}
