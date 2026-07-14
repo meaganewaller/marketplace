@@ -1,3 +1,4 @@
 [tools]
 bun = "latest"
 shfmt = "latest"
+hk = "latest"
