@@ -9,7 +9,7 @@
 	"plugins/mise": "1.1.0",
 	"plugins/meta": "1.1.0",
 	"plugins/ruby-rails": "1.4.1",
-	"plugins/sitegraph": "1.0.0",
+	"plugins/sitegraph": "1.1.0",
 	"plugins/typescript-architect": "1.0.0",
 	"plugins/tools": "1.2.1"
 }
