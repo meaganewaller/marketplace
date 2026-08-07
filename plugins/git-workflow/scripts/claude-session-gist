@@ -27,23 +27,6 @@ readonly SCRIPT_NAME="${0##*/}"
 readonly SCRIPT_DIR="${0%/*}"
 readonly EXIT_BLOCKED=3
 
-# Remote patterns whose repositories must never have their conversation logs
-# extracted or published. Read as whitespace-separated globs from the
-# `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST` environment variable, e.g.
-#   'github.com/acme/* github.enterprise.internal/*'
-#
-# This must be a real array: repo_is_blocked() indexes it with `[@]`, and a
-# scalar assigned here dies with "unbound variable" under `set -o nounset` on
-# bash 3.2 -- which is every default macOS shell, so the blocklist never ran on
-# the machine it exists to protect. Split with `read -ra` rather than an
-# unquoted array assignment: the latter also applies pathname expansion, and
-# these patterns contain `*` that must reach the matcher literally.
-BLOCKED_REMOTE_PATTERNS=()
-if [[ -n "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST:-}" ]]; then
-    read -ra BLOCKED_REMOTE_PATTERNS <<< "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST}"
-fi
-readonly BLOCKED_REMOTE_PATTERNS
-
 log() {
     printf '%s: %s\n' "${SCRIPT_NAME}" "$*" >&2
 }
@@ -67,6 +50,79 @@ die() {
     log "error: $*"
     exit 1
 }
+
+# Path to the settings file that stores plugin option values.
+#
+# Honors CLAUDE_CONFIG_DIR, which is how Claude Code relocates the config
+# directory. Hardcoding ~/.claude would silently read nothing for anyone who
+# has moved it -- and "read nothing" means "block nothing".
+user_settings_path() {
+    printf '%s/settings.json' "${CLAUDE_CONFIG_DIR:-${HOME}/.claude}"
+}
+
+# Resolve the raw blocklist string, in order of precedence:
+#
+#   1. MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST -- explicit override. The
+#      only source that works in a bare shell, a test harness, or CI.
+#   2. CLAUDE_PLUGIN_OPTION_GIST_BLOCKLIST -- exported by Claude Code from the
+#      plugin's `userConfig`, but only to HOOK processes. Present if a hook
+#      runs this; absent when the pr skill invokes it through the Bash tool.
+#   3. pluginConfigs[<plugin-id>].options.gist_blocklist in user settings --
+#      where `userConfig` actually persists the value, and so the only source
+#      that covers the normal /pr path. See the plugins reference: components
+#      that run in a shell are told to read the value from a config file.
+resolve_blocklist() {
+    if [[ -n "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST:-}" ]]; then
+        printf '%s' "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST}"
+        return 0
+    fi
+
+    if [[ -n "${CLAUDE_PLUGIN_OPTION_GIST_BLOCKLIST:-}" ]]; then
+        printf '%s' "${CLAUDE_PLUGIN_OPTION_GIST_BLOCKLIST}"
+        return 0
+    fi
+
+    local settings
+    settings=$(user_settings_path)
+    [[ -r "${settings}" ]] || return 0
+
+    # Only jq parses this. A regex over JSON would return a confidently wrong
+    # answer on a control whose entire job is to not leak, so if the file
+    # mentions the option and jq is missing, refuse instead of guessing.
+    if ! command -v jq &>/dev/null; then
+        if grep -q 'gist_blocklist' "${settings}" 2>/dev/null; then
+            die "a gist blocklist is configured in ${settings} but jq is not installed to read it"
+        fi
+        return 0
+    fi
+
+    # The pluginConfigs key embeds a marketplace-dependent plugin id, so select
+    # by plugin name instead of assuming its exact format.
+    jq -r '
+        (.pluginConfigs // {})
+        | to_entries
+        | map(select(.key | test("git-workflow")))
+        | map(.value.options.gist_blocklist // empty)
+        | first // ""
+    ' "${settings}" 2>/dev/null || return 0
+}
+
+# Remote patterns whose repositories must never have their conversation logs
+# extracted or published, as whitespace-separated globs.
+#
+# This must be a real array: repo_is_blocked() indexes it with `[@]`, and a
+# scalar assigned here dies with "unbound variable" under `set -o nounset` on
+# bash 3.2 -- which is every default macOS shell, so the blocklist never ran on
+# the machine it exists to protect. Split with `read -ra` rather than an
+# unquoted array assignment: the latter also applies pathname expansion, and
+# these patterns contain `*` that must reach the matcher literally.
+BLOCKED_REMOTE_PATTERNS=()
+blocklist_raw=$(resolve_blocklist)
+if [[ -n "${blocklist_raw}" ]]; then
+    read -ra BLOCKED_REMOTE_PATTERNS <<< "${blocklist_raw}"
+fi
+unset blocklist_raw
+readonly BLOCKED_REMOTE_PATTERNS
 
 usage() {
     cat >&2 <<EOF

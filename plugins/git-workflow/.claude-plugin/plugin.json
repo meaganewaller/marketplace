@@ -18,5 +18,12 @@
 	],
 	"license": "BlueOak-1.0.0",
 	"name": "git-workflow",
+	"userConfig": {
+		"gist_blocklist": {
+			"description": "Whitespace-separated globs matched against a normalized host/org/repo, e.g. 'github.com/acme/* github.internal/*'. The /pr skill refuses to publish a session transcript for any repo whose git remote matches. Leave empty to publish for every repo.",
+			"title": "Gist blocklist",
+			"type": "string"
+		}
+	},
 	"version": "0.1.0"
 }

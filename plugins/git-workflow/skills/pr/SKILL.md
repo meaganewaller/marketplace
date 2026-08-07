@@ -77,7 +77,7 @@ bash "${CLAUDE_PLUGIN_ROOT}/scripts/claude-session-gist" "${CLAUDE_SESSION_ID}"
 The shim:
 
 - Takes the current session ID (provided by the `${CLAUDE_SESSION_ID}` substitution)
-- **Checks the current repo's git remote against the gist blocklist first** (work repos whose conversation logs must never leave the machine — read from the `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST` environment variable as whitespace-separated globs, matched against a normalized lowercase `host/org/repo` so HTTPS and SSH remotes compare equal)
+- **Checks the current repo's git remote against the gist blocklist first** (work repos whose conversation logs must never leave the machine — whitespace-separated globs from the plugin's `gist_blocklist` user config, overridable via `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST`, matched against a normalized lowercase `host/org/repo` so HTTPS and SSH remotes compare equal)
 - For a **blocklisted** repo: refuses before extracting or uploading anything — prints an explanation to stderr, exits `3`, and writes **nothing to stdout**
 - Otherwise: extracts with `--detailed` output, pipes directly to `gh gist create` (secret by default), and prints **only the Gist URL** to stdout
 

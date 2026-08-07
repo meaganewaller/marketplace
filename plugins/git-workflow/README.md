@@ -14,6 +14,7 @@ This is a deliberately small plugin: four skills that cover the everyday loop, p
 
 - [GitHub CLI (`gh`)](https://cli.github.com/) installed and authenticated — every skill here shells out to it
 - `claude-extract` on `PATH` — only needed for the `/pr` conversation-log step
+- `jq` — only needed to read a [gist blocklist](#gist-blocklist) configured through `userConfig`; not required if you set the environment variable directly or configure no blocklist at all
 
 Scripts target bash 3.2 so they run under the system `/bin/bash` on macOS.
 
@@ -82,25 +83,34 @@ Two rules are worth calling out because they're easy to get wrong:
 
 `/pr` attaches a link to the session transcript in the PR footer. For work repositories whose conversation logs must never leave the machine, `claude-session-gist` checks the repo's git remotes **before extracting or uploading anything**.
 
-Configure it with the `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST` environment variable. Patterns are whitespace-separated globs matched against a normalized, lowercased `host/org/repo` form, so HTTPS and SSH remotes for the same repo compare equal.
+Patterns are whitespace-separated globs matched against a normalized, lowercased `host/org/repo` form, so HTTPS and SSH remotes for the same repo compare equal. **Nothing is blocked until you set a value.**
 
-The plugin ships a [`settings.json`](settings.json) declaring the variable with an empty default — **nothing is blocked until you set a value**. Set the real one in your user settings at `~/.claude/settings.json`:
+The plugin declares this as a [`userConfig`](.claude-plugin/plugin.json) option, so Claude Code prompts for it when you enable the plugin — no hand-editing required. Answer the **Gist blocklist** prompt with something like:
 
-```json
-{
-  "env": {
-    "MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST": "github.com/acme/* github.enterprise.internal/*"
-  }
-}
+```text
+github.com/acme/* github.enterprise.internal/*
 ```
 
-Or export it from your shell profile:
+The value persists to `pluginConfigs["git-workflow@…"].options.gist_blocklist` in your user settings.
+
+To override it for one shell, a test, or CI, set the environment variable instead — it takes precedence over the configured value:
 
 ```bash
 export MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST='github.com/acme/* github.enterprise.internal/*'
 ```
 
-> **Heads up:** Claude Code's plugin loader currently honors only the `agent` and `subagentStatusLine` keys in a plugin's `settings.json` ([plugins reference](https://code.claude.com/docs/en/plugins-reference)). The `env` block there records the contract and is ready if that support lands, but today the value has to come from user settings or the ambient environment. Don't rely on the plugin file alone — verify with the check below.
+<details>
+<summary>How the value reaches the script</summary>
+
+`userConfig` values are exported as `CLAUDE_PLUGIN_OPTION_<KEY>` only to **hook** processes, and `/pr` invokes this shim through the Bash tool rather than a hook — so that export is absent on the normal path. The [plugins reference](https://code.claude.com/docs/en/plugins-reference) directs shell-invoked components to read the value from a config file instead, which is what the shim does. It resolves in this order:
+
+1. `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST` — explicit override; the only source that works in a bare shell or CI
+2. `CLAUDE_PLUGIN_OPTION_GIST_BLOCKLIST` — present when a hook runs it
+3. `pluginConfigs[…].options.gist_blocklist` in `$CLAUDE_CONFIG_DIR/settings.json` (falling back to `~/.claude`) — where `userConfig` actually persists
+
+Step 3 needs `jq`. If the settings file has a blocklist configured and `jq` is missing, the shim **refuses** rather than parsing JSON with a regex and returning a confidently wrong answer.
+
+</details>
 
 Confirm the blocklist is live before trusting it. From inside a repo you expect to be blocked:
 
