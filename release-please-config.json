@@ -74,18 +74,6 @@
 			"initial-version": "1.0.0",
 			"release-type": "simple"
 		},
-		"plugins/git": {
-			"component": "git",
-			"extra-files": [
-				{
-					"jsonpath": "$.version",
-					"path": ".claude-plugin/plugin.json",
-					"type": "json"
-				}
-			],
-			"initial-version": "1.0.0",
-			"release-type": "simple"
-		},
 		"plugins/mise": {
 			"component": "mise",
 			"extra-files": [
@@ -148,6 +136,18 @@
 		},
 		"plugins/tools": {
 			"component": "tools",
+			"extra-files": [
+				{
+					"jsonpath": "$.version",
+					"path": ".claude-plugin/plugin.json",
+					"type": "json"
+				}
+			],
+			"initial-version": "1.0.0",
+			"release-type": "simple"
+		},
+		"plugins/git-workflow": {
+			"component": "git-workflow",
 			"extra-files": [
 				{
 					"jsonpath": "$.version",

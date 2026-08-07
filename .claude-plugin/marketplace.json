@@ -144,22 +144,22 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
-			"description": "Git and GitHub workflows: commits, branches, PRs, issues, release automation, and repository management",
-			"name": "git",
-			"source": "./plugins/git",
+			"description": "Git and GitHub workflow skills — commits, pull requests, issues, and PR splitting, sharing one set of conventional-commit and issue-linking rules",
+			"name": "git-workflow",
+			"source": "./plugins/git-workflow",
 			"strict": true,
 			"tags": [
 				"git",
 				"github",
 				"gh",
-				"issues",
+				"commit",
+				"conventional-commits",
 				"pull-requests",
-				"commits",
-				"branches",
-				"release-please",
+				"issues",
+				"code-review",
 				"cli"
 			],
-			"version": "1.2.0"
+			"version": "0.1.0"
 		},
 		{
 			"author": {

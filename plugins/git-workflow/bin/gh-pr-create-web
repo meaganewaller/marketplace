@@ -1,0 +1,8 @@
+#!/bin/bash
+# Shim for gh pr create that automatically adds --web flag for safety.
+# This ensures PRs always open in browser for human review before submission.
+
+set -euo pipefail
+
+# Pass through to real gh command with --web injected
+exec gh pr create --web "$@"
