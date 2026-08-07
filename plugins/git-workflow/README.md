@@ -34,9 +34,9 @@ Supports `--amend`. Optionally scans open issues to suggest a `Fixes #N` footer,
 
 ### `/pr`
 
-Gathers context, drafts the body, then opens the PR **in the browser** for final human review — it never submits one directly. That's structural: `scripts/gh-pr-create-web` is a shim that injects `--web` into every `gh pr create` call.
+Gathers context, drafts the body, then opens the PR **in the browser** for final human review — it never submits one directly. That's structural: `gh-pr-create-web` is a shim that injects `--web` into every `gh pr create` call.
 
-The flow reads any `.github/pull_request_template.md`, collects branch/commit/diff/CI state through `scripts/pr-context` in a single call, publishes the session transcript as a secret Gist (see [Gist blocklist](#gist-blocklist)), and drafts a Why / What / Notes-for-reviewers body. Titles follow conventional commits so release-please and squash-merge behave — see [`skills/pr/reference/pr-title.md`](skills/pr/reference/pr-title.md).
+The flow reads any `.github/pull_request_template.md`, collects branch/commit/diff/CI state through `pr-context` in a single call, publishes the session transcript as a secret Gist (see [Gist blocklist](#gist-blocklist)), and drafts a Why / What / Notes-for-reviewers body. Titles follow conventional commits so release-please and squash-merge behave — see [`skills/pr/reference/pr-title.md`](skills/pr/reference/pr-title.md).
 
 Runs on Sonnet.
 
@@ -70,9 +70,11 @@ Two rules are worth calling out because they're easy to get wrong:
 - **The emoji is not a function of the type.** `feat` is not always `:sparkles:`. If you can derive it mechanically, it's the wrong emoji.
 - **`Blocks #123` as plain text does nothing.** GitHub stopped parsing it. Use the native `dependencies/blocked_by` and `sub_issues` APIs so relationships actually appear on project boards.
 
-## Scripts
+## Executables
 
-| Script | Purpose |
+These live in `bin/`, so Claude Code adds them to the Bash tool's `PATH` while the plugin is enabled — the skills call them as bare commands rather than by path.
+
+| Command | Purpose |
 |--------|---------|
 | `pr-context` | Collects branch info, commit range, diff stats, CI status, and referenced issues in one execution, replacing 5–7 tool calls. Always compares against `origin/<base>`, never local. |
 | `gh-pr-create-web` | Shim that injects `--web` into `gh pr create` so PRs always open in the browser first. |
@@ -115,7 +117,7 @@ Step 3 needs `jq`. If the settings file has a blocklist configured and `jq` is m
 Confirm the blocklist is live before trusting it. From inside a repo you expect to be blocked:
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/claude-session-gist" test-id; echo "exit=$?"
+claude-session-gist test-id; echo "exit=$?"
 ```
 
 Exit `3` with no stdout means the blocklist matched. Any other exit means it did not.

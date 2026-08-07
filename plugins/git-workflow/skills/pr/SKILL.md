@@ -12,9 +12,9 @@ allowed-tools:
     - Bash(git fetch:*)
     - Bash(git push:*)
     - Bash(gh issue view:*)
-    - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/claude-session-gist":*)
-    - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/gh-pr-create-web":*)
-    - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/pr-context":*)
+    - Bash(claude-session-gist:*)
+    - Bash(gh-pr-create-web:*)
+    - Bash(pr-context:*)
 ---
 
 # Create Pull Request
@@ -55,7 +55,7 @@ Run `git status` first to check for uncommitted changes.
 Then gather the rest with the context script rather than ad hoc `git log`/`git diff` calls — it fetches `origin/<base>` before comparing, which matters: comparing against **local** `main` instead of `origin/main` can silently pull in commits from a previous PR that hasn't merged yet, making this PR's diff wrong.
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/pr-context" [base-branch]
+pr-context [base-branch]
 ```
 
 Defaults to `main` as the base if not given. It reports: branch and remote-tracking status, the commit range and types since `origin/<base>`, diff stats and changed files, issue references and closing keywords already in the commits, a PR title suggestion, and any existing PR + its CI status. Use this output for the rest of the steps below instead of re-deriving it.
@@ -71,7 +71,7 @@ If the script reports `FETCH_FAILED=true` or can't resolve `origin/<base>`, ask 
 Publish the current session through the gist shim, which extracts **only the current session** and pipes it to a secret Gist:
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/claude-session-gist" "${CLAUDE_SESSION_ID}"
+claude-session-gist "${CLAUDE_SESSION_ID}"
 ```
 
 The shim:
@@ -140,7 +140,7 @@ git push -u origin <branch-name>
 **Then create PR using the shim:**
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/gh-pr-create-web" --title "..." --body "..."
+gh-pr-create-web --title "..." --body "..."
 ```
 
 The shim automatically adds `--web`, ensuring PRs open in browser for human review. Do NOT add `--web` yourself—the shim handles it.

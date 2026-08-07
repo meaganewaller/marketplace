@@ -215,7 +215,7 @@ Git and GitHub workflow skills — commits, pull requests, issues, and PR splitt
   - `issue` - File a well-structured GitHub issue: duplicate search, native issue types, acceptance criteria, and labels applied at creation.
   - `split-pr` - Read-only analysis of a large diff, proposing a split by logical concern with a suggested creation order.
 - **Rules:** 6 shared reference documents (conventional commits, mood emoji, issue linking, issue detection, GitHub labels, branch naming) that the skills cross-reference instead of duplicating.
-- **Scripts:**
+- **Executables:** (in `bin/`, added to the Bash tool's `PATH` when the plugin is enabled)
   - `pr-context` - Collects branch, commit range, diff stats, CI status, and referenced issues in one execution
   - `gh-pr-create-web` - Shim that injects `--web` so PRs always open in the browser
   - `claude-session-gist` - Publishes the session transcript as a secret Gist, refusing outright for blocklisted repos
