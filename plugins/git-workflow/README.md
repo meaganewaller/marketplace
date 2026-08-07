@@ -82,11 +82,33 @@ Two rules are worth calling out because they're easy to get wrong:
 
 `/pr` attaches a link to the session transcript in the PR footer. For work repositories whose conversation logs must never leave the machine, `claude-session-gist` checks the repo's git remotes **before extracting or uploading anything**.
 
-Configure it with the `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST` environment variable. Patterns are matched as globs against a normalized, lowercased `host/org/repo` form, so HTTPS and SSH remotes for the same repo compare equal:
+Configure it with the `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST` environment variable. Patterns are whitespace-separated globs matched against a normalized, lowercased `host/org/repo` form, so HTTPS and SSH remotes for the same repo compare equal.
+
+The plugin ships a [`settings.json`](settings.json) declaring the variable with an empty default — **nothing is blocked until you set a value**. Set the real one in your user settings at `~/.claude/settings.json`:
+
+```json
+{
+  "env": {
+    "MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST": "github.com/acme/* github.enterprise.internal/*"
+  }
+}
+```
+
+Or export it from your shell profile:
 
 ```bash
 export MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST='github.com/acme/* github.enterprise.internal/*'
 ```
+
+> **Heads up:** Claude Code's plugin loader currently honors only the `agent` and `subagentStatusLine` keys in a plugin's `settings.json` ([plugins reference](https://code.claude.com/docs/en/plugins-reference)). The `env` block there records the contract and is ready if that support lands, but today the value has to come from user settings or the ambient environment. Don't rely on the plugin file alone — verify with the check below.
+
+Confirm the blocklist is live before trusting it. From inside a repo you expect to be blocked:
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/claude-session-gist" test-id; echo "exit=$?"
+```
+
+Exit `3` with no stdout means the blocklist matched. Any other exit means it did not.
 
 The design is fail-closed by intent: a remote that can't be normalized is treated as blocked. A false block costs one missing PR link; a false pass leaks a work conversation log.
 
