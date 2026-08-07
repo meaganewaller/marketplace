@@ -1,0 +1,22 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "git workflow management — commit messages, PRs, and more",
+	"keywords": [
+		"git",
+		"workflow",
+		"commit",
+		"pr",
+		"merge",
+		"rebase",
+		"squash",
+		"revert",
+		"cherry-pick",
+		"bisect",
+		"stash"
+	],
+	"license": "BlueOak-1.0.0",
+	"name": "git-workflow",
+	"version": "0.1.0"
+}

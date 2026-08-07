@@ -40,20 +40,20 @@ Bun runtime patterns, bunx, shell scripting, lockfile management, and testing gu
 
 **Category:** development
 
-Expert guidance for Cloudflare Workers, storage, AI, Zero Trust, wrangler, and deployment workflows.
+Cloudflare platform expertise — Workers, Pages, R2, D1, KV, Durable Objects, AI Workers, Zero Trust, MCP servers, and cost optimization.
 
 **Contains:**
 
 - **Skills:**
-  - `cloudflare-knowledge` - Cloudflare platform knowledge — Workers, Pages, R2, D1, KV, Durable Objects, AI, and Zero Trust. Includes 8 reference files for progressive disclosure.
+  - `cloudflare-knowledge` - Cloudflare platform knowledge — Workers, Pages, R2, D1, KV, Durable Objects, AI, and Zero Trust. Includes 8 reference files for progressive disclosure (wrangler config, storage deep-dive, AI usage, AI models, MCP server development, Zero Trust setup, cost comparison, third-party integrations).
 - **Commands:**
   - `/cloudflare-expert:cloudflare-worker` - Create a new Cloudflare Worker with specified bindings and configuration
   - `/cloudflare-expert:cloudflare-deploy` - Deploy a Cloudflare Worker with environment configuration and secrets
   - `/cloudflare-expert:cloudflare-debug` - Debug Cloudflare Workers issues with diagnostic commands and solutions
   - `/cloudflare-expert:cloudflare-tunnel` - Create and configure a Cloudflare Tunnel for Zero Trust access
-  - `/cloudflare-expert:cloudflare-ai` - Generate code for Cloudflare Workers AI tasks (TTS, STT, image, LLM)
+  - `/cloudflare-expert:cloudflare-ai` - Generate production-ready code for Workers AI tasks (TTS, STT, image, LLM, vision, embeddings, RAG)
 - **Agents:**
-  - `cloudflare-expert` - Expert agent for Cloudflare architecture, implementation, troubleshooting, and optimization
+  - `cloudflare-expert` - Expert agent for the full Cloudflare platform — Workers, storage, AI Workers, Zero Trust, MCP servers, Workflows, Vectorize, observability, and cost optimization
 
 **Installation:**
 
@@ -199,71 +199,32 @@ Fnox secrets management — configuration, provider setup, and security best pra
 
 ---
 
-### git
+### git-workflow
 
-[🧭 Plugin README](plugins/git/README.md)
+[🧭 Plugin README](plugins/git-workflow/README.md)
 
 **Category:** development
 
-Git and GitHub workflows: commits, branches, PRs, issues, release automation, and repository management.
+Git and GitHub workflow skills — commits, pull requests, issues, and PR splitting, sharing one set of conventional-commit and issue-linking rules.
 
 **Contains:**
 
-- **Commands:**
-  - `/git:gh-issue-list` - List issues in the current GitHub repository
-  - `/git:gh-issue-create` - Create a new issue in the current GitHub repository
-  - `/git:gh-issue-view` - View details of a GitHub issue
-  - `/git:gh-pr-list` - List pull requests in the current GitHub repository
-  - `/git:gh-pr-create` - Create a new pull request from the current branch
-  - `/git:gh-pr-view` - View details of a GitHub pull request
-  - `/git:gh-pr-checkout` - Checkout a pull request locally
-  - `/git:gh-pr-address-comments` - Address outstanding PR review comments
 - **Skills:**
-  - `git-commit` - Create commits with conventional messages and issue references
-  - `git-push` - Push local commits to remote repositories with branch tracking
-  - `git-pr` - Create pull requests with descriptions, labels, and issue references
-  - `git-commit-push-pr` - Complete workflow from uncommitted changes to open PR in one step
-  - `git-branch-pr-workflow` - Branch management, PR workflows, and GitHub integration
-  - `git-branch-naming` - Branch naming conventions with type prefixes and issue linking
-  - `git-commit-workflow` - Commit message conventions, staging practices, and conventional commits
-  - `git-commit-trailers` - Git commit trailer conventions (BREAKING CHANGE, Release-As, Co-authored-by)
-  - `git-conflicts` - Resolve merge conflicts file-by-file with modern git tooling
-  - `git-resolve-conflicts` - Resolve merge conflicts in pull requests
-  - `git-rebase-patterns` - Advanced rebase patterns for linear history and stacked PRs
-  - `git-fork-workflow` - Fork management and upstream synchronization
-  - `git-upstream-pr` - Submit clean PRs to upstream repositories from a fork
-  - `git-issue` - Process GitHub issues end-to-end with TDD and parallel work support
-  - `git-issue-manage` - Administrative operations on GitHub issues (transfer, pin, lock, bulk ops)
-  - `git-issue-hierarchy` - Manage sub-issues and GitHub dependency relationships (blocked_by/blocking)
-  - `git-pr-feedback` - Review PR workflow results and address reviewer comments
-  - `git-fix-pr` - Analyze and fix failing PR checks
-  - `git-triage` - Triage open GitHub issues and PRs in one sweep with backlog grooming
-  - `git-maintain` - Repository maintenance and cleanup (gc, prune, branch cleanup)
-  - `git-security-checks` - Pre-commit security validation and secret detection via gitleaks
-  - `git-derive-docs` - Derive undocumented rules, PRDs, ADRs, and PRPs from git history
-  - `git-coworker-check` - Detect whether another Claude agent is working in the same repo clone
-  - `git-api-pr` - Create PRs via GitHub API without local git operations
-  - `git-repo-detection` - Detect GitHub repository name and owner from git remotes
-  - `git-cli-agentic` - Git commands optimized for AI agent workflows with porcelain output
-  - `gh-cli-agentic` - GitHub CLI commands optimized for AI agent workflows with JSON output
-  - `gh-workflow-monitoring` - Monitor GitHub Actions workflow runs with blocking watch commands
-  - `github-issue-autodetect` - Automatically detect GitHub issues that staged changes may fix
-  - `github-issue-writing` - Create well-structured GitHub issues with clear titles and acceptance criteria
-  - `github-labels` - Discover and apply labels to GitHub PRs and issues
-  - `github-pr-title` - Craft PR titles using conventional commits format for release-please automation
-  - `release-please-configuration` - Configure release-please for monorepos and single-package repos
-  - `release-please-pr-workflow` - Merge release-please PRs in monorepos with conflict handling
-  - `release-please-protection` - Avoid manual edits to release-please-managed files
-- **Agents:**
-  - `git-ops` - Specialized agent for complex git write operations (conflicts, rebases, bisect, cherry-picks)
-- **Hooks:**
-  - PreToolUse (Bash): Validates PR issue links and checks PR metadata on push
-  - PreToolUse (mcp__github__create_pull_request): Ensures PR body contains issue closing keywords
+  - `commit` - Create a commit with intentional file selection, conventional-commit format, mood emoji, and an American English pass. Supports `--amend`.
+  - `pr` - Gather context, draft a Why/What/Notes body, and open the PR in the browser for final human review — never submits directly.
+  - `issue` - File a well-structured GitHub issue: duplicate search, native issue types, acceptance criteria, and labels applied at creation.
+  - `split-pr` - Read-only analysis of a large diff, proposing a split by logical concern with a suggested creation order.
+- **Rules:** 6 shared reference documents (conventional commits, mood emoji, issue linking, issue detection, GitHub labels, branch naming) that the skills cross-reference instead of duplicating.
+- **Scripts:**
+  - `pr-context` - Collects branch, commit range, diff stats, CI status, and referenced issues in one execution
+  - `gh-pr-create-web` - Shim that injects `--web` so PRs always open in the browser
+  - `claude-session-gist` - Publishes the session transcript as a secret Gist, refusing outright for blocklisted repos
+  - `claude-extract-session` - Extracts a session by ID to markdown
 
 **Installation:**
 
 ```bash
-/plugin install git@meaganewaller-marketplace
+/plugin install git-workflow@meaganewaller-marketplace
 ```
 
 ---

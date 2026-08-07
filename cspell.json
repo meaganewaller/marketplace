@@ -118,6 +118,8 @@
 		"slos",
 		"sqlx",
 		"triaging",
+		"misattributes",
+		"xtrace",
 		"typer",
 		"venv",
 		"wcag"

@@ -1,0 +1,188 @@
+#!/usr/bin/env bash
+#
+# claude-session-gist - Publish the current claude session as a secret gist,
+# UNLESS the current repo's git remote is on the blocklist.
+#
+# Usage: claude-session-gist <session-id> [branch-name]
+#
+# Behavior:
+#   - If any git remote of the current repo matches a blocked pattern, this
+#     refuses BEFORE extracting or uploading anything: it prints an explanation
+#     to stderr and exits 3 with NO stdout. The caller MUST then
+#     omit the conversation-log link from the PR body.
+#   - Otherwise, it extracts the session (via the sibling claude-extract-session shim)
+#     and pipes it to `gh gist create` (secret by default), printing the
+#     resulting Gist URL - and nothing else - to stdout.
+#
+# The blocklist is rendered from the `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST`
+# environment variable.
+
+[[ -n "${DEBUG:-}" ]] && set -o xtrace
+set -o errexit
+set -o errtrace
+set -o nounset
+set -o pipefail
+
+readonly SCRIPT_NAME="${0##*/}"
+readonly SCRIPT_DIR="${0%/*}"
+readonly EXIT_BLOCKED=3
+
+# Remote patterns whose repositories must never have their conversation logs
+# extracted or published. Read as whitespace-separated globs from the
+# `MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST` environment variable, e.g.
+#   'github.com/acme/* github.enterprise.internal/*'
+#
+# This must be a real array: repo_is_blocked() indexes it with `[@]`, and a
+# scalar assigned here dies with "unbound variable" under `set -o nounset` on
+# bash 3.2 -- which is every default macOS shell, so the blocklist never ran on
+# the machine it exists to protect. Split with `read -ra` rather than an
+# unquoted array assignment: the latter also applies pathname expansion, and
+# these patterns contain `*` that must reach the matcher literally.
+BLOCKED_REMOTE_PATTERNS=()
+if [[ -n "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST:-}" ]]; then
+    read -ra BLOCKED_REMOTE_PATTERNS <<< "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST}"
+fi
+readonly BLOCKED_REMOTE_PATTERNS
+
+log() {
+    printf '%s: %s\n' "${SCRIPT_NAME}" "$*" >&2
+}
+
+# Lowercase a string.
+#
+# This deliberately shells out to `tr` instead of using `${var,,}`: macOS ships
+# bash 3.2.57, where `${var,,}` is a runtime "bad substitution" error. This
+# script runs under `#!/usr/bin/env bash`, which finds /bin/bash on a default
+# PATH -- so the blocklist never evaluated on the machine it exists to protect,
+# and every repo with a remote died at exit 1 instead. `bash -n` and shellcheck
+# both pass on `${var,,}`, so only running it under bash 3.2 catches this;
+# test/claude-session-gist.bats does exactly that. LC_ALL=C keeps this to ASCII,
+# which is all a host or org name can contain.
+to_lower() {
+    printf '%s' "$1" | LC_ALL=C tr '[:upper:]' '[:lower:]'
+}
+
+# Print error and exit
+die() {
+    log "error: $*"
+    exit 1
+}
+
+usage() {
+    cat >&2 <<EOF
+Usage: ${SCRIPT_NAME} <session-id> [branch-name]
+
+Publish the current Claude session as a secret Gist, unless the current
+repository's git remote is on the gist blocklist.
+
+Arguments:
+    session-id    UUID or agent-prefixed ID of the session to publish
+    branch-name   Optional; defaults to the current branch. Used only to name
+                  the Gist file.
+
+Options:
+    -h, --help    Show this help message
+
+Exit codes:
+    0   Gist created; URL printed to stdout
+    3   Repository is blocklisted; nothing extracted or uploaded
+    1   Error
+EOF
+    exit 1
+}
+
+# Normalize a git remote URL to a canonical, lowercased `host/org/repo` form so
+# that HTTPS and scp-style SSH remotes for the same repo compare equal.
+#   https://github.com/Gusto/repo.git -> github.com/gusto/repo.git
+#   git@github.com:Gusto/repo.git     -> github.com/gusto/repo.git
+#   ssh://git@github.com/Gusto/repo   -> github.com/gusto/repo
+normalize_remote() {
+    local url="$1"
+    local sep='/'
+
+    url="${url#*://}"   # strip scheme://
+    url="${url#*@}"     # strip user@
+    url="${url/:/$sep}" # scp-style host:path -> host/path
+    to_lower "${url}"
+}
+
+
+# Return 0 if the current repo has any remote matching the blocklist.
+repo_is_blocked() {
+    # No patterns configured -> nothing is ever blocked.
+    if [[ "${#BLOCKED_REMOTE_PATTERNS[@]}" -eq 0 ]]; then
+        return 1
+    fi
+
+    # Not a git repo (or no remotes) -> nothing to match against.
+    local remotes
+    if ! remotes=$(git remote 2>/dev/null) || [[ -z "${remotes}" ]]; then
+        return 1
+    fi
+
+    local remote url norm pattern pattern_lc
+    while IFS= read -r remote; do
+        [[ -z "${remote}" ]] && continue
+        url=$(git remote get-url "${remote}" 2>/dev/null) || continue
+
+        # Fail CLOSED. If a remote exists but cannot be normalized, we cannot
+        # prove it is safe to publish. A false block costs one missing PR link;
+        # a false pass leaks a work conversation log to a Gist.
+        norm=$(normalize_remote "${url}") || norm=''
+        if [[ -z "${norm}" ]]; then
+            log "blocked: could not normalize remote '${url}'"
+            return 0
+        fi
+
+        for pattern in "${BLOCKED_REMOTE_PATTERNS[@]}"; do
+            pattern_lc=$(to_lower "${pattern}")
+            # RHS must stay UNQUOTED so [[ == ]] treats it as a glob, not a
+            # literal; quoting it silently turns the blocklist into exact-match
+            # and lets work repos through.
+            # shellcheck disable=SC2053 # intentional glob match
+            if [[ "${norm}" == ${pattern_lc} ]]; then
+                log "blocked: remote '${url}' matches pattern '${pattern}'"
+                return 0
+            fi
+        done
+    done <<< "${remotes}"
+
+    return 1
+}
+
+main() {
+  if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+        usage
+    fi
+
+    if [[ $# -lt 1 || $# -gt 2 ]]; then
+        die "expected 1-2 arguments, got $#. Use --help for usage."
+    fi
+
+    local session_id="$1"
+    local branch="${2:-}"
+
+    # Refuse before touching the session for blocklisted repositories.
+    if repo_is_blocked; then
+        log "this repository's conversation log must not be published; skipping gist."
+        exit "${EXIT_BLOCKED}"
+    fi
+
+    if [[ -z "${branch}" ]]; then
+        branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || printf 'session')
+    fi
+    # Slashes are illegal in Gist filenames; flatten branch names like fix/foo.
+    local branch_safe="${branch//\//-}"
+
+    local extract="${SCRIPT_DIR}/claude-extract-session"
+    [[ -x "${extract}" ]] || die "sibling shim not found or not executable: ${extract}"
+
+    command -v gh &>/dev/null || die "gh not found in PATH"
+
+    # Extract -> secret Gist. gh prints the Gist URL to stdout, which becomes
+    # this script's only stdout.
+    "${extract}" "${session_id}" \
+        | gh gist create --filename "pr-conversation-${branch_safe}.md" -
+}
+
+main "$@"
