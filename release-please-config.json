@@ -2,18 +2,6 @@
 	"$schema": "https://raw.githubusercontent.com/googleapis/release-please/refs/heads/main/schemas/config.json",
 	"include-component-in-tag": true,
 	"packages": {
-		"plugins/decision-journal": {
-			"component": "decision-journal",
-			"extra-files": [
-				{
-					"jsonpath": "$.version",
-					"path": ".claude-plugin/plugin.json",
-					"type": "json"
-				}
-			],
-			"initial-version": "1.0.0",
-			"release-type": "simple"
-		},
 		"plugins/dev-collective": {
 			"component": "dev-collective",
 			"extra-files": [
