@@ -2,7 +2,6 @@
 	"plugins/dev-collective": "1.1.0",
 	"plugins/dotfiles": "1.1.1",
 	"plugins/bun": "1.1.0",
-	"plugins/cloudflare-expert": "1.1.0",
 	"plugins/fnox": "1.0.1",
 	"plugins/git-workflow": "0.2.0",
 	"plugins/mise": "1.1.0",

@@ -34,35 +34,6 @@ Bun runtime patterns, bunx, shell scripting, lockfile management, and testing gu
 
 ---
 
-### cloudflare-expert
-
-[🧭 Plugin README](plugins/cloudflare-expert/README.md)
-
-**Category:** development
-
-Cloudflare platform expertise — Workers, Pages, R2, D1, KV, Durable Objects, AI Workers, Zero Trust, MCP servers, and cost optimization.
-
-**Contains:**
-
-- **Skills:**
-  - `cloudflare-knowledge` - Cloudflare platform knowledge — Workers, Pages, R2, D1, KV, Durable Objects, AI, and Zero Trust. Includes 8 reference files for progressive disclosure (wrangler config, storage deep-dive, AI usage, AI models, MCP server development, Zero Trust setup, cost comparison, third-party integrations).
-- **Commands:**
-  - `/cloudflare-expert:cloudflare-worker` - Create a new Cloudflare Worker with specified bindings and configuration
-  - `/cloudflare-expert:cloudflare-deploy` - Deploy a Cloudflare Worker with environment configuration and secrets
-  - `/cloudflare-expert:cloudflare-debug` - Debug Cloudflare Workers issues with diagnostic commands and solutions
-  - `/cloudflare-expert:cloudflare-tunnel` - Create and configure a Cloudflare Tunnel for Zero Trust access
-  - `/cloudflare-expert:cloudflare-ai` - Generate production-ready code for Workers AI tasks (TTS, STT, image, LLM, vision, embeddings, RAG)
-- **Agents:**
-  - `cloudflare-expert` - Expert agent for the full Cloudflare platform — Workers, storage, AI Workers, Zero Trust, MCP servers, Workflows, Vectorize, observability, and cost optimization
-
-**Installation:**
-
-```bash
-/plugin install cloudflare-expert@meaganewaller-marketplace
-```
-
----
-
 ### dev-collective
 
 [🧭 Plugin README](plugins/dev-collective/README.md)
