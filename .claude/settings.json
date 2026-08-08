@@ -1,15 +1,26 @@
 {
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "command": "bd prime --hook-json",
-            "type": "command"
-          }
-        ],
-        "matcher": ""
-      }
-    ]
-  }
+	"enabledPlugins": {
+		"meta@meaganewaller-local": true
+	},
+	"extraKnownMarketplaces": {
+		"meaganewaller-local": {
+			"source": {
+				"source": "file",
+				"path": "../.claude-plugin/marketplace.json"
+			}
+		}
+	},
+	"hooks": {
+		"SessionStart": [
+			{
+				"hooks": [
+					{
+						"command": "bd prime --hook-json",
+						"type": "command"
+					}
+				],
+				"matcher": ""
+			}
+		]
+	}
 }
