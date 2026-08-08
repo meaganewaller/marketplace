@@ -19,12 +19,14 @@ add this marketplace
 
 **Category:** development
 
-Bun runtime patterns, bunx, shell scripting, lockfile management, and testing guidance.
+Bun runtime, package management, testing, bundling, and standalone executables — verified against the Bun CLI, not recalled.
 
 **Contains:**
 
 - **Skills:**
-  - `bun-runtime` - Provides Bun runtime guidance including bunx, shell scripting, lockfile management, resolution, and testing patterns. Includes 5 reference files for progressive disclosure.
+  - `bun-runtime` - Bun across all four of its roles: runtime, package manager, bundler, and test runner. Records the flags and config keys that are commonly invented but do not exist. Includes 8 reference files for progressive disclosure (package management, security, testing, building, built-in APIs, shell, resolution, bunx).
+- **Scripts:**
+  - `bun-project-audit.sh` - Reports Bun version, lockfile format and whether it needs migrating, workspace layout, config files, and blocked lifecycle scripts
 
 **Installation:**
 
@@ -298,6 +300,31 @@ Ruby 4+ and Rails 8+ expert skills: mise toolchain, Ruby LSP, RBS/Sorbet type si
 
 ```bash
 /plugin install ruby-rails@meaganewaller-marketplace
+```
+
+---
+
+### sitegraph
+
+[🧭 Plugin README](plugins/sitegraph/README.md)
+
+**Category:** utility
+
+Filesystem-as-navigation-graph static sites for technical reports, audits, and dashboards — auto-discovered nav rail and sitemap, CDN-served CSS kernel, zero-build.
+
+**Contains:**
+
+- **Skills:**
+  - `rebuild-nav` - Rebuilds the sitemap and per-page navigation rail by walking the site's folder structure. Use after adding, moving, renaming, or removing pages, or when regenerating breadcrumbs and prev/next links (1 reference file: authoring)
+- **Scripts:**
+  - `build-nav.ts` - Walks the site root and regenerates nav rail, breadcrumbs, sitemap, and prev/next links
+- **Assets:**
+  - `kernel.css` - CDN-served CSS kernel used by generated pages
+
+**Installation:**
+
+```bash
+/plugin install sitegraph@meaganewaller-marketplace
 ```
 
 ---
