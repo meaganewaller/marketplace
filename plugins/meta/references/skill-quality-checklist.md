@@ -22,7 +22,7 @@ Use this checklist when creating or auditing a Claude Code plugin skill.
 - [ ] Body uses imperative/infinitive instructions, not second person
 - [ ] `SKILL.md` is under 500 lines
 - [ ] Detailed material lives in `references/` rather than the main file
-- [ ] No duplicated content between `SKILL.md` and reference files
+- [ ] No *unintentional* duplication between `SKILL.md` and reference files — explanation belongs in one place. Deliberate exception: a short always-on list of high-cost errors may repeat a fact a reference also covers, when the point is to prevent the error before any reference loads. Judge whether the repetition buys always-on protection; if it does, the reference should shrink to the added detail, not the `SKILL.md` entry.
 - [ ] Workflow steps are ordered and actionable
 - [ ] Examples are complete and correct (if included)
 

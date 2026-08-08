@@ -18,7 +18,8 @@ bun test --path-ignore-patterns='**/fixtures/**'
 ## CLI Flags
 
 ```bash
-bun test -t "parses headers"    # filter by test NAME (regex)
+bun test -t "parses headers"    # filter by test NAME (regex); --grep is an
+                                # undocumented alias that behaves identically
 bun test --watch
 bun test --bail                 # stop at first failure (--bail=3 for a count)
 bun test --timeout 10000        # per-test timeout, default 5000ms
@@ -208,8 +209,6 @@ Split a slow suite across jobs with a matrix and `--shard=${{ matrix.shard }}/4`
 
 | Mistake | Correction |
 | --------- | ------------ |
-| `--grep` to filter by name | `-t` / `--test-name-pattern` |
-| Configuring `[test] include`/`exclude` | Ignored — rename files or filter by path |
 | Naming a file `foo.check.ts` and expecting it to run | Needs `.test.`, `_test_`, `.spec.`, or `_spec_` |
 | Spying on a global without restoring | `mockRestore()` or `jest.restoreAllMocks()` in `afterEach` |
 | `mock.module` after importing the subject | Register it first, or via `preload` |

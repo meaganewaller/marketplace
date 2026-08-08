@@ -36,18 +36,7 @@ The `bun-runtime` skill triggers on Bun work: setting up a project, fixing an in
 
 ### Quick Reference
 
-| Instead of        | Use                     |
-| ----------------- | ----------------------- |
-| `node file.ts`    | `bun file.ts`           |
-| `npx package`     | `bunx package`          |
-| `npm install`     | `bun install`           |
-| `npm ci`          | `bun install --frozen-lockfile` |
-| `npm run script`  | `bun run script`        |
-| `jest` / `vitest` | `bun test`              |
-| `npm audit`       | `bun audit`             |
-| `webpack`         | `bun build`             |
-| `pkg` / `nexe`    | `bun build --compile`   |
-| `execa`           | `Bun.$`                 |
+The full Node-to-Bun mapping (16 rows, covering the runtime, package manager, bundler, and built-in APIs) lives in the skill itself, at `skills/bun-runtime/SKILL.md` — kept in one place so the two cannot drift.
 
 ### Reference Topics
 

@@ -1,13 +1,13 @@
 ---
 name: bun-runtime
-description: This skill should be used when the user asks to "set up a Bun project", "run tests with bun test", "fix a bun install error", "migrate from npm/yarn/pnpm to Bun", "compile a standalone executable", "write a shell script with Bun.$", "resolve a bun.lock conflict", "audit dependencies for vulnerabilities", or mentions bun, bunx, bun.lock, bunfig.toml, bun:test, bun:sqlite, Bun.serve, or Bun.$. Verified against Bun 1.3.x.
+description: This skill should be used when the user asks to "set up a Bun project", "run tests with bun test", "fix a bun install error", "migrate from npm/yarn/pnpm to Bun", "compile a standalone executable", "bundle with bun build", "write a shell script with Bun.$", "resolve a bun.lock conflict", "resolve a path alias in Bun", "run a package with bunx", "audit dependencies for vulnerabilities", or mentions bun, bunx, bun.lock, bunfig.toml, bun:test, bun:sqlite, Bun.serve, Bun.$, tsconfig paths, or import attributes.
 ---
 
 # Bun Runtime Guidance
 
 Bun is a JavaScript runtime, package manager, bundler, and test runner in one binary — all four roles below, with emphasis on the details that are easy to get wrong from memory.
 
-Commands and config keys here were executed against **Bun 1.3.14**. Some are newer than 1.2, so confirm availability when working on an older pinned version.
+Commands and config keys here were executed against **Bun 1.3.14** specifically — not the 1.3 line as a whole. Some postdate 1.2, so confirm availability against the installed binary when a project pins an older version.
 
 ## Verify Before Asserting
 
@@ -19,35 +19,34 @@ bun <subcommand> --help    # authoritative flag list
 bun pm --help              # package management subcommands
 ```
 
-Run `scripts/bun-project-audit.sh` to capture version, lockfile format, workspace layout, and config state for a project in one pass.
+Capture version, lockfile format, workspace layout, and config state for a project in one pass:
+
+```bash
+scripts/bun-project-audit.sh [project-dir]   # defaults to the current directory
+```
 
 ## Commonly Hallucinated — These Do Not Exist
 
-Each of the following was verified as wrong against Bun 1.3.14. They read as reasonable, so they get invented often. Never emit them:
+Each row below was executed against Bun 1.3.14. These read as reasonable, so they get invented often. Never emit them:
 
 | Invented | Actual |
 | ---------- | -------- |
-| `bun test --grep <pattern>` | `bun test -t <regex>` / `--test-name-pattern` |
 | `[test] include` / `exclude` in bunfig.toml | Silently ignored — discovery is by filename only |
 | `[resolve]` section in bunfig.toml | No such section; use package.json `overrides` |
-| `bun pm ls --peer` | Flag is ignored; it does not check peer deps |
+| `bun pm ls --peer` | Flag is ignored; nothing reports missing peer deps |
 | `import x from "pkg" with { type: "module" }` | Attributes are `json`, `text`, `toml`, `sqlite`, `file`, `macro` |
-| `bun add -d bun-types` | `bun add -d @types/bun` (it wraps `bun-types`) |
-| `bunx --bun` means "prefer local bin" | `--bun` forces the Bun runtime instead of Node |
+| `coverageThreshold = { line = ... }` | Plural keys — `lines`, `functions`, `statements` |
+
+Two more that are real but misremembered rather than invented: `bun-types` exists,
+but `@types/bun` is the package to install (it wraps `bun-types`); and `bunx --bun`
+forces the Bun runtime instead of Node, it does not control local-vs-cached binary
+ordering.
 
 Test discovery is filename-based: `.test.`, `_test_`, `.spec.`, or `_spec_`.
 
 ## The Lockfile Changed in 1.2
 
-The single most common stale assumption. As of Bun 1.2, `bun install` writes **`bun.lock`** — a text-based JSONC file that is human-readable and resolves in git like any other text file. The binary `bun.lockb` is legacy.
-
-Consequences that invert older advice:
-
-- Merge conflicts **are** hand-resolvable; do not tell users to delete and regenerate as the first move.
-- `bun.lock` belongs in review diffs, not `.gitattributes` binary rules.
-- Older projects still holding `bun.lockb` migrate with `bun install --save-text-lockfile`.
-
-Details, workspace catalogs, and migration in `references/package-management.md`.
+The single most common stale assumption: since Bun 1.2 the default lockfile is **`bun.lock`**, a text-based JSONC file, not the binary `bun.lockb`. Conflict resolution, migration, and workspace catalogs are in `references/package-management.md`.
 
 ## Quick Reference
 

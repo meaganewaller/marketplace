@@ -95,7 +95,7 @@ Use `@types/bun`, not `bun-types`. `@types/bun` is the DefinitelyTyped entry poi
 
 ## Overrides
 
-`bunfig.toml` has **no** `[resolve]` section. Adding one does nothing — the override is silently ignored. Pin transitive versions with `overrides` in `package.json`; see `package-management.md`.
+Pin transitive versions with `overrides` in `package.json` — see `package-management.md`. (`bunfig.toml` has no `[resolve]` section; see the table in `SKILL.md`.)
 
 ## Auto-install
 

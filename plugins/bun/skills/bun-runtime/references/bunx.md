@@ -40,8 +40,6 @@ Many CLIs ship a `#!/usr/bin/env node` shebang and would otherwise run under Nod
 bunx --bun vite dev
 ```
 
-This is what makes a Node-targeted tool run on Bun's runtime. It does **not** control whether local or cached binaries are preferred — that ordering is automatic.
-
 Use it when a tool should pick up Bun's TypeScript handling or speed; drop it when a tool depends on Node internals and misbehaves under Bun.
 
 ### `-p` for mismatched names

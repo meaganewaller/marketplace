@@ -91,7 +91,7 @@ bun info <pkg>            # registry metadata
 bun pm hash               # lockfile hash, useful as a CI cache key
 ```
 
-`bun pm ls` still works as an alias for `bun list`. There is no `--peer` flag — it is accepted and ignored, and does not report missing peer dependencies.
+`bun pm ls` still works as an alias for `bun list`. Bun has no command that reports *missing* peer dependencies.
 
 ## Updating
 
