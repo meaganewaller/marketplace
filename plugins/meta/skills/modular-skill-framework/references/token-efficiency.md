@@ -82,4 +82,4 @@ Keep merged when:
 - Large inline JSON/YAML schemas in `SKILL.md`
 
 Run `/meta:audit-skill` for line counts and broken reference paths; apply
-**skill-development** `references/quality-checklist.md` for pass/fail criteria.
+`${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md` for pass/fail criteria.

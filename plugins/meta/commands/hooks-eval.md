@@ -29,7 +29,7 @@ When invoked:
    flag. If path empty, ask which plugin to evaluate.
 
 2. **Static validation** — Apply the full `/meta:validate-hook` workflow using
-   **hook-development** `references/hook-checklist.md`. Include the static
+   `${CLAUDE_PLUGIN_ROOT}/references/hook-checklist.md`. Include the static
    findings in the final report.
 
 3. **Inventory test scripts** — Glob `hooks/**/test-*.sh` and `hooks/test-*.sh`

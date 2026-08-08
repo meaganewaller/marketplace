@@ -24,8 +24,8 @@ When invoked:
    `plugins/*/.claude-plugin/plugin.json` relative to the repo root or ask the
    user which plugin to validate.
 
-2. **Apply plugin-structure skill** — Follow the validation workflow and load
-   `references/marketplace-checklist.md` when the plugin is part of
+2. **Apply the marketplace checklist** — Follow the validation workflow and load
+   `${CLAUDE_PLUGIN_ROOT}/references/marketplace-checklist.md` when the plugin is part of
    `meaganewaller-marketplace`.
 
 3. **Inspect files** — Read `.claude-plugin/plugin.json`, `README.md`, and

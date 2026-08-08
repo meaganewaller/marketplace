@@ -37,7 +37,7 @@ description: >-
 **Reference link pattern:**
 
 ```markdown
-Before finishing, evaluate against `references/quality-checklist.md`.
+Before finishing, evaluate against `${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md`.
 For architecture boundaries, apply **modular-skill-framework**.
 ```
 
@@ -76,8 +76,8 @@ Commands should:
 Example contract (audit command):
 
 ```markdown
-2. **Apply skill-development** — Load and follow
-   `references/quality-checklist.md`.
+2. **Apply the quality checklist** — Load and follow
+   `${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md`.
 ```
 
 The command does not redefine the checklist; it points at the canonical file.

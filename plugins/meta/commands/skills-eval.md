@@ -35,8 +35,8 @@ When invoked:
 
 3. **Discover skills** — Glob `**/SKILL.md` within scope (one level per skill dir).
 
-4. **Static audit each skill** — For each skill, apply **skill-development**
-   `references/quality-checklist.md` and summarize:
+4. **Static audit each skill** — For each skill, apply the skill quality checklist in
+   `${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md` and summarize:
    - PASS / PASS WITH WARNINGS / FAIL
    - Top 1–3 issues (critical and warnings only in summary)
 

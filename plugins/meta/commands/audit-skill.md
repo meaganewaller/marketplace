@@ -5,12 +5,12 @@ argument-hint: <skill-path>
 
 # Audit Skill
 
-Evaluate a skill directory against the skill-development quality checklist.
+Evaluate a skill directory against meta.s skill quality checklist.
 
 ## Usage
 
 ```text
-/meta:audit-skill plugins/meta/skills/skill-development
+/meta:audit-skill plugins/meta/skills/modular-skill-framework
 /meta:audit-skill ~/.cursor/skills-cursor/create-skill
 ```
 
@@ -22,8 +22,8 @@ When invoked:
    must contain `SKILL.md` or end at the skill directory that will contain it.
    If empty, ask the user which skill to audit.
 
-2. **Apply skill-development skill** — Load and follow
-   `references/quality-checklist.md`.
+2. **Apply the skill quality checklist** — Load and follow
+   `${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md`.
 
 3. **Inspect files** — Read `SKILL.md` frontmatter and body. Verify referenced
    files in `references/`, `scripts/`, and `assets/` exist. Count lines in

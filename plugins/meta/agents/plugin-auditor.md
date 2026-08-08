@@ -1,28 +1,24 @@
 ---
-name: plugin-validator
+name: plugin-auditor
 model: sonnet
 color: "#1D3557"
 description: |
-  Validates Claude Code plugins for layout, manifest quality, component inventory,
+  Scores Claude Code plugins for layout, manifest quality, component inventory,
   marketplace registration, and hook/MCP conventions. Use when the user asks to
-  "validate a plugin", "plugin structure audit", "marketplace registration check",
-  "plugin compliance review", or needs thorough plugin assessment with scored results
-  and improvement plans. Complements /meta:validate-plugin with deeper cross-component
-  analysis.
+  "audit a plugin", "score this plugin", "marketplace registration check",
+  "plugin compliance review", or needs a scored plugin assessment with an
+  improvement plan. Judges an existing plugin against meta's checklists; for
+  guidance on authoring plugin components, see the plugin-dev plugin.
 tools: Read, Grep, Glob, Bash, Task
-skills:
-  - plugin-structure
-  - hook-development
-  - command-development
 maxTurns: 25
 created: 2026-06-01
 modified: 2026-06-01
 reviewed: 2026-06-01
 ---
 
-# Plugin Validator Agent
+# Plugin Auditor Agent
 
-Read-only agent that validates Claude Code plugin structure, manifest quality,
+Read-only agent that audits Claude Code plugin structure, manifest quality,
 component documentation, marketplace registration, and hook/MCP integration.
 Produces compliance scores and prioritized fix plans.
 
@@ -61,13 +57,13 @@ Parse from the task prompt. Defaults apply when omitted.
 Detect marketplace plugin: path under `plugins/<name>/` in a repo with
 `.claude-plugin/marketplace.json` at the repository root.
 
-## Standards and Skills
+## Standards
 
-Apply bundled skills and references:
+Judge against these bundled references:
 
-- **plugin-structure** — layout, manifest, portable paths; `references/marketplace-checklist.md`
-- **hook-development** — `references/hook-checklist.md` when `hooks/hooks.json` exists
-- **command-development** — command frontmatter and “write for Claude” conventions (sample)
+- `${CLAUDE_PLUGIN_ROOT}/references/marketplace-checklist.md` — layout, manifest, portable paths, marketplace registration
+- `${CLAUDE_PLUGIN_ROOT}/references/hook-checklist.md` — when `hooks/hooks.json` exists
+- `${CLAUDE_PLUGIN_ROOT}/references/command-patterns.md` — command frontmatter and "write for Claude" conventions
 
 Align severity with `/meta:validate-plugin`: critical / warning / suggestion.
 
@@ -136,7 +132,7 @@ Mark entire section N/A for plugins outside this marketplace.
 
 ### 6. Hooks and MCP (full-validation)
 
-If `hooks/hooks.json` exists, apply **hook-development** checklist:
+If `hooks/hooks.json` exists, apply the hook checklist:
 
 - Valid events and structure
 - `${CLAUDE_PLUGIN_ROOT}` instead of hardcoded absolute paths
@@ -161,8 +157,8 @@ For each skill directory (or summary when **include-skills**):
 
 ### 8. Optional skill summary (include-skills)
 
-Per skill: PASS / PASS WITH WARNINGS / FAIL using **skill-development**
-`references/quality-checklist.md` (static only). Do not run Task probes here.
+Per skill: PASS / PASS WITH WARNINGS / FAIL using the criteria in
+`${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md` (static only). Do not run Task probes here.
 
 ### 9. Produce output
 
@@ -285,7 +281,7 @@ fixes grouped first when applicable.
 | --- | --- |
 | Static plugin checklist | `/meta:validate-plugin` |
 | Hooks only | `/meta:validate-hook` |
-| Scored plugin audit, JSON, README reconciliation | **plugin-validator** agent |
+| Scored plugin audit, JSON, README reconciliation | **plugin-auditor** agent |
 | Scored skill audits | **skill-auditor** agent |
 | Batch skill eval | `/meta:skills-eval` |
 

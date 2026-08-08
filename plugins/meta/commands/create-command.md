@@ -12,7 +12,7 @@ arguments:
     description: Brief description for frontmatter and README
     required: true
   - name: skill
-    description: Optional skill name to delegate complex logic (e.g. plugin-structure)
+    description: Optional skill name to delegate complex logic (e.g. modular-skill-framework)
     required: false
 ---
 
@@ -28,14 +28,14 @@ Invoked as `/plugin-name:command-name` after install (for example `/git:gh-pr-cr
 
 ```text
 /meta:create-command plugins/meta audit-hook Audit hook configuration quality
-/meta:create-command plugins/git sync-issues Sync open issues to a local cache plugin-structure
+/meta:create-command plugins/git sync-issues Sync open issues to a local cache modular-skill-framework
 ```
 
 When `$skill` is provided, include a delegation step in the generated command body.
 
 ## Instructions
 
-Follow these steps in order. Apply the **command-development** skill throughout.
+Follow these steps in order. Apply the command patterns reference throughout.
 
 ### 1. Parse and validate inputs
 
@@ -61,7 +61,7 @@ Pick the best fit before writing the file:
 If `$skill` is set, use **thin delegate**. Otherwise infer from `$description` or ask
 the user when ambiguous.
 
-See `skills/command-development/references/patterns.md` in the meta plugin for examples.
+See `${CLAUDE_PLUGIN_ROOT}/references/command-patterns.md` in the meta plugin for examples.
 
 ### 3. Generate the command file
 
@@ -86,7 +86,7 @@ Add `allowed-tools` only when the command should be read-only (audits, analysis)
 4. `## Instructions` — numbered steps in imperative form, instructions **to Claude**
 5. `## Output Format` — when the command produces a report or structured result
 
-**Writing rules** (from meta command-development):
+**Writing rules** (from meta command-patterns):
 
 - Write instructions to Claude, not explanatory text to the user
 - Use imperative form ("Resolve target", "Report findings")

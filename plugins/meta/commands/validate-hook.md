@@ -25,8 +25,8 @@ When invoked:
 1. **Resolve target** — Use `$ARGUMENTS` as the plugin directory. If empty, ask
    which plugin to validate.
 
-2. **Apply hook-development skill** — Load and follow
-   `references/hook-checklist.md`.
+2. **Apply the hook checklist** — Load and follow
+   `${CLAUDE_PLUGIN_ROOT}/references/hook-checklist.md`.
 
 3. **Locate hooks** — Read `hooks/hooks.json`. If missing, report N/A for hook
    validation (not a failure unless README claims hooks exist).

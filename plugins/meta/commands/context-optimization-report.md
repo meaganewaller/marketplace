@@ -45,7 +45,7 @@ When invoked:
    - If empty, default to `plugins/meta` or ask the user
 
 2. **Apply standards** — Load **modular-skill-framework** (especially
-   `references/token-efficiency.md`) and **skill-development** sizing targets:
+   `references/token-efficiency.md`) and the skill quality checklist sizing targets:
    - `SKILL.md` body: under 500 lines; ~1,500 words for core workflow
    - Single reference: split if >~2,000 words (use line count as proxy)
    - `description` frontmatter: focused triggers, not an encyclopedia
@@ -78,7 +78,7 @@ When invoked:
    | ≤150 | OK for trigger load |
    | 151–300 | warning — lean body or move detail to references |
    | 301–500 | warning — likely hurts trigger context |
-   | >500 | critical — violates skill-development target |
+   | >500 | critical — violates the skill sizing target |
 
 6. **Portfolio analysis** — Compute aggregates:
    - Total skills, total files measured, total lines

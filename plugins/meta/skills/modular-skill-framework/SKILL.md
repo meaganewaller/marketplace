@@ -24,18 +24,21 @@ compose cleanly, stay focused, and minimize context overhead.
 - **Token Efficiency** — Minimal always-on context; bulk detail in `references/`,
   determinism in `scripts/`, output files in `assets/`.
 
-## When to Use This Skill vs skill-development
+## When to Use This Skill
+
+This skill covers skill *composition*. Authoring mechanics live elsewhere — meta
+is the evaluation layer, not an authoring tutorial.
 
 | Question | Use |
 | --- | --- |
-| How to write `SKILL.md`, frontmatter, triggers | **skill-development** |
 | Whether to split/merge skills, compose a plugin skill set | **modular-skill-framework** |
-| Quality audit of one skill | **skill-development** + `/meta:audit-skill` |
-| Plugin directory layout, `plugin.json` | **plugin-structure** |
+| How to write `SKILL.md`, frontmatter, triggers | the `plugin-dev` plugin |
+| Plugin directory layout, `plugin.json` | the `plugin-dev` plugin |
+| Quality audit of one skill | `/meta:audit-skill` or the `skill-auditor` agent |
+| Scored audit of a whole plugin | `/meta:validate-plugin` or the `plugin-auditor` agent |
 
-Apply both when scaffolding a new skill ecosystem: use this skill for boundaries
-and composition, then **skill-development** for file-level authoring and the
-quality checklist.
+Use this skill for boundaries and composition, then evaluate the result against
+`${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md`.
 
 ## Skill Boundaries (Single Responsibility)
 
@@ -102,13 +105,13 @@ Every skill exposes interfaces agents and commands rely on:
 | **Output** | Stable headings or templates when consumers (commands, users) depend on format |
 
 Commands that invoke skills should say which reference to apply (e.g.
-`references/quality-checklist.md`) rather than inlining checklist text.
+`${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md`) rather than inlining checklist text.
 
 See `references/interfaces.md` for handoff templates and anti-patterns.
 
 ## Token Efficiency
 
-Load context in layers (see **skill-development** progressive disclosure):
+Load context in layers (progressive disclosure):
 
 1. Metadata — always available
 2. `SKILL.md` — on trigger
@@ -130,7 +133,7 @@ See `references/token-efficiency.md` for sizing and splitting guidance.
    the trigger table has no ambiguous rows.
 3. **Design interfaces** — Frontmatter triggers, reference links, command entry points.
 4. **Scaffold directories** — Create only `references/`, `scripts/`, `assets/` in use.
-5. **Author with skill-development** — Write `SKILL.md`, run quality checklist.
+5. **Author the files** — Write `SKILL.md`, then run the quality checklist.
 6. **Validate composition** — Check sibling overlap, handoff clarity, and README
    component list.
 

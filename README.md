@@ -166,16 +166,17 @@ mise dev environment management — tool versions, environment variables, tasks,
 
 **Category:** development
 
-Tools for building and evaluating Claude skills, hooks, agents, commands, and plugins — modular patterns, quality checks, and plugin validation.
+Evaluation layer for Claude Code plugins — scored skill and plugin audits, hook and rules evals, and context-footprint reports against bundled checklists.
 
 **Contains:**
 
 - **Skills:**
-  - `skill-development` - Author and evaluate `SKILL.md` files with progressive disclosure and quality checklists (96 lines; 1 reference file)
-  - `modular-skill-framework` - Composable skill design: boundaries, interfaces, token efficiency, and split/merge heuristics (141 lines; 3 reference files)
-  - `plugin-structure` - Plugin layout, `plugin.json`, marketplace registration, and portable `${CLAUDE_PLUGIN_ROOT}` paths (122 lines; 1 reference file)
-  - `command-development` - Slash command structure, frontmatter, dynamic arguments, and command+skill patterns (101 lines; 1 reference file)
-  - `hook-development` - Hook events, `hooks.json` format, and hook authoring conventions (95 lines; 2 reference files)
+  - `modular-skill-framework` - Composable skill design: boundaries, interfaces, token efficiency, and split/merge heuristics (3 reference files)
+- **References** (judging criteria, loaded on demand rather than always-on):
+  - `skill-quality-checklist.md` - pass/fail criteria for a skill
+  - `marketplace-checklist.md` - layout, manifest, marketplace registration
+  - `hook-checklist.md` - `hooks.json` and hook script conventions
+  - `command-patterns.md` - command frontmatter and writing conventions
 - **Commands:**
   - `/meta:create-command` - Scaffold a new slash command in a plugin using meta conventions
   - `/meta:validate-plugin` - Validate plugin layout, manifest, and marketplace registration
@@ -187,8 +188,10 @@ Tools for building and evaluating Claude skills, hooks, agents, commands, and pl
   - `/meta:rules-eval` - Evaluate Cursor rules, `CLAUDE.md`, and `AGENTS.md` for clarity and enforceability
   - `/meta:hooks-eval` - Evaluate plugin hooks statically and run companion test scripts when present
 - **Agents:**
-  - `plugin-validator` - Scored plugin validation (layout, manifest, marketplace registration, README inventory, hooks/MCP)
+  - `plugin-auditor` - Scored plugin audit (layout, manifest, marketplace registration, README inventory, hooks/MCP)
   - `skill-auditor` - Scored skill quality audits (structure, content, token efficiency, activation, tool integration)
+
+> Authoring guidance (`SKILL.md` structure, command frontmatter, hook events, plugin layout) lives in the **plugin-dev** plugin. Meta judges plugins rather than teaching how to write them, so it ships one skill instead of duplicating four.
 
 **Installation:**
 
