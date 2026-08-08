@@ -1,221 +1,218 @@
-# Testing with Bun
+# Testing with `bun:test`
 
-Bun has a built-in test runner: `bun:test`. No external dependencies needed.
+Bun has a built-in, Jest-compatible test runner. No dependencies needed. All flags verified against Bun 1.3.14.
 
-## Basic Setup
+## Test Discovery
+
+Bun finds tests **by filename only**. A file is a test file when its name contains `.test.`, `_test_`, `.spec.`, or `_spec_` with a JS/TS extension.
+
+There is no `include`/`exclude` configuration. `[test] include` and `[test] exclude` in `bunfig.toml` are silently ignored — setting them changes nothing. To control the set, rename files, pass path filters, or use `--path-ignore-patterns`.
+
+```bash
+bun test                        # every test file under the project
+bun test src/utils              # only paths matching "src/utils"
+bun test foo bar                # files matching "foo" or "bar"
+bun test --path-ignore-patterns='**/fixtures/**'
+```
+
+## CLI Flags
+
+```bash
+bun test -t "parses headers"    # filter by test NAME (regex)
+bun test --watch
+bun test --bail                 # stop at first failure (--bail=3 for a count)
+bun test --timeout 10000        # per-test timeout, default 5000ms
+bun test --only                 # only test.only / describe.only
+bun test --todo                 # include test.todo
+bun test --coverage
+bun test --changed              # only files affected by git changes
+bun test --shard=1/3            # split across CI jobs
+bun test --parallel             # worker processes, implies --isolate
+bun test --isolate              # fresh global per file
+bun test --retry=2              # retry flaky tests
+bun test --randomize            # randomize order to expose inter-test coupling
+bun test --reporter=junit --reporter-outfile=results.xml
+bun test --only-failures        # hide passing tests
+bun test --rerun-each=10        # run each file N times to surface flakiness
+```
+
+## Writing Tests
 
 ```typescript
-// example.test.ts
-import { test, expect, describe, beforeAll, afterAll } from "bun:test";
+import { describe, test, expect, beforeEach } from "bun:test";
 
-describe("MyModule", () => {
-  beforeAll(() => {
-    // Setup before all tests
+describe("parseConfig", () => {
+  let config: Config;
+  beforeEach(() => {
+    config = loadFixture();
   });
 
-  afterAll(() => {
-    // Cleanup after all tests
+  test("defaults port to 3000 when unset", () => {
+    expect(parseConfig(config).port).toBe(3000);
   });
 
-  test("should work", () => {
-    expect(1 + 1).toBe(2);
+  test("rejects a negative port", () => {
+    expect(() => parseConfig({ ...config, port: -1 })).toThrow("invalid port");
   });
 });
 ```
 
-## Running Tests
+Lifecycle hooks: `beforeAll`, `afterAll`, `beforeEach`, `afterEach`. Hooks in a `describe` scope to that block; at file top level they scope to the file.
 
-```bash
-# Run all tests
-bun test
+### Variants
 
-# Run specific file
-bun test src/utils.test.ts
+```typescript
+test.skip("not ready", () => {});
+test.todo("write this");
+test.only("focus", () => {});
+test.failing("known bug", () => {});     // passes when the body throws
+test.if(process.platform === "darwin")("mac only", () => {});
+test.each([[1, 1, 2], [2, 2, 4]])("%i + %i = %i", (a, b, sum) => {
+  expect(a + b).toBe(sum);
+});
+```
 
-# Run tests matching pattern
-bun test --grep "should work"
+### Async and timeouts
 
-# Watch mode
-bun test --watch
+```typescript
+test("fetches the user", async () => {
+  await expect(getUser(1)).resolves.toMatchObject({ id: 1 });
+});
 
-# With coverage
-bun test --coverage
-
-# Bail on first failure
-bun test --bail
+test("slow path", async () => {
+  await migrate();
+}, 30_000);                                // third arg = per-test timeout
 ```
 
 ## Assertions
 
 ```typescript
-import { expect } from "bun:test";
-
-// Equality
-expect(value).toBe(expected);           // Strict equality
-expect(value).toEqual(expected);        // Deep equality
-expect(value).toStrictEqual(expected);  // Deep + type equality
-
-// Truthiness
-expect(value).toBeTruthy();
-expect(value).toBeFalsy();
-expect(value).toBeNull();
-expect(value).toBeUndefined();
-expect(value).toBeDefined();
-
-// Numbers
-expect(num).toBeGreaterThan(3);
-expect(num).toBeLessThan(10);
-expect(num).toBeCloseTo(0.3, 5);  // Floating point
-
-// Strings
-expect(str).toMatch(/pattern/);
-expect(str).toContain("substring");
-
-// Arrays
-expect(arr).toContain(item);
-expect(arr).toHaveLength(3);
-
-// Objects
-expect(obj).toHaveProperty("key");
-expect(obj).toHaveProperty("key", "value");
-
-// Exceptions
-expect(() => fn()).toThrow();
-expect(() => fn()).toThrow("message");
-expect(() => fn()).toThrow(ErrorClass);
-
-// Async
-await expect(promise).resolves.toBe(value);
-await expect(promise).rejects.toThrow();
+expect(v).toBe(x);                 // Object.is
+expect(v).toEqual(x);              // deep, ignores undefined props
+expect(v).toStrictEqual(x);        // deep, type- and undefined-sensitive
+expect(v).toBeCloseTo(0.3, 5);
+expect(s).toMatch(/re/);
+expect(arr).toContainEqual(obj);   // deep equality within an array
+expect(obj).toMatchObject({ a: 1 });
+expect(fn).toThrow(TypeError);
+await expect(p).rejects.toThrow("boom");
+expect(mock).toHaveBeenCalledWith("arg");
+expect(v).toBeOneOf([1, 2, 3]);
 ```
+
+Prefer `toEqual`/`toMatchObject` over `toBe` for objects — `toBe` compares identity and fails on structurally equal values.
 
 ## Mocking
 
 ```typescript
-import { mock, spyOn } from "bun:test";
+import { mock, spyOn, jest } from "bun:test";
 
-// Mock function
-const fn = mock(() => "mocked");
-fn();
-expect(fn).toHaveBeenCalled();
-expect(fn).toHaveBeenCalledTimes(1);
+const fetchUser = mock(async (id: number) => ({ id, name: "Ada" }));
+fetchUser.mockResolvedValueOnce({ id: 9, name: "Grace" });
 
-// Spy on object method
-const obj = { method: () => "original" };
-const spy = spyOn(obj, "method").mockReturnValue("mocked");
-expect(obj.method()).toBe("mocked");
-spy.mockRestore();
+await fetchUser(9);
+expect(fetchUser).toHaveBeenCalledTimes(1);
+expect(fetchUser).toHaveBeenCalledWith(9);
 
-// Mock implementation
-const mockFn = mock((x: number) => x * 2);
-mockFn.mockImplementation((x) => x * 3);
+const spy = spyOn(console, "log").mockImplementation(() => {});
+spy.mockRestore();                        // always restore spies on globals
 
-// Mock return values
-mockFn.mockReturnValue(42);
-mockFn.mockReturnValueOnce(99);
-
-// Mock resolved/rejected values
-mockFn.mockResolvedValue("async result");
-mockFn.mockRejectedValue(new Error("failed"));
+jest.restoreAllMocks();                   // in afterEach, to prevent leakage
 ```
 
-## Async Testing
+### Module mocks
 
 ```typescript
-import { test, expect } from "bun:test";
+import { mock } from "bun:test";
 
-// Async/await
-test("async test", async () => {
-  const result = await fetchData();
-  expect(result).toBe("data");
-});
+mock.module("./mailer", () => ({
+  send: mock(async () => ({ ok: true })),
+}));
+```
 
-// With timeout
-test("slow test", async () => {
-  await longOperation();
-}, 10000); // 10 second timeout
+`mock.module` affects modules imported *after* the call. Register it before importing the code under test, ideally via `--preload`.
 
-// Testing timers
+### Time
+
+```typescript
 import { setSystemTime } from "bun:test";
 
-test("timer test", () => {
-  setSystemTime(new Date("2024-01-01"));
-  expect(new Date().getFullYear()).toBe(2024);
-  setSystemTime(); // Reset
-});
+setSystemTime(new Date("2026-01-01T00:00:00Z"));
+expect(new Date().getUTCFullYear()).toBe(2026);
+setSystemTime();                          // restore real time
 ```
 
-## Lifecycle Hooks
+## Snapshots
 
 ```typescript
-import { beforeAll, afterAll, beforeEach, afterEach } from "bun:test";
-
-beforeAll(() => {
-  // Once before all tests in file
-});
-
-afterAll(() => {
-  // Once after all tests in file
-});
-
-beforeEach(() => {
-  // Before each test
-});
-
-afterEach(() => {
-  // After each test
-});
-```
-
-## Snapshot Testing
-
-```typescript
-import { test, expect } from "bun:test";
-
-test("snapshot", () => {
-  const obj = { name: "test", value: 123 };
-  expect(obj).toMatchSnapshot();
-});
+expect(render(props)).toMatchSnapshot();
+expect(value).toMatchInlineSnapshot();    // written back into the file
 ```
 
 ```bash
-# Update snapshots
-bun test --update-snapshots
+bun test -u        # update snapshots (--update-snapshots)
 ```
 
-## Configuration
+## Coverage
+
+```bash
+bun test --coverage
+bun test --coverage --coverage-reporter=lcov --coverage-dir=coverage
+```
 
 ```toml
-# bunfig.toml
+# bunfig.toml — these keys are real, unlike include/exclude
 [test]
-# Test file patterns
-include = ["**/*.test.ts", "**/*.spec.ts"]
-
-# Exclude patterns
-exclude = ["node_modules", "dist"]
-
-# Coverage settings
 coverage = true
+coverageThreshold = 0.9
+coverageReporter = ["text", "lcov"]
 coverageDir = "coverage"
+coverageSkipTestFiles = true
 ```
 
-## Best Practices
+`coverageThreshold` is enforced: when coverage falls below it, `bun test` exits non-zero even though every test passed.
 
-1. **Name tests clearly**: Describe behavior, not implementation
-2. **One assertion per test**: When practical, focus tests
-3. **Arrange-Act-Assert**: Structure tests consistently
-4. **Avoid test interdependence**: Each test should be isolated
-5. **Mock at boundaries**: Mock external services, not internal code
+The per-metric form takes **plural** keys:
 
-```typescript
-// Good
-test("returns user when found", async () => {
-  const user = await getUser(1);
-  expect(user.name).toBe("Alice");
-});
-
-// Bad
-test("test1", async () => {
-  // What does this test?
-});
+```toml
+coverageThreshold = { lines = 0.9, functions = 0.8, statements = 0.9 }
 ```
+
+Singular keys (`line`, `function`, `statement`) are accepted by the TOML parser and then silently ignored — the gate passes no matter how low coverage is. Verified in 1.3.14: at 33% line coverage, `{ lines = 0.99 }` exits 1 while `{ line = 0.99 }` exits 0. A nested `[test.coverageThreshold]` table is likewise ignored.
+
+After configuring a threshold, confirm it actually fails:
+
+```bash
+bun test --coverage; echo "exit=$?"    # must be non-zero when under threshold
+```
+
+## Preloading
+
+```toml
+[test]
+preload = ["./test/setup.ts"]
+```
+
+Use preload for global setup: registering module mocks, seeding a test database, installing custom matchers via `expect.extend`.
+
+## CI
+
+```yaml
+- run: bun install --frozen-lockfile
+- run: bun test --coverage --reporter=junit --reporter-outfile=junit.xml
+```
+
+Split a slow suite across jobs with a matrix and `--shard=${{ matrix.shard }}/4`.
+
+## Common Mistakes
+
+| Mistake | Correction |
+| --------- | ------------ |
+| `--grep` to filter by name | `-t` / `--test-name-pattern` |
+| Configuring `[test] include`/`exclude` | Ignored — rename files or filter by path |
+| Naming a file `foo.check.ts` and expecting it to run | Needs `.test.`, `_test_`, `.spec.`, or `_spec_` |
+| Spying on a global without restoring | `mockRestore()` or `jest.restoreAllMocks()` in `afterEach` |
+| `mock.module` after importing the subject | Register it first, or via `preload` |
+| Assuming coverage thresholds only warn | They fail the run |
+| `coverageThreshold = { line = ... }` | Plural keys — singular is silently ignored |
+| Chasing order-dependent failures by hand | `--randomize` and `--rerun-each` surface them |

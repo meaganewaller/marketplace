@@ -2,7 +2,7 @@
 	"author": {
 		"name": "meaganewaller"
 	},
-	"description": "Bun runtime patterns, bunx, shell scripting, lockfile management, and testing guidance",
+	"description": "Bun runtime, package management, testing, bundling, and standalone executables — verified against the Bun CLI, not recalled",
 	"keywords": [
 		"bun",
 		"runtime",
@@ -10,6 +10,8 @@
 		"shell",
 		"testing",
 		"lockfile",
+		"bundler",
+		"security",
 		"mise"
 	],
 	"license": "BlueOak-1.0.0",

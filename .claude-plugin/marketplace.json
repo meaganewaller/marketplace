@@ -13,7 +13,7 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
-			"description": "Bun runtime patterns, bunx, shell scripting, lockfile management, and testing guidance",
+			"description": "Bun runtime, package management, testing, bundling, and standalone executables — verified against the Bun CLI, not recalled",
 			"name": "bun",
 			"source": "./plugins/bun",
 			"strict": true,
@@ -24,6 +24,8 @@
 				"shell",
 				"testing",
 				"lockfile",
+				"bundler",
+				"security",
 				"mise"
 			],
 			"version": "1.0.0"
