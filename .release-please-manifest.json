@@ -1,5 +1,4 @@
 {
-	"plugins/dev-collective": "1.1.0",
 	"plugins/dotfiles": "1.1.1",
 	"plugins/bun": "1.1.0",
 	"plugins/fnox": "1.0.1",
