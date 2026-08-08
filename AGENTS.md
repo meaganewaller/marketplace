@@ -1,5 +1,32 @@
 # Agent Instructions
 
+A marketplace of Claude Code plugins. Content is markdown, JSON, and shell —
+there is no application frontend here.
+
+## Tooling
+
+Default to Bun instead of Node.js. The workspace, lockfile, and every
+`package.json` script assume it.
+
+- `bun <file>` instead of `node <file>` or `ts-node <file>`
+- `bun install` instead of `npm`/`yarn`/`pnpm install`
+- `bun run <script>` instead of `npm run <script>`
+- `bunx <package>` instead of `npx <package>`
+- `bun test` instead of `jest` or `vitest`
+- Bun auto-loads `.env` — do not add `dotenv`
+
+Detailed Bun guidance lives in this repo's own `bun` plugin rather than being
+restated here: `plugins/bun/skills/bun-runtime/`.
+
+## Conventions
+
+- Plugin versions are managed by release-please. Do not hand-edit `version` in
+  `plugin.json`.
+- Commits, lint, and spelling are enforced by hooks (commitlint, biome,
+  markdownlint-cli2, cspell). Fix the underlying issue rather than bypassing.
+
+## Issue Tracking
+
 This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.
 
 > **Architecture in one line:** Issues live in a local Dolt database
@@ -30,6 +57,7 @@ bd dolt push          # Push beads data to remote
 Shell commands like `cp`, `mv`, and `rm` may be aliased to include `-i` (interactive) mode on some systems, causing the agent to hang indefinitely waiting for y/n input.
 
 **Use these forms instead:**
+
 ```bash
 # Force overwrite without prompting
 cp -f source dest           # NOT: cp source dest
@@ -42,6 +70,7 @@ cp -rf source dest          # NOT: cp -r source dest
 ```
 
 **Other commands that may prompt:**
+
 - `scp` - use `-o BatchMode=yes` for non-interactive
 - `ssh` - use `-o BatchMode=yes` to fail instead of prompting
 - `apt-get` - use `-y` flag
