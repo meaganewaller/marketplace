@@ -17,6 +17,10 @@
 		"typescript"
 	],
 	"ignorePaths": [
+		".git/**",
+		".husky/_/**",
+		".beads/**",
+		".agents/**",
 		"plugins/typescript-architect/skills/code-quality-audit/references/anti-patterns.md",
 		"plugins/ruby-rails/skills/generating-rbs/references/**",
 		"plugins/ruby-rails/skills/generating-rbs-inline/references/**",
