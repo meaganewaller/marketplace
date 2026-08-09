@@ -20,7 +20,6 @@
 		"plugins/typescript-architect/skills/code-quality-audit/references/anti-patterns.md",
 		"plugins/ruby-rails/skills/generating-rbs/references/**",
 		"plugins/ruby-rails/skills/generating-rbs-inline/references/**",
-		"plugins/ruby-rails/skills/generating-rbs/generating-rbs-inline/**",
 		"plugins/ruby-rails/skills/generating-sorbet-inline/references/**",
 		"plugins/ruby-rails/skills/generating-sorbet/references/**"
 	],
