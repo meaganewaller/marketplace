@@ -53,7 +53,15 @@ skipped with a warning rather than guessed at. Add the missing tag and rerun.
 | Page title | `<title>` text → first `<h1>` text → humanized filename (first match wins) |
 | Section title | Its `index.html`'s title, if one exists, else humanized directory name |
 | Sort order | Natural (numeric-aware) sort of the raw file/directory name — `2-` sorts before `10-` without zero-padding |
+| Ordering prefix | Up to **three** leading digits are stripped as an ordering hint: `01-intro.html` → "Intro", `100-appendix.html` → "Appendix" |
+| Years and dates | Four or more leading digits are kept, so `2026-q1/` → "2026 Q1" and `2026-01-15-review/` → "2026 01 15 Review" |
 | Acronyms | Preserved only if already capitalized in the filename: `API-audit.html` → "API Audit"; `api-audit.html` → "Api Audit" |
+
+Sort order and the ordering-prefix rule are independent: natural sort already reads
+`2-` as less than `10-`, so numeric prefixes are only about *display*, and a name
+like `2026-q1` still sorts by its number without losing it from the label. To force
+a label the filename can't express, give the page a `<title>` or the directory an
+`index.html`.
 
 Title extraction is regex-based against well-formed `<title>`/`<h1>` tags (plain
 text, no nested markup) — good enough for hand-authored pages, not a full HTML
@@ -126,6 +134,9 @@ reports print/PDF cleanly.
 
 - **`no <head/body> anchor found for "..." block — skipped`**: the page is missing
   that tag. Add it and rerun; other blocks on the same page are unaffected.
+- **`could not read directory (EACCES ...)`**: that subtree is unreadable, so its
+  pages are missing from the rail and sitemap. The rest of the site is still rebuilt
+  normally — fix the permissions and rerun to pick the section back up.
 - **`--check` reports a page would update but you didn't touch it**: someone
   hand-edited inside a marker block, or a sibling page changed (which shifts that
   page's prev/next links). A normal rebuild repairs it.

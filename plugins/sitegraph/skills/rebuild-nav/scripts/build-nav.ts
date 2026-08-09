@@ -21,6 +21,7 @@
  *           marker blocks in CI.
  */
 
+import type { Dirent } from "node:fs";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, join, relative, resolve, sep } from "node:path";
 
@@ -85,7 +86,6 @@ async function main() {
 	await writeIfChanged(sitemapPath, sitemapHtml, checkOnly, counts);
 
 	for (const page of pages) {
-		if (page.fsPath === sitemapPath) continue;
 		let original: string;
 		try {
 			original = await readFile(page.fsPath, "utf8");
@@ -179,7 +179,19 @@ async function buildTree(
 	config: Config,
 	warnings: string[],
 ): Promise<DirNode> {
-	const entries = await readdir(dir, { withFileTypes: true });
+	// Every other I/O failure in this script degrades to a warning and keeps
+	// going; an unreadable directory must too, or one bad permission bit takes
+	// down the whole site's rebuild and leaves every page unwritten.
+	let entries: Dirent[];
+	try {
+		entries = await readdir(dir, { withFileTypes: true });
+	} catch (err) {
+		warnings.push(
+			`${relative(siteRoot, dir) || "."}: could not read directory (${(err as Error).message})`,
+		);
+		entries = [];
+	}
+
 	const children: GraphNode[] = [];
 	let indexPage: PageNode | null = null;
 
@@ -202,7 +214,13 @@ async function buildTree(
 
 		if (!entry.isFile() || !/\.html?$/i.test(entry.name)) continue;
 
-		const page = await buildPageNode(fsPath, sitemapPath, config, warnings);
+		// The sitemap is generated output, not an input page. Discovering it
+		// would inflate the page count on every rerun and make the sitemap
+		// list itself. This is the single place that invariant is enforced —
+		// nothing downstream re-checks for it.
+		if (fsPath === sitemapPath) continue;
+
+		const page = await buildPageNode(fsPath, warnings);
 		children.push(page);
 		if (/^index\.html?$/i.test(entry.name)) indexPage = page;
 	}
@@ -219,20 +237,9 @@ async function buildTree(
 
 async function buildPageNode(
 	fsPath: string,
-	sitemapPath: string,
-	config: Config,
 	warnings: string[],
 ): Promise<PageNode> {
 	const fallback = humanize(basename(fsPath).replace(/\.html?$/i, ""));
-
-	if (fsPath === sitemapPath) {
-		return {
-			type: "page",
-			fsPath,
-			order: basename(fsPath),
-			title: config.sitemapTitle,
-		};
-	}
 
 	try {
 		const html = await readFile(fsPath, "utf8");
@@ -333,9 +340,7 @@ function rewritePage(
 	const siblings = parentDir
 		? parentDir.children.filter(
 				(c): c is PageNode =>
-					c.type === "page" &&
-					c.fsPath !== sitemapPath &&
-					!/^index\.html?$/i.test(basename(c.fsPath)),
+					c.type === "page" && !/^index\.html?$/i.test(basename(c.fsPath)),
 			)
 		: [];
 	const { prev, next } = findPrevNext(siblings, page.fsPath);
@@ -595,7 +600,11 @@ function naturalCompare(a: string, b: string): number {
 }
 
 function humanize(name: string): string {
-	const stripped = name.replace(/^\d+[-_]+/, "");
+	// Strip a leading ordering prefix ("01-intro", "2_setup", "100-appendix")
+	// but stop at three digits so four-digit years survive: "2026-q1" is a
+	// section named for a quarter, not the 2026th item, and must not render
+	// as bare "Q1".
+	const stripped = name.replace(/^\d{1,3}[-_]+/, "");
 	const words = stripped
 		.replace(/[-_]+/g, " ")
 		.trim()
@@ -612,16 +621,16 @@ function humanize(name: string): string {
 }
 
 function extractTitle(html: string, fallback: string): string {
-	const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-	if (titleMatch) {
-		const text = stripTags(titleMatch[1]).trim();
-		if (text) return text;
-	}
-	const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-	if (h1Match) {
-		const text = stripTags(h1Match[1]).trim();
-		if (text) return text;
-	}
+	const titleText = stripTags(
+		html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "",
+	).trim();
+	if (titleText) return titleText;
+
+	const h1Text = stripTags(
+		html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? "",
+	).trim();
+	if (h1Text) return h1Text;
+
 	return fallback;
 }
 

@@ -52,7 +52,9 @@ Not for blog posts, marketing pages, or interactive web apps.
   section label in the rail and breadcrumb; without one, the section still appears
   but isn't itself a link.
 - **Order follows filenames.** A numeric-prefix convention (`01-`, `02-`, …) sorts
-  naturally — `2-` before `10-`, no zero-padding required.
+  naturally — `2-` before `10-`, no zero-padding required. Prefixes of up to three
+  digits are dropped from the displayed label; four-digit years are kept, so
+  `2026-q1/` reads as "2026 Q1".
 - **Everything generated lives inside marker comments** (`<!-- sitegraph:*:start
   -->` … `<!-- sitegraph:*:end -->`). Hand-authored content outside those markers is
   never touched, so pages can evolve for years without the tool fighting your edits.
@@ -83,6 +85,13 @@ new or empty directory bootstraps `sitegraph.config.json` and an initial
 `sitemap.html`.
 
 ## Development
+
+The rebuild script has regression tests that drive the real CLI against temporary
+site fixtures — every case corresponds to a bug that shipped once:
+
+```bash
+bun test plugins/sitegraph
+```
 
 See [DEVELOPMENT.md](../../docs/DEVELOPMENT.md) for development guidelines.
 
