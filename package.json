@@ -26,7 +26,8 @@
 		"lint:check": "bunx --bun @biomejs/biome check",
 		"lint:spelling": "cspell . \"./.*/**\"",
 		"lint:types": "tsc --noEmit",
-		"prepare": "husky"
+		"prepare": "husky",
+		"test": "bun test"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.11",
