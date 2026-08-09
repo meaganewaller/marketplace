@@ -1,6 +1,6 @@
 ---
 name: rails-api-development
-description: API-only Rails apps, JSON rendering, versioning, and pagination. Use when building HTTP APIs without HTML.
+description: This skill should be used when the user asks to "build a JSON API", "run rails new --api", "add API versioning", "serialize this model as JSON", "add pagination to an endpoint", "configure CORS", or mentions jbuilder, blueprinter, or alba. Covers API-only apps that render no HTML.
 ---
 
 # Rails API Development
@@ -13,12 +13,11 @@ Build focused API apps with clear contracts and auth.
 - Serializers (jbuilder, blueprinter, alba)
 - Versioned routes
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

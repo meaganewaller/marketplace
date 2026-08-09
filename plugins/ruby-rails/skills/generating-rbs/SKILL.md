@@ -1,14 +1,13 @@
 ---
 name: generating-rbs
-description: Generates or updates RBS type signatures in separate .rbs files. Triggers when creating, updating, or maintaining type signatures for Ruby source files. Use for sig/**/*.rbs files (Steep/RBS), not inline comments.
+description: This skill should be used when the user asks to "add RBS signatures", "generate RBS for this file", "write .rbs files", "set up Steep", "type-check this Ruby with RBS", or "update sig/ after these changes". Writes standalone RBS signatures under sig/**/*.rbs and never edits the Ruby source. For RBS written as inline `# @rbs` comments in the source instead, use generating-rbs-inline; for Sorbet rather than RBS, use generating-sorbet or generating-sorbet-inline.
 ---
 
-## Defaults (ruby-rails plugin)
+## Defaults
 
-- **Toolchain**: mise — use `mise exec --` when the project uses mise
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Commands**: Prefer `mise exec -- bundle exec` over bare `bundle exec` when Gemfile is present
-- **Pairing**: Use **generating-rbs-inline** vs **generating-rbs** (and Sorbet inline vs RBI) based on project convention — never mix systems in one file
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 # RBS Generate Skill
 
@@ -85,12 +84,12 @@ Always perform this step.
 - Create necessary `.rbs` files for the target Ruby file.
 - Place generated RBS files in `sig/` directory mirroring Ruby source structure.
 - You need to strongly follow RBS syntax conventions to describe types for all declarations
-  - See [syntax.md](reference/syntax.md) for the full list of RBS types. Double-check it in tricky cases.
+  - See [syntax.md](references/syntax.md) for the full list of RBS types. Double-check it in tricky cases.
 - Take inspiration from RBS signature examples
-  - See [rbs_by_example.md](reference/rbs_by_example.md) for short list of RBS signatures examples
-  - See [core](reference/rbs_examples/core/STRUCTURE.md) for RBS signatures of Ruby core library
-  - See [stdlib](reference/rbs_examples/stdlib/STRUCTURE.md) for RBS signatures of Ruby standard library
-  - Pay extra attention to `Data` and `Struct` types. See [data_and_struct.md](reference/data_and_struct.md) for handling guide
+  - See [rbs_by_example.md](references/rbs_by_example.md) for short list of RBS signatures examples
+  - See [core](references/rbs_examples/core/STRUCTURE.md) for RBS signatures of Ruby core library
+  - See [stdlib](references/rbs_examples/stdlib/STRUCTURE.md) for RBS signatures of Ruby standard library
+  - Pay extra attention to `Data` and `Struct` types. See [data_and_struct.md](references/data_and_struct.md) for handling guide
   - See [gem_rbs_collection](https://github.com/ruby/gem_rbs_collection/tree/main/gems) for RBS signature examples of different Ruby libraries. This link contains only RBS files, Ruby sources are not included.
 
 ## 3. Eliminate `untyped` types in generated signatures
@@ -128,8 +127,14 @@ Perform this step ONLY if the project Gemfile includes `steep` gem AND the proje
 
 # References
 
-- [syntax.md](reference/syntax.md) - The full list of RBS types and syntax
-- [rbs_by_example.md](reference/rbs_by_example.md) - Short list of RBS signatures examples
-- [core](reference/rbs_examples/core/STRUCTURE.md) - RBS signatures of Ruby core library
-- [stdlib](reference/rbs_examples/stdlib/STRUCTURE.md) - RBS signatures of Ruby standard library
-- [data_and_struct.md](reference/data_and_struct.md) - Explanation on `Data` and `Struct` types handling
+- [syntax.md](references/syntax.md) - The full list of RBS types and syntax
+- [rbs_by_example.md](references/rbs_by_example.md) - Short list of RBS signatures examples
+- [core](references/rbs_examples/core/STRUCTURE.md) - RBS signatures of Ruby core library
+- [stdlib](references/rbs_examples/stdlib/STRUCTURE.md) - RBS signatures of Ruby standard library
+- [data_and_struct.md](references/data_and_struct.md) - Explanation on `Data` and `Struct` types handling
+
+## See Also
+
+- **generating-rbs-inline** — same RBS types, written as `# @rbs` comments in the source
+- **generating-sorbet** — Sorbet `.rbi` shims instead of RBS
+- **ruby-mise-environment** — installing `rbs`/`steep` and running them on the project Ruby

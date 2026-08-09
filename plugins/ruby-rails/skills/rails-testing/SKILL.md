@@ -1,6 +1,6 @@
 ---
 name: rails-testing
-description: "Rails testing stack: fixtures, factories, system tests, VCR, and test helpers. Use for integrated Rails test strategy."
+description: This skill should be used when the user asks "what kind of test should this be", "add a system test", "test a job or mailer", "set up VCR", "parallelize tests in CI", or needs an overall Rails testing strategy. For writing the examples themselves, use ruby-rspec-testing for spec/ or ruby-minitest-testing for test/.
 ---
 
 # Rails Testing
@@ -13,12 +13,11 @@ Combine unit, integration, and system tests for confidence without redundancy.
 - Testing jobs and mailers
 - CI test parallelization
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

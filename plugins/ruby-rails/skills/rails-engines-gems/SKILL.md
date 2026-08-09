@@ -1,6 +1,6 @@
 ---
 name: rails-engines-gems
-description: Rails engines, mountable apps, and internal gems. Use when extracting or packaging domain boundaries.
+description: This skill should be used when the user asks to "extract this into an engine", "create a mountable app", "pull this code into an internal gem", "isolate a namespace", or "share domain code between two Rails apps". For publishing a standalone Ruby library, use ruby-gem-development.
 ---
 
 # Rails Engines and Gems
@@ -12,12 +12,11 @@ Package bounded context as engines or path gems.
 - Engine extraction
 - Shared domain gem across apps
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

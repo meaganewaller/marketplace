@@ -1,6 +1,6 @@
 ---
 name: rails-authentication
-description: Rails 8 authentication generator, sessions, and authorization patterns (Pundit, Action Policy). Use when adding login or permissions.
+description: This skill should be used when the user asks to "add login", "set up authentication", "run the Rails 8 auth generator", "add password reset", "secure sessions", "add permissions", or "restrict this action to admins". Covers has_secure_password, session security, and authorization with Pundit or Action Policy.
 ---
 
 # Rails Authentication
@@ -13,12 +13,11 @@ Implement auth with Rails 8 built-in generator or established gems — consisten
 - Session security
 - Authorization rules
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

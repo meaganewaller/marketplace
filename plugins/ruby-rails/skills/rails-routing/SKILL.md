@@ -1,6 +1,6 @@
 ---
 name: rails-routing
-description: "Rails routing: REST, resources, scopes, concerns, shallow routes, and route helpers. Use when designing URLs or debugging `routes.rb`."
+description: This skill should be used when the user asks to "add a route", "set up nested resources", "add a member or collection route", "namespace an API", "fix a No route matches error", or asks what a path helper is named. Covers REST resources, scopes, concerns, shallow nesting, and routes.rb debugging.
 ---
 
 # Rails Routing
@@ -13,12 +13,11 @@ Design clear, RESTful routes with Rails 8 routing features.
 - API-only route namespaces
 - Debugging `No route matches` errors
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

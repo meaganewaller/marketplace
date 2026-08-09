@@ -1,6 +1,6 @@
 ---
 name: rails-performance
-description: N+1 detection, indexing, profiling, and query optimization. Use when app is slow or queries multiply.
+description: This skill should be used when the user asks "why is this page slow", "fix an N+1 query", "add a missing index", "profile this request", "reduce memory bloat", or mentions Bullet, rack-mini-profiler, or strict loading. For adding caching once the cause is understood, use rails-caching.
 ---
 
 # Rails Performance
@@ -13,12 +13,11 @@ Find and fix hotspots with measurement-first workflow.
 - Slow requests
 - Memory bloat
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

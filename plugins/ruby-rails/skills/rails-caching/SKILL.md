@@ -1,6 +1,6 @@
 ---
 name: rails-caching
-description: Fragment, low-level, and HTTP caching with Solid Cache (Rails 8). Use when optimizing read-heavy paths.
+description: This skill should be used when the user asks to "cache this page", "add fragment caching", "set up Solid Cache", "add HTTP cache headers", "use Russian doll caching", "invalidate a cache key", or "stop recomputing this on every request". For diagnosing why something is slow in the first place, use rails-performance.
 ---
 
 # Rails Caching
@@ -13,12 +13,11 @@ Apply caching at the right layer with clear invalidation rules.
 - Solid Cache config
 - HTTP cache headers
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

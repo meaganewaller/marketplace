@@ -1,6 +1,6 @@
 ---
 name: rails-deployment-kamal
-description: Deploy Rails 8 with Kamal, Docker, and production checklist. Use when shipping or configuring production.
+description: This skill should be used when the user asks to "deploy this app", "set up Kamal", "configure production secrets", "do a zero-downtime deploy", "write a Dockerfile for Rails", or "run through a production checklist". Covers Kamal, Docker, and Rails 8 production configuration.
 ---
 
 # Rails Deployment with Kamal
@@ -13,12 +13,11 @@ Deploy containerized Rails with Kamal 2 and Rails-generated Dockerfile.
 - Env and secrets
 - Zero-downtime deploys
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

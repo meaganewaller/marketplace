@@ -1,14 +1,13 @@
 ---
 name: generating-rbs-inline
-description: Generates or updates RBS-inline type annotations directly in Ruby source files as comments. Triggers when creating, updating, or maintaining inline type signatures for Ruby source files. Use for rbs-inline (# @rbs) comments in .rb files, not sig/*.rbs.
+description: This skill should be used when the user asks to "add rbs-inline annotations", "annotate this file with @rbs comments", "use rbs-inline", "add inline RBS types", or "generate RBS from comments in the source". Writes RBS types as `# @rbs` comments directly inside .rb files. For standalone sig/**/*.rbs signature files instead, use generating-rbs; for Sorbet rather than RBS, use generating-sorbet or generating-sorbet-inline.
 ---
 
-## Defaults (ruby-rails plugin)
+## Defaults
 
-- **Toolchain**: mise — use `mise exec --` when the project uses mise
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Commands**: Prefer `mise exec -- bundle exec` over bare `bundle exec` when Gemfile is present
-- **Pairing**: Use **generating-rbs-inline** vs **generating-rbs** (and Sorbet inline vs RBI) based on project convention — never mix systems in one file
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 # RBS-Inline Generation Skill
 
@@ -205,3 +204,9 @@ Steep works on RBS files, not directly on inline annotations. The RBS files must
 - [data-struct-support.md](references/data-struct-support.md) - Data and Struct handling in rbs-inline
 - [examples/](references/rbs_inline_examples/STRUCTURE.md) - Real-world rbs-inline examples from production gems
 - [rbs-inline repository](https://github.com/soutaro/rbs-inline) - Official rbs-inline gem
+
+## See Also
+
+- **generating-rbs** — same RBS types, written as standalone `sig/**/*.rbs` files
+- **generating-sorbet-inline** — Sorbet `sig { }` blocks instead of RBS comments
+- **ruby-mise-environment** — installing `rbs-inline`/`steep` and running them on the project Ruby

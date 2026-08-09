@@ -1,14 +1,13 @@
 ---
 name: generating-sorbet
-description: Generates or updates Sorbet type signatures in separate .rbi files. Triggers when creating, updating, or maintaining type signatures for Ruby source files. Use for rbi/**/*.rbi shim files without editing source.
+description: This skill should be used when the user asks to "generate RBI files", "add Sorbet types without touching the source", "write .rbi shims", "type a gem for Sorbet", or "add signatures for generated code". Writes standalone .rbi files under rbi/ and never edits the Ruby source — the right choice for gems, generated code, and legacy files. For `sig { }` blocks written in the source itself, use generating-sorbet-inline; for RBS rather than Sorbet, use generating-rbs or generating-rbs-inline.
 ---
 
-## Defaults (ruby-rails plugin)
+## Defaults
 
-- **Toolchain**: mise — use `mise exec --` when the project uses mise
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Commands**: Prefer `mise exec -- bundle exec` over bare `bundle exec` when Gemfile is present
-- **Pairing**: Use **generating-rbs-inline** vs **generating-rbs** (and Sorbet inline vs RBI) based on project convention — never mix systems in one file
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 # Sorbet RBI Generation Skill
 
@@ -152,7 +151,7 @@ end
 ```
 
 - RBI files mirror structure but contain only signatures and empty method stubs
-- See [syntax.md](reference/syntax.md) for the full Sorbet RBI syntax guide
+- See [syntax.md](references/syntax.md) for the full Sorbet RBI syntax guide
 
 ## 3. Eliminate `T.untyped` in Signatures
 
@@ -199,6 +198,12 @@ Fix any errors reported and repeat until validation passes.
 
 # References
 
-- [syntax.md](reference/syntax.md) - Sorbet RBI syntax guide
-- [references/](reference/references/STRUCTURE.md) - Real-world RBI examples from stripe-ruby
+- [syntax.md](references/syntax.md) - Sorbet RBI syntax guide
+- [references/](references/references/STRUCTURE.md) - Real-world RBI examples from stripe-ruby
 - [Sorbet RBI documentation](https://sorbet.org/docs/rbi) - Official RBI docs
+
+## See Also
+
+- **generating-sorbet-inline** — same Sorbet types, written as `sig { }` blocks in the source
+- **generating-rbs** — RBS `sig/**/*.rbs` files instead of Sorbet
+- **ruby-mise-environment** — installing `sorbet`/`tapioca` and running them on the project Ruby

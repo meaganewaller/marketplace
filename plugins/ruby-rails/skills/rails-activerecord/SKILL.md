@@ -1,6 +1,6 @@
 ---
 name: rails-activerecord
-description: "Active Record: models, associations, validations, callbacks, scopes, and query interfaces. Use when working with persistence layer."
+description: This skill should be used when the user asks to "add an association", "add a validation", "write a scope", "set up has_many :through", "add a counter cache", or "use an enum", or is working with models, callbacks, or query chains. For schema changes and migration files, use rails-database-migrations; for diagnosing slow or N+1 queries, use rails-performance.
 ---
 
 # Active Record
@@ -13,12 +13,11 @@ Model data with clear associations, validations, and query objects.
 - Scopes and `where` chains
 - Counter caches and touch
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 
