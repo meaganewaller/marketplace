@@ -1,14 +1,13 @@
 ---
 name: generating-sorbet-inline
-description: Generates or updates Sorbet inline type signatures directly in Ruby source files using sig blocks. Triggers when creating, updating, or maintaining inline type signatures for Ruby source files. Use for sig { } blocks and # typed: sigils in .rb files.
+description: This skill should be used when the user asks to "add sig blocks", "add Sorbet signatures to this class", "make this file typed: strict", "add T.let annotations", or "type this Ruby with Sorbet inline". Writes `sig { }` blocks and `# typed:` sigils directly into .rb source. For standalone .rbi shim files that leave the source untouched, use generating-sorbet; for RBS rather than Sorbet, use generating-rbs or generating-rbs-inline.
 ---
 
-## Defaults (ruby-rails plugin)
+## Defaults
 
-- **Toolchain**: mise — use `mise exec --` when the project uses mise
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Commands**: Prefer `mise exec -- bundle exec` over bare `bundle exec` when Gemfile is present
-- **Pairing**: Use **generating-rbs-inline** vs **generating-rbs** (and Sorbet inline vs RBI) based on project convention — never mix systems in one file
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 # Sorbet Inline Generation Skill
 
@@ -148,7 +147,7 @@ end
 ```
 
 - Focus on method and attribute signatures only
-- See [syntax.md](reference/syntax.md) for the full Sorbet syntax guide
+- See [syntax.md](references/syntax.md) for the full Sorbet syntax guide
 
 ## 3. Eliminate `T.untyped` in Signatures
 
@@ -194,6 +193,12 @@ Fix any errors reported and repeat until validation passes.
 
 # References
 
-- [syntax.md](reference/syntax.md) - Sorbet signature syntax guide
-- [sorbet_examples/](reference/sorbet_examples/STRUCTURE.md) - Real-world Sorbet examples from production gems
+- [syntax.md](references/syntax.md) - Sorbet signature syntax guide
+- [sorbet_examples/](references/sorbet_examples/STRUCTURE.md) - Real-world Sorbet examples from production gems
 - [Sorbet documentation](https://sorbet.org/docs/overview) - Official Sorbet docs
+
+## See Also
+
+- **generating-sorbet** — same Sorbet types, written as standalone `.rbi` shim files
+- **generating-rbs-inline** — RBS `# @rbs` comments instead of Sorbet blocks
+- **ruby-mise-environment** — installing `sorbet`/`tapioca` and running them on the project Ruby

@@ -1,6 +1,6 @@
 ---
 name: rails-application-boot
-description: "Bootstrapping and configuring Rails 8 apps: new apps, config, environments, credentials, and initial structure. Use when creating or reconfiguring a Rails application."
+description: This skill should be used when the user asks to "start a new Rails app", "run rails new", "configure an environment", "edit credentials", "set up the master key", "add a health check endpoint", or "set up bin/dev". Covers bootstrapping and reconfiguring Rails 8 applications and their initial structure.
 ---
 
 # Rails Application Boot
@@ -13,12 +13,11 @@ Create and configure Rails 8 applications using current defaults and mise-manage
 - Environment config (`config/environments`)
 - Credentials and master key workflow
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

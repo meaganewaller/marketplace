@@ -21,12 +21,14 @@ Each `description` lists phrases for that action only.
 Split when the workflow differs even if the domain is the same:
 
 ```text
-skill-development/     → create and improve SKILL.md
-(meta:audit-skill)       → evaluate against checklist (command-driven)
+plugin-dev:skill-development  → how to author a SKILL.md      (skill-driven)
+meta:audit-skill              → score one against a checklist (command-driven)
 ```
 
-Authoring guidance stays in the skill; one-shot audits can be commands that
-load `references/quality-checklist.md` without duplicating it in the command body.
+Authoring guidance and evaluation are different jobs with different triggers, so
+they belong in different places — here, in different plugins. One-shot audits are
+commands that load `${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md`
+without duplicating it in the command body.
 
 ### When to merge skills
 
@@ -56,13 +58,13 @@ Do not duplicate those skills' procedures.
 Place shared material once:
 
 ```text
-skill-development/references/quality-checklist.md
+${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md
 ```
 
 Other skills and commands link:
 
 ```markdown
-Evaluate against `references/quality-checklist.md` in **skill-development**.
+Evaluate against `${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md`.
 ```
 
 ### Command as orchestrator
@@ -100,12 +102,15 @@ facade; avoid a separate "index" skill unless triggers require it.
 
 ## Example: Meta Plugin Shape
 
+Meta is an evaluation plugin, so it carries exactly one always-on skill and keeps
+its judging criteria in plugin-level references that only load when a command or
+agent asks for them:
+
 ```text
-skill-development          # Author SKILL.md
-modular-skill-framework    # Boundaries and composition (this skill)
-plugin-structure           # Plugin layout and marketplace registration
-command-development        # Slash commands
-hook-development           # hooks.json and events
+skills/modular-skill-framework  # Boundaries and composition (this skill)
+references/                     # Checklists — loaded on demand, never always-on
+agents/                         # skill-auditor, plugin-auditor (scored judgments)
+commands/                       # audit-skill, skills-eval, validate-plugin, ...
 ```
 
 Triggers are disjoint; commands (`audit-skill`, `skills-eval`) orchestrate

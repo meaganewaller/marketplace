@@ -1,6 +1,6 @@
 ---
 name: rails-security
-description: "Rails security: OWASP, CSRF, SQL injection, XSS, mass assignment, headers. Use when reviewing security or hardening apps."
+description: This skill should be used when the user asks to "review this for security", "run Brakeman", "fix a CSRF issue", "prevent SQL injection", "escape this output", "set a Content Security Policy", "add security headers", or "audit dependencies for CVEs". Covers OWASP issues, mass assignment, and XSS in Rails apps.
 ---
 
 # Rails Security
@@ -13,12 +13,11 @@ Apply Rails security defaults and audit common footguns.
 - Brakeman output
 - Content Security Policy
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

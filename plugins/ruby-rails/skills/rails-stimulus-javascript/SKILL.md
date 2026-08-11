@@ -1,6 +1,6 @@
 ---
 name: rails-stimulus-javascript
-description: Stimulus controllers, import maps, and modest JavaScript in Rails 8. Use when adding client behavior.
+description: This skill should be used when the user asks to "add a Stimulus controller", "add JavaScript to this page", "pin a JS package with importmap", "wire up a data-action", or asks where JS belongs under app/javascript. For server-driven page updates that need no JavaScript, use rails-hotwire-turbo.
 ---
 
 # Stimulus and Import Maps
@@ -13,12 +13,11 @@ Add small, cohesive Stimulus controllers; avoid SPA frameworks unless required.
 - importmap pins
 - JS organization under `app/javascript`
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

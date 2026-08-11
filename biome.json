@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["**", "!!.vim"]
+		"includes": ["**", "!!.vim", "!.beads", "!.agents", "!.codex"]
 	},
 	"formatter": {
 		"enabled": true,

@@ -1,6 +1,6 @@
 ---
 name: ruby-mise-environment
-description: mise setup for Ruby 4+, Bundler, binstubs, Gemfile, and project tasks. Use when configuring Ruby versions, installing gems, or debugging bundle/ruby path issues.
+description: This skill should be used when the user asks to "set up Ruby for this project", "pin the Ruby version", "install gems", "fix a wrong Ruby version", "debug a bundle or ruby path problem", "add binstubs", or "migrate off rbenv, rvm, or asdf". Covers mise.toml, Bundler, and project tasks.
 ---
 
 # Ruby mise Environment
@@ -14,12 +14,11 @@ Configure Ruby projects with mise as the single source of truth for Ruby version
 - Running bundle/rails with correct Ruby
 - Migrating from rbenv/rvm/asdf
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

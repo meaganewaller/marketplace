@@ -13,7 +13,7 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
-			"description": "Bun runtime patterns, bunx, shell scripting, lockfile management, and testing guidance",
+			"description": "Bun runtime, package management, testing, bundling, and standalone executables — verified against the Bun CLI, not recalled",
 			"name": "bun",
 			"source": "./plugins/bun",
 			"strict": true,
@@ -24,74 +24,11 @@
 				"shell",
 				"testing",
 				"lockfile",
+				"bundler",
+				"security",
 				"mise"
 			],
-			"version": "1.0.0"
-		},
-		{
-			"author": {
-				"name": "meaganewaller"
-			},
-			"category": "development",
-			"description": "Expert guidance for Cloudflare Workers, storage, AI, Zero Trust, wrangler, and deployment workflows",
-			"name": "cloudflare-expert",
-			"source": "./plugins/cloudflare-expert",
-			"strict": true,
-			"tags": [
-				"cloudflare",
-				"workers",
-				"wrangler",
-				"r2",
-				"d1",
-				"kv",
-				"zero-trust",
-				"tunnel",
-				"workers-ai",
-				"vectorize",
-				"mcp",
-				"edge"
-			],
-			"version": "1.0.0"
-		},
-		{
-			"author": {
-				"name": "meaganewaller"
-			},
-			"category": "utility",
-			"description": "captures tradeoffs and related decisions into markdown automatically",
-			"name": "decision-journal",
-			"source": "./plugins/decision-journal",
-			"strict": true,
-			"tags": ["decision", "documentation", "adr", "tradeoffs"],
-			"version": "1.0.0"
-		},
-		{
-			"author": {
-				"name": "meaganewaller"
-			},
-			"category": "development",
-			"description": "Transforms your terminal into a professional engineering team: language domain experts (Ruby/Rails, Bash, Python, Rust, Go), strategic roles, quality and ops specialists, and SDLC lifecycle skills, summoned via a dispatcher and per-role commands",
-			"name": "dev-collective",
-			"source": "./plugins/dev-collective",
-			"strict": true,
-			"tags": [
-				"engineering-team",
-				"agents",
-				"ruby",
-				"rails",
-				"bash",
-				"python",
-				"rust",
-				"go",
-				"architecture",
-				"tech-lead",
-				"code-review",
-				"sre",
-				"security",
-				"sdlc",
-				"orchestration"
-			],
-			"version": "1.0.0"
+			"version": "1.1.0"
 		},
 		{
 			"author": {
@@ -114,7 +51,7 @@
 				"source-only",
 				"package-management"
 			],
-			"version": "1.0.0"
+			"version": "1.1.1"
 		},
 		{
 			"author": {
@@ -137,7 +74,7 @@
 				"age",
 				"encryption"
 			],
-			"version": "1.0.0"
+			"version": "1.0.1"
 		},
 		{
 			"author": {
@@ -159,7 +96,7 @@
 				"code-review",
 				"cli"
 			],
-			"version": "0.1.0"
+			"version": "0.2.0"
 		},
 		{
 			"author": {
@@ -182,14 +119,14 @@
 				"python",
 				"ruby"
 			],
-			"version": "1.0.0"
+			"version": "1.1.0"
 		},
 		{
 			"author": {
 				"name": "meaganewaller"
 			},
 			"category": "development",
-			"description": "Tools for building and evaluating Claude skills, hooks, agents, commands, and plugins — modular patterns, quality checks, and plugin validation",
+			"description": "Evaluation layer for Claude Code plugins — scored skill and plugin audits, hook and rules evals, and context-footprint reports against bundled checklists",
 			"name": "meta",
 			"source": "./plugins/meta",
 			"strict": true,
@@ -204,7 +141,7 @@
 				"quality",
 				"claude-code"
 			],
-			"version": "1.0.0"
+			"version": "1.1.0"
 		},
 		{
 			"author": {
@@ -235,7 +172,7 @@
 				"solid-queue",
 				"rails-8"
 			],
-			"version": "1.0.0"
+			"version": "1.4.1"
 		},
 		{
 			"author": {
@@ -257,29 +194,6 @@
 				"file-protocol",
 				"reports",
 				"audits"
-			],
-			"version": "1.0.0"
-		},
-		{
-			"author": {
-				"name": "meaganewaller"
-			},
-			"category": "utility",
-			"description": "General purpose CLI tools: fd, ripgrep, jq, yq, shell scripting, ImageMagick, Mermaid diagrams, and universal dependency installation",
-			"name": "tools",
-			"source": "./plugins/tools",
-			"strict": true,
-			"tags": [
-				"tools",
-				"utilities",
-				"fd",
-				"ripgrep",
-				"jq",
-				"yq",
-				"shell",
-				"imagemagick",
-				"mermaid",
-				"diagrams"
 			],
 			"version": "1.1.0"
 		},

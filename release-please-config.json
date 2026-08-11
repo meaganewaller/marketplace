@@ -2,36 +2,17 @@
 	"$schema": "https://raw.githubusercontent.com/googleapis/release-please/refs/heads/main/schemas/config.json",
 	"include-component-in-tag": true,
 	"packages": {
-		"plugins/decision-journal": {
-			"component": "decision-journal",
-			"extra-files": [
-				{
-					"jsonpath": "$.version",
-					"path": ".claude-plugin/plugin.json",
-					"type": "json"
-				}
-			],
-			"initial-version": "1.0.0",
-			"release-type": "simple"
-		},
-		"plugins/dev-collective": {
-			"component": "dev-collective",
-			"extra-files": [
-				{
-					"jsonpath": "$.version",
-					"path": ".claude-plugin/plugin.json",
-					"type": "json"
-				}
-			],
-			"initial-version": "1.0.0",
-			"release-type": "simple"
-		},
 		"plugins/dotfiles": {
 			"component": "dotfiles",
 			"extra-files": [
 				{
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
+					"type": "json"
+				},
+				{
+					"jsonpath": "$.plugins[?(@.name=='dotfiles')].version",
+					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
 			],
@@ -45,17 +26,10 @@
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
 					"type": "json"
-				}
-			],
-			"initial-version": "1.0.0",
-			"release-type": "simple"
-		},
-		"plugins/cloudflare-expert": {
-			"component": "cloudflare-expert",
-			"extra-files": [
+				},
 				{
-					"jsonpath": "$.version",
-					"path": ".claude-plugin/plugin.json",
+					"jsonpath": "$.plugins[?(@.name=='bun')].version",
+					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
 			],
@@ -69,6 +43,11 @@
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
 					"type": "json"
+				},
+				{
+					"jsonpath": "$.plugins[?(@.name=='fnox')].version",
+					"path": "/.claude-plugin/marketplace.json",
+					"type": "json"
 				}
 			],
 			"initial-version": "1.0.0",
@@ -80,6 +59,11 @@
 				{
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
+					"type": "json"
+				},
+				{
+					"jsonpath": "$.plugins[?(@.name=='mise')].version",
+					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
 			],
@@ -93,6 +77,11 @@
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
 					"type": "json"
+				},
+				{
+					"jsonpath": "$.plugins[?(@.name=='meta')].version",
+					"path": "/.claude-plugin/marketplace.json",
+					"type": "json"
 				}
 			],
 			"initial-version": "1.0.0",
@@ -104,6 +93,11 @@
 				{
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
+					"type": "json"
+				},
+				{
+					"jsonpath": "$.plugins[?(@.name=='ruby-rails')].version",
+					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
 			],
@@ -117,6 +111,11 @@
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
 					"type": "json"
+				},
+				{
+					"jsonpath": "$.plugins[?(@.name=='sitegraph')].version",
+					"path": "/.claude-plugin/marketplace.json",
+					"type": "json"
 				}
 			],
 			"initial-version": "1.0.0",
@@ -129,17 +128,10 @@
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
 					"type": "json"
-				}
-			],
-			"initial-version": "1.0.0",
-			"release-type": "simple"
-		},
-		"plugins/tools": {
-			"component": "tools",
-			"extra-files": [
+				},
 				{
-					"jsonpath": "$.version",
-					"path": ".claude-plugin/plugin.json",
+					"jsonpath": "$.plugins[?(@.name=='typescript-architect')].version",
+					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
 			],
@@ -152,6 +144,11 @@
 				{
 					"jsonpath": "$.version",
 					"path": ".claude-plugin/plugin.json",
+					"type": "json"
+				},
+				{
+					"jsonpath": "$.plugins[?(@.name=='git-workflow')].version",
+					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
 			],

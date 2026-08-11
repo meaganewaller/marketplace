@@ -4,12 +4,11 @@ globs: "*.rb,*.rake,*.rbs,*.rbi,sig/**/*.rbs,rbi/**/*.rbi,Steepfile,sorbet/confi
 alwaysApply: false
 ---
 
-Default assumptions for this plugin:
+This plugin's default assumptions — toolchain, Ruby and Rails versions, command
+forms, and type-system pairing — live in one place:
+[`references/conventions.md`](references/conventions.md). Read it rather than
+restating any of it here or in a skill. Every `SKILL.md` points at that same
+file, so it is the only place to edit when a default changes.
 
-- **Toolchain**: Use [mise](https://mise.jdx.dev) for Ruby, Node (if needed), and task runners — not rbenv, rvm, asdf, or chruby directly.
-- **Ruby**: Target **Ruby 4.0.0+** unless the project pins an older version in `mise.toml` or `.ruby-version`.
-- **Rails**: Target **Rails 8+** defaults (Solid Queue/Cache/Cable, Kamal, built-in authentication generator, Propshaft, import maps).
-- **Bundler**: Use `bundle exec` for Rails and gem binaries; prefer `bin/rails`, `bin/rspec`, `bin/rubocop` binstubs when present.
-- **Commands**: Run via mise — e.g. `mise exec -- ruby -v`, `mise exec -- bin/rails routes`, or project tasks in `mise.toml`.
-
-When a skill from this plugin applies, read its `SKILL.md` and follow it before improvising Ruby/Rails guidance.
+When a skill from this plugin applies, read its `SKILL.md` and follow it before
+improvising Ruby/Rails guidance.

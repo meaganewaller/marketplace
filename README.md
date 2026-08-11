@@ -19,119 +19,19 @@ add this marketplace
 
 **Category:** development
 
-Bun runtime patterns, bunx, shell scripting, lockfile management, and testing guidance.
+Bun runtime, package management, testing, bundling, and standalone executables — verified against the Bun CLI, not recalled.
 
 **Contains:**
 
 - **Skills:**
-  - `bun-runtime` - Provides Bun runtime guidance including bunx, shell scripting, lockfile management, resolution, and testing patterns. Includes 5 reference files for progressive disclosure.
+  - `bun-runtime` - Bun across all four of its roles: runtime, package manager, bundler, and test runner. Records the flags and config keys that are commonly invented but do not exist. Includes 8 reference files for progressive disclosure (package management, security, testing, building, built-in APIs, shell, resolution, bunx).
+- **Scripts:**
+  - `bun-project-audit.sh` - Reports Bun version, lockfile format and whether it needs migrating, workspace layout, config files, and blocked lifecycle scripts
 
 **Installation:**
 
 ```bash
 /plugin install bun@meaganewaller-marketplace
-```
-
----
-
-### cloudflare-expert
-
-[🧭 Plugin README](plugins/cloudflare-expert/README.md)
-
-**Category:** development
-
-Cloudflare platform expertise — Workers, Pages, R2, D1, KV, Durable Objects, AI Workers, Zero Trust, MCP servers, and cost optimization.
-
-**Contains:**
-
-- **Skills:**
-  - `cloudflare-knowledge` - Cloudflare platform knowledge — Workers, Pages, R2, D1, KV, Durable Objects, AI, and Zero Trust. Includes 8 reference files for progressive disclosure (wrangler config, storage deep-dive, AI usage, AI models, MCP server development, Zero Trust setup, cost comparison, third-party integrations).
-- **Commands:**
-  - `/cloudflare-expert:cloudflare-worker` - Create a new Cloudflare Worker with specified bindings and configuration
-  - `/cloudflare-expert:cloudflare-deploy` - Deploy a Cloudflare Worker with environment configuration and secrets
-  - `/cloudflare-expert:cloudflare-debug` - Debug Cloudflare Workers issues with diagnostic commands and solutions
-  - `/cloudflare-expert:cloudflare-tunnel` - Create and configure a Cloudflare Tunnel for Zero Trust access
-  - `/cloudflare-expert:cloudflare-ai` - Generate production-ready code for Workers AI tasks (TTS, STT, image, LLM, vision, embeddings, RAG)
-- **Agents:**
-  - `cloudflare-expert` - Expert agent for the full Cloudflare platform — Workers, storage, AI Workers, Zero Trust, MCP servers, Workflows, Vectorize, observability, and cost optimization
-
-**Installation:**
-
-```bash
-/plugin install cloudflare-expert@meaganewaller-marketplace
-```
-
----
-
-### decision-journal
-
-[🧭 Plugin README](plugins/decision-journal/README.md)
-
-**Category:** utility
-
-Captures tradeoffs and related decisions into markdown automatically.
-
-**Contains:**
-
-- **Hooks:**
-  - PostToolUse (Write|Edit): Creates markers for large changes
-  - PreCompact (auto): Triggers capture agent before compaction
-  - Stop: Cleans up old markers
-- **Agents:**
-  - `capture-decisions`: Analyzes context and writes rich journal entries
-
-**Installation:**
-
-```bash
-/plugin install decision-journal@meaganewaller-marketplace
-```
-
----
-
-### dev-collective
-
-[🧭 Plugin README](plugins/dev-collective/README.md)
-
-**Category:** development
-
-Transforms your terminal into a professional engineering team: language domain experts (Ruby/Rails, Bash, Python, Rust, Go), strategic roles, quality and ops specialists, and SDLC lifecycle skills, summoned via a dispatcher and per-role commands.
-
-**Contains:**
-
-- **Skills:**
-  - `team-orchestration` - Routes any engineering task to the right roles and lifecycle phases, sequencing them and right-sizing the team
-  - `discovery` - Frame the problem, clarify requirements, define success, and cut scope before any code is written
-  - `technical-design` - Produce design docs and RFCs with trade-off analysis, alternatives, and non-functional requirements
-  - `implementation-workflow` - Break a goal into a sequenced work plan, pick the right language expert, and keep tests green to a definition of done
-  - `code-review-process` - Review gate with a blocking / should-fix / nit severity taxonomy and actionable feedback
-  - `shipping` - Release-readiness checklist, rollout strategy (canary, feature flags), observability, and rollback planning
-- **Commands:**
-  - `/dev-collective:assemble` - Dispatcher that reads a task, picks the team and phases, runs the matching agents, and synthesizes the result
-  - `/dev-collective:tech-lead` - Break a goal into a sequenced work plan with role assignments
-  - `/dev-collective:architect` - Produce a design doc / RFC with trade-offs and a recommendation
-  - `/dev-collective:cto` - Org-level technology strategy and build-vs-buy guidance
-  - `/dev-collective:review` - Severity-tagged, security-aware code review
-  - `/dev-collective:ship` - Release-readiness assessment with rollout and rollback plan
-- **Agents:**
-  - `rails-engineer` - Ruby 3.x/4 and Rails 8 specialist (Active Record, Hotwire/Turbo, service objects, RSpec)
-  - `python-engineer` - Modern Python 3.12+ specialist (type hints, async, uv/ruff/mypy/pytest)
-  - `rust-engineer` - Rust systems specialist (ownership, error handling, async/tokio, cargo/clippy)
-  - `go-engineer` - Go specialist (explicit errors, goroutines and channels, table-driven tests)
-  - `bash-engineer` - Bash/POSIX shell specialist (safe scripting, shellcheck, shfmt, bats)
-  - `cto` - Org and business-level technology strategy, build vs buy, and multi-quarter bets
-  - `principal-architect` - System and cross-service architecture, RFCs, and decision records
-  - `staff-engineer` - Hardest cross-cutting technical problems, standards, and prototyping unknowns
-  - `tech-lead` - Owns delivery of an effort — work breakdown, sequencing, and unblocking
-  - `product-manager` - Owns problem, user, scope, and success criteria — the "what" and "why"
-  - `code-reviewer` - Read-only review for correctness, design, readability, and coverage
-  - `qa-engineer` - Test strategy, the test pyramid, edge cases, and regression coverage
-  - `sre` - Reliability, observability, deployment, incident response, and SLOs
-  - `security-engineer` - Read-only threat modeling and vulnerability review (defensive)
-
-**Installation:**
-
-```bash
-/plugin install dev-collective@meaganewaller-marketplace
 ```
 
 ---
@@ -266,16 +166,17 @@ mise dev environment management — tool versions, environment variables, tasks,
 
 **Category:** development
 
-Tools for building and evaluating Claude skills, hooks, agents, commands, and plugins — modular patterns, quality checks, and plugin validation.
+Evaluation layer for Claude Code plugins — scored skill and plugin audits, hook and rules evals, and context-footprint reports against bundled checklists.
 
 **Contains:**
 
 - **Skills:**
-  - `skill-development` - Author and evaluate `SKILL.md` files with progressive disclosure and quality checklists (96 lines; 1 reference file)
-  - `modular-skill-framework` - Composable skill design: boundaries, interfaces, token efficiency, and split/merge heuristics (141 lines; 3 reference files)
-  - `plugin-structure` - Plugin layout, `plugin.json`, marketplace registration, and portable `${CLAUDE_PLUGIN_ROOT}` paths (122 lines; 1 reference file)
-  - `command-development` - Slash command structure, frontmatter, dynamic arguments, and command+skill patterns (101 lines; 1 reference file)
-  - `hook-development` - Hook events, `hooks.json` format, and hook authoring conventions (95 lines; 2 reference files)
+  - `modular-skill-framework` - Composable skill design: boundaries, interfaces, token efficiency, and split/merge heuristics (3 reference files)
+- **References** (judging criteria, loaded on demand rather than always-on):
+  - `skill-quality-checklist.md` - pass/fail criteria for a skill
+  - `marketplace-checklist.md` - layout, manifest, marketplace registration
+  - `hook-checklist.md` - `hooks.json` and hook script conventions
+  - `command-patterns.md` - command frontmatter and writing conventions
 - **Commands:**
   - `/meta:create-command` - Scaffold a new slash command in a plugin using meta conventions
   - `/meta:validate-plugin` - Validate plugin layout, manifest, and marketplace registration
@@ -287,8 +188,10 @@ Tools for building and evaluating Claude skills, hooks, agents, commands, and pl
   - `/meta:rules-eval` - Evaluate Cursor rules, `CLAUDE.md`, and `AGENTS.md` for clarity and enforceability
   - `/meta:hooks-eval` - Evaluate plugin hooks statically and run companion test scripts when present
 - **Agents:**
-  - `plugin-validator` - Scored plugin validation (layout, manifest, marketplace registration, README inventory, hooks/MCP)
+  - `plugin-auditor` - Scored plugin audit (layout, manifest, marketplace registration, README inventory, hooks/MCP)
   - `skill-auditor` - Scored skill quality audits (structure, content, token efficiency, activation, tool integration)
+
+> Authoring guidance (`SKILL.md` structure, command frontmatter, hook events, plugin layout) lives in the **plugin-dev** plugin. Meta judges plugins rather than teaching how to write them, so it ships one skill instead of duplicating four.
 
 **Installation:**
 
@@ -356,31 +259,27 @@ Ruby 4+ and Rails 8+ expert skills: mise toolchain, Ruby LSP, RBS/Sorbet type si
 
 ---
 
-### tools
+### sitegraph
 
-[🧭 Plugin README](plugins/tools/README.md)
+[🧭 Plugin README](plugins/sitegraph/README.md)
 
 **Category:** utility
 
-General purpose CLI tools: fd, ripgrep, jq, yq, shell scripting, ImageMagick, Mermaid diagrams, and universal dependency installation.
+Filesystem-as-navigation-graph static sites for technical reports, audits, and dashboards — auto-discovered nav rail and sitemap, CDN-served CSS kernel, zero-build.
 
 **Contains:**
 
 - **Skills:**
-  - `binary-analysis` - Reverse engineering and binary exploration using strings, binwalk, hexdump, xxd, file, and objdump
-  - `deps-install` - Universal dependency installer that auto-detects the project's package manager (uv, bun, npm, yarn, pnpm, cargo, go, bundler, brew)
-  - `fd-file-finding` - Fast file finding using fd with smart defaults, gitignore awareness, and parallel execution
-  - `imagemagick-conversion` - Convert and manipulate images with ImageMagick (format conversion, resizing, batch processing)
-  - `jq-json-processing` - JSON querying, filtering, and transformation with jq
-  - `mermaid-diagrams` - Generate diagrams from text using Mermaid CLI (flowcharts, sequence, ERD, class, state, Gantt, git graphs) as SVG/PNG/PDF
-  - `rg-code-search` - Fast code search using ripgrep with smart defaults, regex patterns, and file filtering
-  - `shell-expert` - Shell scripting expertise, CLI automation, and cross-platform bash/zsh/POSIX best practices
-  - `yq-yaml-processing` - YAML querying, filtering, and transformation with yq (Kubernetes manifests, GitHub Actions workflows)
+  - `rebuild-nav` - Rebuilds the sitemap and per-page navigation rail by walking the site's folder structure. Use after adding, moving, renaming, or removing pages, or when regenerating breadcrumbs and prev/next links (1 reference file: authoring)
+- **Scripts:**
+  - `build-nav.ts` - Walks the site root and regenerates nav rail, breadcrumbs, sitemap, and prev/next links
+- **Assets:**
+  - `kernel.css` - CDN-served CSS kernel used by generated pages
 
 **Installation:**
 
 ```bash
-/plugin install tools@meaganewaller-marketplace
+/plugin install sitegraph@meaganewaller-marketplace
 ```
 
 ---

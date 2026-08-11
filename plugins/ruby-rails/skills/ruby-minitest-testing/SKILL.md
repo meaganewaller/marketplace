@@ -1,6 +1,6 @@
 ---
 name: ruby-minitest-testing
-description: "Minitest patterns for Ruby and Rails: assertions, parallel tests, fixtures, and Rails 8 default test stack. Use when working in `test/` directories or Minitest-only projects."
+description: This skill should be used when the user asks to "write a Minitest test", "add a test under test/", "convert these specs to Minitest", "parallelize the test suite", or is working in a Rails app on the default test stack. For RSpec instead, use ruby-rspec-testing; for choosing a test type or strategy, use rails-testing.
 ---
 
 # Minitest Testing
@@ -13,12 +13,11 @@ Use Minitest effectively — Rails 8's default — with clear structure and para
 - Converting from RSpec
 - Speeding up unit tests
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

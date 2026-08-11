@@ -1,6 +1,6 @@
 ---
 name: rails-hotwire-turbo
-description: Hotwire Turbo Drive, Frames, and Streams for Rails 8 HTML apps. Use when building interactive pages without a heavy SPA.
+description: This skill should be used when the user asks to "add a Turbo Frame", "update part of the page without a reload", "broadcast a Turbo Stream", "make this form submit without a full refresh", or mentions Turbo Drive, lazy-loaded frames, or turbo_stream responses. For client-side behavior written as Stimulus controllers, use rails-stimulus-javascript.
 ---
 
 # Hotwire Turbo
@@ -13,12 +13,11 @@ Use Turbo to minimize custom JavaScript while keeping snappy navigation.
 - Turbo Frames for partial updates
 - Turbo Streams for server-pushed DOM changes
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

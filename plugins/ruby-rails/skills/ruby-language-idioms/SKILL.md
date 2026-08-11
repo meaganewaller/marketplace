@@ -1,6 +1,6 @@
 ---
 name: ruby-language-idioms
-description: Ruby 4+ language idioms, Enumerable patterns, blocks, classes, modules, and RuboCop-friendly style. Use when writing or refactoring Ruby outside Rails-specific APIs.
+description: This skill should be used when the user asks to "make this Ruby more idiomatic", "refactor this for clarity", "use pattern matching", "explain how blocks work", "choose between a module and a class", or asks about Enumerable, keyword arguments, frozen string literals, or RuboCop-friendly style. Covers plain Ruby outside Rails-specific APIs.
 ---
 
 # Ruby Language Idioms
@@ -13,12 +13,11 @@ Write expressive, modern Ruby 4 code aligned with community style and this marke
 - Choosing between class methods, modules, and composition
 - Explaining Ruby semantics (blocks, keywords, pattern matching)
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

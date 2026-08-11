@@ -1,6 +1,6 @@
 ---
 name: rails-database-migrations
-description: Schema migrations, multi-database, seeds, and structure.sql vs schema.rb. Use when changing the database shape.
+description: This skill should be used when the user asks to "add a column", "create a migration", "rename a table", "add an index", "backfill data", "roll back a migration", "seed the database", or asks about schema.rb vs structure.sql or multiple databases. For model-level associations and validations, use rails-activerecord.
 ---
 
 # Rails Database Migrations
@@ -13,12 +13,11 @@ Ship safe, reversible migrations with zero-downtime awareness when needed.
 - Backfilling data
 - Multiple databases / replicas
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

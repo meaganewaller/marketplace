@@ -18,7 +18,7 @@
 		"strict": true,
 		"stripInternal": true,
 		"target": "esnext",
-		"types": ["node"],
+		"types": ["bun"],
 		"verbatimModuleSyntax": false
 	},
 	"exclude": ["plugins/example-plugin/**/*", "**/dist/**"],

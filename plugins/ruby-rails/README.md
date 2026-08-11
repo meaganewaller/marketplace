@@ -17,6 +17,11 @@ Expert guidance for **Ruby 4.0+** and **Rails 8+** development using **mise** as
 | Rails | 8+ (Solid Queue/Cache/Cable, Kamal, Propshaft) |
 | Commands | `mise exec --`, `bin/rails`, `bundle exec` |
 
+These are assumptions, not mandates — a project that pins something different
+wins. [`references/conventions.md`](references/conventions.md) is the
+authoritative copy that every skill reads; this table is a summary for humans
+browsing the marketplace.
+
 ## Components
 
 ### Commands

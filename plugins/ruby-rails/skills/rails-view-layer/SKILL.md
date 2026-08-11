@@ -1,6 +1,6 @@
 ---
 name: rails-view-layer
-description: ERB, layouts, partials, ViewComponent, helpers, and presenters. Use when building server-rendered UI.
+description: This skill should be used when the user asks to "render a partial", "build a ViewComponent", "add a layout", "use content_for", "build a form", "add a view helper", or "translate this view with I18n". Covers ERB, presenters, and server-rendered UI.
 ---
 
 # Rails View Layer
@@ -13,12 +13,11 @@ Compose views with partials, components, and clear locals contracts.
 - Layouts and content_for
 - Form builders
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

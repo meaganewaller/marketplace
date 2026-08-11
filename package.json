@@ -26,7 +26,8 @@
 		"lint:check": "bunx --bun @biomejs/biome check",
 		"lint:spelling": "cspell . \"./.*/**\"",
 		"lint:types": "tsc --noEmit",
-		"prepare": "husky"
+		"prepare": "husky",
+		"test": "bun test"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.11",
@@ -34,24 +35,17 @@
 		"@commitlint/config-conventional": "^20.5.0",
 		"@types/bun": "latest",
 		"cspell": "^10.0.0",
-		"globals": "^17.4.0",
 		"husky": "^9.1.7",
 		"knip": "^6.3.1",
 		"lint-staged": "^16.4.0",
 		"markdownlint-cli2": "^0.22.0",
 		"markdownlint-cli2-formatter-pretty": "^0.0.10",
-		"npm-run-all2": "^8.0.4"
-	},
-	"peerDependencies": {
+		"npm-run-all2": "^8.0.4",
 		"typescript": "^5"
 	},
 	"knip": {
 		"ignoreDependencies": [
 			"markdownlint-cli2-formatter-pretty"
-		],
-		"ignore": [
-			"**/*.d.ts",
-			".worktrees/**/*"
 		],
 		"tags": [
 			"-knipignore"

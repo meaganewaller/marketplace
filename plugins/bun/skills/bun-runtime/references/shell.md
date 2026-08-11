@@ -1,168 +1,146 @@
-# Shell Scripting with Bun
+# Shell Scripting with `Bun.$`
 
-Bun provides `Bun.$` for shell scripting - a tagged template literal for running commands.
+`Bun.$` runs shell commands from a tagged template. It uses Bun's own cross-platform shell — the same script works on Windows without a POSIX shell installed. Verified against Bun 1.3.14.
 
-## Basic Usage
+## Basics
 
 ```typescript
 import { $ } from "bun";
 
-// Simple command
-await $`echo "Hello, World!"`;
-
-// Capture output
-const result = await $`ls -la`.text();
-
-// Get as lines
-const files = await $`ls`.lines();
-
-// Get as JSON
-const pkg = await $`cat package.json`.json();
+await $`echo "Hello"`;                    // runs, streams output to stdout
+const text = await $`git status`.text();  // capture stdout
+const pkg  = await $`cat package.json`.json();
+const rows = await Array.fromAsync($`ls`.lines());
 ```
 
-## Variable Interpolation
+Output methods: `.text()`, `.json()`, `.lines()`, `.blob()`, `.arrayBuffer()`, `.bytes()`. `.lines()` is an async iterable, so consume it with `for await` or `Array.fromAsync`.
+
+## Interpolation Is Escaped
+
+Interpolated values are passed as single arguments, never re-parsed as shell syntax. Verified: interpolating `a b; touch /tmp/PWNED` created a file with that literal name and did **not** execute the `touch`.
 
 ```typescript
-const name = "file.txt";
-const dir = "/tmp";
+const userInput = "a b; rm -rf /";
+await $`touch ${userInput}`;      // one file, literally named "a b; rm -rf /"
+```
 
-// Safe interpolation (auto-escaped)
-await $`touch ${dir}/${name}`;
+This makes `Bun.$` injection-safe by default and is the main reason to prefer it over `child_process.exec` with a built string. Arrays expand to separate arguments:
 
-// Array expansion
+```typescript
 const files = ["a.txt", "b.txt"];
-await $`rm ${files}`;
+await $`rm ${files}`;             // rm a.txt b.txt
 ```
 
-## Output Handling
-
-```typescript
-// Get stdout as text
-const text = await $`echo hello`.text();
-
-// Get stdout as Buffer
-const buffer = await $`cat image.png`.arrayBuffer();
-
-// Get stdout as Blob
-const blob = await $`cat file`.blob();
-
-// Stream stdout
-const proc = $`long-running-command`;
-for await (const chunk of proc.stdout) {
-  console.log(chunk);
-}
-```
+To interpolate raw shell syntax on purpose, opt out explicitly with `$.raw`.
 
 ## Error Handling
 
+A non-zero exit throws a `ShellError`:
+
 ```typescript
-// Throws on non-zero exit
 try {
   await $`exit 1`;
-} catch (err) {
-  console.error(err.exitCode); // 1
-  console.error(err.stderr);
-}
-
-// Don't throw on error
-const result = await $`exit 1`.nothrow();
-console.log(result.exitCode); // 1
-
-// Check exit code
-const { exitCode } = await $`test -f file.txt`.nothrow();
-if (exitCode === 0) {
-  console.log("File exists");
+} catch (err) {           // ShellError
+  console.error(err.exitCode, err.stderr.toString());
 }
 ```
 
-## Environment Variables
+Use `.nothrow()` when a non-zero exit is an expected outcome:
 
 ```typescript
-// Set env for command
-await $`echo $MY_VAR`.env({ MY_VAR: "value" });
-
-// Use current env
-await $`printenv`;
-
-// Extend current env
-await $`printenv`.env({ ...process.env, EXTRA: "value" });
+const { exitCode } = await $`git diff --quiet`.nothrow();
+const hasChanges = exitCode !== 0;
 ```
 
-## Working Directory
+`err.stdout` and `err.stderr` are Buffers — call `.toString()` before logging them.
+
+## Options
 
 ```typescript
-// Run in specific directory
-await $`ls`.cwd("/tmp");
-
-// Chain with other options
-await $`npm install`.cwd("./packages/app").quiet();
+await $`npm install`.quiet();                    // suppress passthrough output
+await $`pwd`.cwd("/tmp");                        // working directory
+await $`echo $FOO`.env({ FOO: "bar" });          // replaces the environment
+await $`printenv`.env({ ...process.env, X: "1" }); // extend instead of replace
 ```
 
-## Piping
+`.env()` **replaces** the environment rather than extending it. Spread `process.env` when the command still needs `PATH` and friends.
+
+`.quiet()` suppresses streaming to the terminal but still captures output, so `.quiet().text()` is the usual pairing for scripts that parse results.
+
+## Redirection and Pipes
 
 ```typescript
-// Pipe between commands
-await $`cat file.txt | grep pattern | wc -l`;
+await $`cat a.txt | sort -u | wc -l`;
+await $`echo "content" > out.txt`;
+await $`echo "more" >> out.txt`;
+await $`cmd 2>&1`;
 
-// Pipe to file
-await $`echo "content" > output.txt`;
-
-// Append to file
-await $`echo "more" >> output.txt`;
+// redirect to and from JavaScript values
+const buf = Buffer.alloc(1024);
+await $`cat file.txt > ${buf}`;
+await $`cat < ${new Response("data")}`;
 ```
 
-## Quiet Mode
+## Built-in Commands
+
+Bun's shell implements `cd`, `ls`, `rm`, `echo`, `pwd`, `cat`, `touch`, `mkdir`, `which`, `mv`, `cp`, and others internally, so scripts behave consistently across platforms rather than depending on system coreutils.
+
+## When to Use `Bun.spawn` Instead
+
+`Bun.$` is for short commands whose output is consumed at the end. Use `Bun.spawn` for long-running processes, incremental streaming, or fine-grained stdio control:
 
 ```typescript
-// Suppress stdout/stderr printing
-await $`npm install`.quiet();
-
-// Still capture output
-const output = await $`npm install`.quiet().text();
-```
-
-## Practical Examples
-
-### Git Operations
-
-```typescript
-const branch = await $`git branch --show-current`.text();
-const status = await $`git status --porcelain`.lines();
-const hasChanges = status.length > 0;
-```
-
-### File Operations
-
-```typescript
-// Check if file exists
-const exists = (await $`test -f ${path}`.nothrow()).exitCode === 0;
-
-// Create directory
-await $`mkdir -p ${dir}`;
-
-// Copy with progress
-await $`rsync -ah --progress ${src} ${dst}`;
-```
-
-### Process Management
-
-```typescript
-// Run in background
-const proc = Bun.spawn(["long-task"], {
-  stdout: "inherit",
+const proc = Bun.spawn(["./server", "--port", "3000"], {
+  stdout: "pipe",
   stderr: "inherit",
+  env: { ...process.env, NODE_ENV: "production" },
 });
 
-// Wait for completion
-await proc.exited;
+for await (const chunk of proc.stdout) {
+  process.stdout.write(chunk);          // stream as it arrives
+}
+
+const code = await proc.exited;
+proc.kill();
 ```
 
-## Comparison with Alternatives
+`proc.stdout` is a `ReadableStream` when `stdout: "pipe"`; read it all at once with `new Response(proc.stdout).text()`. A `ShellPromise` from `$` does not expose a `.stdout` stream — that distinction is a common mix-up.
 
-| Feature | Bun.$ | execa | child_process |
-| --------- | ------- | ------- | --------------- |
-| Template literals | Yes | No | No |
-| Auto-escaping | Yes | Manual | Manual |
-| TypeScript | Native | Yes | Yes |
-| Streaming | Yes | Yes | Yes |
-| Performance | Fast | Good | Good |
+`Bun.spawnSync` covers the blocking case.
+
+## A Real Script
+
+```typescript
+#!/usr/bin/env bun
+import { $ } from "bun";
+
+const branch = (await $`git branch --show-current`.text()).trim();
+if (branch === "main") {
+  console.error("refusing to run on main");
+  process.exit(1);
+}
+
+const dirty = (await $`git status --porcelain`.text()).trim().length > 0;
+if (dirty) {
+  console.error("working tree is dirty");
+  process.exit(1);
+}
+
+await $`bun test`;                        // throws and aborts if tests fail
+await $`bun build ./src/index.ts --outdir=dist`.quiet();
+console.log(`built ${branch}`);
+```
+
+Make it executable with `chmod +x` and run it directly — the shebang handles the rest.
+
+## Common Mistakes
+
+| Mistake | Correction |
+| --------- | ------------ |
+| Building a command string and interpolating it | Interpolate values; `$` escapes them |
+| Expecting `.env()` to extend the environment | It replaces; spread `process.env` |
+| Logging `err.stderr` directly | It is a Buffer — `.toString()` |
+| Treating a non-zero exit as a return value | It throws; use `.nothrow()` |
+| Iterating `$\`cmd\`.stdout` | Not a stream — use `.lines()` or `Bun.spawn` |
+| Using `$` for a long-running server | Use `Bun.spawn` |
+| Adding execa or zx | `Bun.$` covers both |

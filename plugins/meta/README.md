@@ -1,6 +1,6 @@
 # Meta
 
-Tools for building and evaluating Claude skills, hooks, agents, commands, and plugins — modular patterns, quality checks, and plugin validation.
+Evaluation layer for Claude Code plugins — scored skill and plugin audits, hook and rules evals, and context-footprint reports against bundled checklists.
 
 ## Installation
 
@@ -32,15 +32,29 @@ Tools for building and evaluating Claude skills, hooks, agents, commands, and pl
 
 ### Skills
 
-- **skill-development** — Author and evaluate `SKILL.md` files with progressive disclosure
 - **modular-skill-framework** — Composable skill design: boundaries, interfaces, and token efficiency
-- **plugin-structure** — Plugin layout, manifest rules, and marketplace registration
-- **command-development** — Slash command structure, frontmatter, and patterns
-- **hook-development** — Hook events, `hooks.json` format, and `${CLAUDE_PLUGIN_ROOT}` paths
+
+Meta deliberately ships one skill. It judges plugins rather than teaching how to
+write them, so its criteria live in `references/` and load only when a command or
+agent asks for them — nothing else is added to every session.
+
+For authoring guidance (`SKILL.md` structure, command frontmatter, hook events,
+plugin layout), use the **plugin-dev** plugin. Meta previously duplicated those
+four skills at a fraction of the depth, which only created ambiguity about which
+to follow.
+
+### References
+
+Judging criteria, loaded on demand:
+
+- **`references/skill-quality-checklist.md`** — pass/fail criteria for a skill
+- **`references/marketplace-checklist.md`** — layout, manifest, marketplace registration
+- **`references/hook-checklist.md`** — `hooks.json` and hook script conventions
+- **`references/command-patterns.md`** — command frontmatter and writing conventions
 
 ### Agents
 
-- **plugin-validator** — Scored plugin validation (layout, manifest, marketplace registration, README inventory, hooks/MCP)
+- **plugin-auditor** — Scored plugin audit (layout, manifest, marketplace registration, README inventory, hooks/MCP)
 - **skill-auditor** — Scored skill quality audits (structure, content, token efficiency, activation, tool integration); plugin or single-skill scope
 
 ### Hooks
@@ -76,14 +90,14 @@ This plugin activates when you are:
 /meta:validate-hook plugins/git
 ```
 
-Delegate a scored plugin audit to the **plugin-validator** agent (e.g.
+Delegate a scored plugin audit to the **plugin-auditor** agent (e.g.
 `output=json-analysis` or `include-skills=true` for a skill summary). See
-`agents/plugin-validator.md`.
+`agents/plugin-auditor.md`.
 
 ### Audit or test a skill
 
 ```text
-/meta:audit-skill plugins/meta/skills/skill-development
+/meta:audit-skill plugins/meta/skills/modular-skill-framework
 /meta:test-skill plugins/git/skills/git-commit medium
 /meta:skills-eval plugins/meta
 /meta:skills-eval plugins/git --deep
@@ -102,14 +116,14 @@ Delegate a scored audit to the **skill-auditor** agent (e.g. full plugin review 
 /meta:hooks-eval plugins/git --run-tests
 ```
 
-### Ask for authoring guidance
+### Ask for composition guidance
 
-Skills auto-activate on phrases like "create a skill", "modular skills",
-"split a skill", "validate a plugin", "add a PreToolUse hook", or
-"create a slash command".
+The **modular-skill-framework** skill auto-activates on phrases like "modular
+skills", "split a skill", "skill boundaries", or "skill composition". For how to
+*write* a skill, command, or hook, use the **plugin-dev** plugin.
 
-The **plugin-validator** agent triggers on "validate a plugin", "plugin structure
-audit", or "marketplace registration check".
+The **plugin-auditor** agent triggers on "audit a plugin", "score this plugin",
+or "marketplace registration check".
 
 The **skill-auditor** agent triggers on "audit a skill", "skill quality review", or
 "evaluate skills in a plugin".

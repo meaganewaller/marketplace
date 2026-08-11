@@ -10,7 +10,6 @@ description: |
   results. Supports full plugin audits and targeted single-skill reviews.
 tools: Read, Grep, Glob, Bash, Task
 skills:
-  - skill-development
   - modular-skill-framework
 maxTurns: 25
 created: 2026-06-01
@@ -56,12 +55,12 @@ Parse from the task prompt. Defaults apply when omitted.
 3. If path is `SKILL.md` → parent directory is the skill
 4. If invalid or empty → report blocker and request scope
 
-## Standards and Skills
+## Standards
 
-Apply bundled skills and their references:
+Judge against these:
 
-- **skill-development** — `references/quality-checklist.md` for pass/fail criteria
-- **modular-skill-framework** — boundaries, composition, interfaces, token efficiency
+- `${CLAUDE_PLUGIN_ROOT}/references/skill-quality-checklist.md` — pass/fail criteria
+- **modular-skill-framework** skill — boundaries, composition, interfaces, token efficiency
 
 Align findings with `/meta:audit-skill` severity (critical / warning / suggestion).
 

@@ -1,6 +1,6 @@
 ---
 name: rails-background-jobs
-description: Active Job with Solid Queue (Rails 8 default), retries, and idempotency. Use when enqueueing background work.
+description: This skill should be used when the user asks to "run this in the background", "create a job", "send this email asynchronously", "add a recurring task", "make a job idempotent", "configure retries", or mentions Active Job, Solid Queue, perform_later, or a jobs dashboard.
 ---
 
 # Rails Background Jobs
@@ -13,12 +13,11 @@ Run async work through Active Job with Solid Queue in development and production
 - Recurring tasks
 - Job idempotency and retries
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

@@ -1,6 +1,6 @@
 ---
 name: rails-controllers
-description: "Rails controllers: strong parameters, filters, respond_to, streaming, and HTTP semantics. Use when implementing request handling."
+description: This skill should be used when the user asks to "add a controller action", "fix strong parameters", "add a before_action", "return the right HTTP status", "respond with a Turbo Stream", or "move logic out of the controller". Covers filters, respond_to, streaming, and request handling.
 ---
 
 # Rails Controllers
@@ -13,12 +13,11 @@ Keep controllers thin; push domain logic to models, services, or jobs.
 - Strong params and authorization hooks
 - Turbo Stream responses
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

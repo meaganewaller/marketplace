@@ -13,7 +13,7 @@ static `/meta:audit-skill`.
 ## Usage
 
 ```text
-/meta:test-skill plugins/meta/skills/skill-development
+/meta:test-skill plugins/meta/skills/modular-skill-framework
 /meta:test-skill plugins/git/skills/git-commit medium
 /meta:test-skill ~/.cursor/skills/commit high
 ```
@@ -31,7 +31,7 @@ When invoked:
 2. **Parse strictness** — Optional second token: `low`, `medium`, or `high`.
    Default `medium`.
 
-3. **Apply skill-development skill** — Read `SKILL.md` and bundled references.
+3. **Apply the skill quality checklist** — Read `SKILL.md` and bundled references.
 
 4. **Extract contract** — Identify enforceable rules: "must", "never", "always",
    "required", "CRITICAL", and procedural steps the skill mandates. List as R1, R2…

@@ -1,6 +1,6 @@
 ---
 name: ruby-rspec-testing
-description: "RSpec 3 patterns: expectations, contexts, shared examples, factories, and request specs. Use when writing or fixing RSpec tests in Ruby or Rails projects."
+description: This skill should be used when the user asks to "write an RSpec spec", "add a request spec", "fix a failing spec", "set up Factory Bot", "use shared examples", "stub time in a test", or is working under spec/. For Minitest instead, use ruby-minitest-testing; for choosing a test type or strategy, use rails-testing.
 ---
 
 # RSpec Testing
@@ -13,12 +13,11 @@ Structure fast, deterministic RSpec suites for Ruby libraries and Rails apps.
 - Choosing between unit, request, and system specs
 - Factory Bot vs fixtures
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

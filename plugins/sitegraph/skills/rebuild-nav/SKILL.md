@@ -1,6 +1,6 @@
 ---
 name: rebuild-nav
-description: Rebuilds the sitemap and per-page navigation rail for a sitegraph static site by walking its folder structure. Use after adding, moving, renaming, or removing HTML pages under a sitegraph site root, or when asked to regenerate/refresh the nav rail, breadcrumbs, sitemap, or prev/next links.
+description: This skill should be used when the user asks to "rebuild the nav", "regenerate the sitemap", "fix the nav rail", "update the breadcrumbs", "check whether the nav is stale", "verify nothing has drifted before handoff", or "start a new sitegraph site", or after HTML pages are added, moved, renamed, or deleted under a sitegraph site root. Rebuilds the nav rail, breadcrumbs, prev/next pager, and sitemap.html from the folder structure; also covers drift detection with --check and bootstrapping sitegraph.config.json for a new site.
 ---
 
 # rebuild-nav
@@ -16,8 +16,6 @@ Use this skill when:
 
 - The user drops new HTML pages into a sitegraph site and wants the nav updated
 - Pages were moved, renamed, or deleted and links/breadcrumbs need to catch up
-- The user asks to "rebuild the nav", "regenerate the sitemap", "fix the rail", or
-  similar
 - Starting a brand-new sitegraph site (running the script on an empty/new directory
   bootstraps it — see [Bootstrapping a new site](#bootstrapping-a-new-site))
 - Verifying nothing has drifted before a release/handoff (`--check` mode)
@@ -77,18 +75,17 @@ page gets its nav rail and CSS link injected.
   labels the section in the rail/breadcrumb, and clicking the section links straight
   to it. Without an `index.html`, the section is still shown (expandable) but its
   label isn't a link.
-- **Page title** = `<title>` text, else first `<h1>` text, else the humanized
-  filename.
-- **Order** = natural sort (numeric-aware) of the raw file/directory name, so a
-  `01-`, `02-`, `10-` numeric-prefix convention sorts correctly without zero-padding.
-  Dirs and files at the same level interleave by this same order.
+- `sitemap.html` is generated output, not an input page — it is never discovered,
+  never appears in the rail, and is excluded from the page count.
 - Dotfiles/dot-directories and anything listed in `sitegraph.config.json`'s `ignore`
   array are skipped entirely.
 
-Full details, the config file schema, and the CSS helper classes (`badge`,
-`callout`, `metric`, …) available to hand-authored content are in
-[references/authoring.md](references/authoring.md) — read it before writing new
-pages or troubleshooting a warning.
+Titles, sort order, and naming conventions are derived from the filenames
+themselves; the exact rules are tabulated in
+[references/authoring.md](references/authoring.md), along with the config file
+schema and the CSS helper classes (`badge`, `callout`, `metric`, …) available to
+hand-authored content. Read it before writing new pages, choosing directory names,
+or troubleshooting a warning.
 
 ## Examples
 

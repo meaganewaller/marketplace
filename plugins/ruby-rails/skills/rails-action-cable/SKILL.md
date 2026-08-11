@@ -1,6 +1,6 @@
 ---
 name: rails-action-cable
-description: Action Cable, Solid Cable, and Turbo Streams broadcasts. Use for WebSockets and live UI.
+description: This skill should be used when the user asks to "add real-time updates", "set up Action Cable", "create a channel", "broadcast changes to the browser", "push updates without polling", or mentions WebSockets, Solid Cable, or broadcasting from a model. Covers channels, subscriptions, connection authentication, and Turbo Stream broadcasts.
 ---
 
 # Action Cable and Realtime
@@ -13,12 +13,11 @@ Use Solid Cable and Turbo Streams before custom WebSocket code.
 - Broadcasting model updates
 - Connection authentication
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 

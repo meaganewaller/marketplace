@@ -1,6 +1,6 @@
 ---
 name: ruby-gem-development
-description: "Authoring Ruby gems: gemspec, versioning, releases, and testing. Use when building libraries or extracting code from apps."
+description: This skill should be used when the user asks to "create a gem", "run bundle gem", "write a gemspec", "cut a release", "bump the gem version", "publish to RubyGems", or "test against multiple Ruby versions in CI". For extracting code into a Rails engine instead, use rails-engines-gems.
 ---
 
 # Ruby Gem Development
@@ -13,12 +13,11 @@ Build and publish gems with Bundler and standard layout.
 - Semver releases
 - CI for multi-Ruby matrix
 
-## Defaults (This Plugin)
+## Defaults
 
-- **Toolchain**: mise — not rbenv, rvm, or asdf directly
-- **Ruby**: 4.0.0+ unless the project pins otherwise
-- **Rails**: 8+ conventions and generators when applicable
-- **Execution**: Prefer `mise exec --`, `bin/rails`, `bin/rspec`, and `bundle exec`
+Assume mise-managed Ruby and Rails with `bin/*` binstubs — not rbenv, rvm, or
+asdf. Read `${CLAUDE_PLUGIN_ROOT}/references/conventions.md` for versions,
+command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 
