@@ -19,21 +19,41 @@ const releaseConfig = JSON.parse(
 	await readFile("release-please-config.json", "utf8"),
 );
 
-const published: { name: string; version: string; source: string }[] =
-	marketplace.plugins;
+const published: {
+	name: string;
+	version: string;
+	source: string;
+	description: string;
+}[] = marketplace.plugins;
+
+const pluginManifest = (name: string) =>
+	readFile(join("plugins", name, ".claude-plugin", "plugin.json"), "utf8").then(
+		JSON.parse,
+	);
 
 describe("marketplace.json agrees with each plugin.json", () => {
 	test.each(
 		published.map((p) => [p.name] as const),
 	)("%s advertises the version it actually ships", async (name) => {
-		const manifest = JSON.parse(
-			await readFile(
-				join("plugins", name, ".claude-plugin", "plugin.json"),
-				"utf8",
-			),
-		);
+		const manifest = await pluginManifest(name);
 		const entry = published.find((p) => p.name === name);
 		expect(entry?.version).toBe(manifest.version);
+	});
+
+	/**
+	 * Version was not the only field that drifted. Nothing syncs `description`
+	 * either, and three plugins had diverged — git-workflow still read "and
+	 * more" in its plugin.json long after marketplace.json described the real
+	 * skill set, while sitegraph's marketplace entry was a truncated copy.
+	 * Whichever file is edited, the browse text and the installed text must
+	 * still say the same thing.
+	 */
+	test.each(
+		published.map((p) => [p.name] as const),
+	)("%s describes itself the same way in both files", async (name) => {
+		const manifest = await pluginManifest(name);
+		const entry = published.find((p) => p.name === name);
+		expect(entry?.description).toBe(manifest.description);
 	});
 });
 
