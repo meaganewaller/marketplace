@@ -93,8 +93,6 @@ site fixtures — every case corresponds to a bug that shipped once:
 bun test plugins/sitegraph
 ```
 
-See [DEVELOPMENT.md](../../docs/DEVELOPMENT.md) for development guidelines.
-
 ## License
 
 [Blue Oak Model License 1.0.0](../../LICENSE)

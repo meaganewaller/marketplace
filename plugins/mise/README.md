@@ -80,10 +80,6 @@ Ask naturally — the `mise-tools` skill activates automatically:
 Add node 22 to this project with mise
 ```
 
-## Development
-
-See [DEVELOPMENT.md](../../docs/DEVELOPMENT.md) for development guidelines.
-
 ## License
 
 [Blue Oak Model License 1.0.0](../../LICENSE)

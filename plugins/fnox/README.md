@@ -73,10 +73,6 @@ fnox = "latest"
 _.fnox-env = { tools = true }
 ```
 
-## Development
-
-See [DEVELOPMENT.md](../../docs/DEVELOPMENT.md) for development guidelines.
-
 ## License
 
 [Blue Oak Model License 1.0.0](../../LICENSE)

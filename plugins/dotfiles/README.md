@@ -83,10 +83,6 @@ chezmoi status
 
 The `chezmoi-workflow` skill drives this loop, the hooks enforce step 1, and `/dotfiles-status` collapses steps 2 + 4 into one command.
 
-## Development
-
-See [DEVELOPMENT.md](../../docs/DEVELOPMENT.md) for development guidelines.
-
 ## License
 
 [Blue Oak Model License 1.0.0](../../LICENSE)
