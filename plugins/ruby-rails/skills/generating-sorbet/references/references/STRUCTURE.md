@@ -19,7 +19,7 @@ rbi/
     ├── resources/    # Resource type definitions
     ├── services/     # Service type definitions
     └── params/       # Parameter type definitions
-```text
+```
 
 ### RBI Syntax Key Points
 
@@ -55,7 +55,7 @@ stripe-ruby/
         │   ├── customer_service.rb
         │   └── ...
         └── ...
-```text
+```
 
 ### Resources
 
@@ -91,7 +91,7 @@ module Stripe
     def self.create(params = {}, opts = {}); end
   end
 end
-```text
+```
 
 ### Services
 
@@ -119,7 +119,7 @@ module Stripe
     def retrieve(customer, params = {}, opts = {}); end
   end
 end
-```text
+```
 
 ### Params
 
@@ -145,7 +145,7 @@ module Stripe
     def address; end
   end
 end
-```text
+```
 
 ### Key Patterns
 
@@ -159,7 +159,7 @@ end
    def default_payment_method; end
    ```
 
-1. **Multi-line Signatures** - For methods with many parameters
+3. **Multi-line Signatures** - For methods with many parameters
 
    ```ruby
    sig {
@@ -169,7 +169,7 @@ end
    def create(params = {}, opts = {}); end
    ```
 
-2. **Collection Types** - Arrays and hashes with typed elements
+4. **Collection Types** - Arrays and hashes with typed elements
 
    ```ruby
    sig { returns(T.nilable(T::Array[CustomField])) }
@@ -179,14 +179,14 @@ end
    def invoice_credit_balance; end
    ```
 
-3. **Boolean Type** - Using `T::Boolean`
+5. **Boolean Type** - Using `T::Boolean`
 
    ```ruby
    sig { returns(T::Boolean) }
    def livemode; end
    ```
 
-4. **Instance and Class Methods** - Both defined for API operations
+6. **Instance and Class Methods** - Both defined for API operations
 
    ```ruby
    sig { params(params: T.any(...)).returns(::Stripe::Customer) }
