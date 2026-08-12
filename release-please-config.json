@@ -136,6 +136,7 @@
 				}
 			],
 			"initial-version": "1.0.0",
+			"release-as": "1.0.1",
 			"release-type": "simple"
 		},
 		"plugins/git-workflow": {
