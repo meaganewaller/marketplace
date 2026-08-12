@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/meaganewaller/marketplace/compare/mise-v1.1.0...mise-v1.1.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* **mise:** drop a README link to a file that never existed ([#40](https://github.com/meaganewaller/marketplace/issues/40))
+
 ## [1.1.0](https://github.com/meaganewaller/marketplace/compare/mise-v1.0.0...mise-v1.1.0) (2026-05-08)
 
 

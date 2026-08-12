@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/meaganewaller/marketplace/compare/git-workflow-v0.2.0...git-workflow-v0.2.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* **git-workflow:** describe the plugin the same way the marketplace does ([#40](https://github.com/meaganewaller/marketplace/issues/40))
+
 ## [0.2.0](https://github.com/meaganewaller/marketplace/compare/git-workflow-v0.1.0...git-workflow-v0.2.0) (2026-08-07)
 
 

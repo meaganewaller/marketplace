@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.2](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.1...ruby-rails-v1.4.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* **ruby-rails:** repair fences that hid a whole reference guide ([#40](https://github.com/meaganewaller/marketplace/issues/40))
+* **ruby-rails:** drop 8MB of vendored gem source no skill reads ([#40](https://github.com/meaganewaller/marketplace/issues/40))
+* **ruby-rails:** delete a duplicate corpus that was silenced ([#39](https://github.com/meaganewaller/marketplace/issues/39))
+* **ruby-rails:** repair dead reference links and weak triggers ([#39](https://github.com/meaganewaller/marketplace/issues/39))
+* **ruby-rails:** give the plugin's defaults one home ([#39](https://github.com/meaganewaller/marketplace/issues/39))
+
 ## [1.4.1](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.0...ruby-rails-v1.4.1) (2026-06-10)
 
 

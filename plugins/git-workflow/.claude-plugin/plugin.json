@@ -2,7 +2,7 @@
 	"author": {
 		"name": "meaganewaller"
 	},
-	"description": "git workflow management — commit messages, PRs, and more",
+	"description": "Git and GitHub workflow skills — commits, pull requests, issues, and PR splitting, sharing one set of conventional-commit and issue-linking rules",
 	"keywords": [
 		"git",
 		"workflow",
@@ -25,5 +25,5 @@
 			"type": "string"
 		}
 	},
-	"version": "0.2.0"
+	"version": "0.2.1"
 }

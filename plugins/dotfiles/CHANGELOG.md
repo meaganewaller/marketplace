@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/meaganewaller/marketplace/compare/dotfiles-v1.1.1...dotfiles-v1.1.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* **dotfiles:** drop a README link to a file that never existed ([#40](https://github.com/meaganewaller/marketplace/issues/40))
+
 ## [1.1.1](https://github.com/meaganewaller/marketplace/compare/dotfiles-v1.1.0...dotfiles-v1.1.1) (2026-06-10)
 
 

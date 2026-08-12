@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/meaganewaller/marketplace/compare/typescript-architect-v1.0.0...typescript-architect-v1.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* **typescript-architect:** drop a README link to a file that never existed ([#40](https://github.com/meaganewaller/marketplace/issues/40))
+
 ## 1.0.0 (2026-04-18)
 
 

@@ -2,7 +2,7 @@
 	"author": {
 		"name": "meaganewaller"
 	},
-	"description": "Ruby 4+ and Rails 8+ expert guidance: mise toolchain, Ruby LSP, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and deployment",
+	"description": "Ruby 4+ and Rails 8+ expert skills: mise toolchain, Ruby LSP, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and Kamal deployment",
 	"keywords": [
 		"ruby",
 		"rails",
@@ -25,5 +25,5 @@
 	],
 	"license": "BlueOak-1.0.0",
 	"name": "ruby-rails",
-	"version": "1.4.1"
+	"version": "1.4.2"
 }

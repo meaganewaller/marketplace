@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/meaganewaller/marketplace/compare/meta-v1.1.0...meta-v1.1.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* **meta:** reposition as the eval layer, not an authoring tutorial ([#39](https://github.com/meaganewaller/marketplace/issues/39))
+* **meta:** drop a README link to a file that never existed ([#40](https://github.com/meaganewaller/marketplace/issues/40))
+
 ## [1.1.0](https://github.com/meaganewaller/marketplace/compare/meta-v1.0.0...meta-v1.1.0) (2026-06-01)
 
 

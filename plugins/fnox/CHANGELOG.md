@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/meaganewaller/marketplace/compare/fnox-v1.0.1...fnox-v1.0.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* **fnox:** drop a README link to a file that never existed ([#40](https://github.com/meaganewaller/marketplace/issues/40))
+
 ## [1.0.1](https://github.com/meaganewaller/marketplace/compare/fnox-v1.0.0...fnox-v1.0.1) (2026-06-10)
 
 
