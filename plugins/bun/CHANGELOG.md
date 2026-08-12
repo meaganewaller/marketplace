@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/meaganewaller/marketplace/compare/bun-v1.1.1...bun-v1.2.0) (2026-08-12)
+
+
+### Features
+
+* Add Bun plugin and update marketplace configuration ([a751fc8](https://github.com/meaganewaller/marketplace/commit/a751fc812f29ceb115db75e5f0052b4dded0248d))
+
 ## [1.1.1](https://github.com/meaganewaller/marketplace/compare/bun-v1.1.0...bun-v1.1.1) (2026-08-12)
 
 

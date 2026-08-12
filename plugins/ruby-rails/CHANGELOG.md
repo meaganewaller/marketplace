@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.5.0](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.2...ruby-rails-v1.5.0) (2026-08-12)
+
+
+### Features
+
+* add ruby-rails plugin for Ruby 4+ and Rails 8+ ([#15](https://github.com/meaganewaller/marketplace/issues/15)) ([8010d59](https://github.com/meaganewaller/marketplace/commit/8010d598646d620d9864bb16c0e340f71a9f671f))
+* **ruby-rails:** add RBS and Sorbet type signature skills ([#18](https://github.com/meaganewaller/marketplace/issues/18)) ([0177ff4](https://github.com/meaganewaller/marketplace/commit/0177ff45b86edfb569f819a09f57662b8a29af64))
+* **ruby-rails:** integrate Ruby LSP for Claude Code ([#23](https://github.com/meaganewaller/marketplace/issues/23)) ([a9b25e1](https://github.com/meaganewaller/marketplace/commit/a9b25e1c9fb66a64133b956632fe0abef8275ec9))
+* **ruby-rails:** integrate Solargraph LSP for Ruby ([#21](https://github.com/meaganewaller/marketplace/issues/21)) ([9776a94](https://github.com/meaganewaller/marketplace/commit/9776a9400eadddf25d06c49dc4af93662f834cb9))
+
+
+### Bug Fixes
+
+* **skills:** quote frontmatter values that broke YAML parsing ([#34](https://github.com/meaganewaller/marketplace/issues/34)) ([983443b](https://github.com/meaganewaller/marketplace/commit/983443bcc416fee8335f757d80c126e2f14a15ab))
+
 ## [1.4.2](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.1...ruby-rails-v1.4.2) (2026-08-12)
 
 
