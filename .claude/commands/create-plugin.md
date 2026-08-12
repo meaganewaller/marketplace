@@ -104,10 +104,6 @@ Generate a README.md with:
 
 (Add usage examples here)
 
-## Development
-
-See [DEVELOPMENT.md](../../docs/DEVELOPMENT.md) for development guidelines.
-
 ## License
 
 [Blue Oak Model License 1.0.0](../../LICENSE)

@@ -150,10 +150,6 @@ mise exec -- bin/rails test
 mise exec -- bundle exec rspec
 ```
 
-## Development
-
-See [DEVELOPMENT.md](../../docs/DEVELOPMENT.md) for development guidelines.
-
 ## License
 
 [Blue Oak Model License 1.0.0](../../LICENSE)
