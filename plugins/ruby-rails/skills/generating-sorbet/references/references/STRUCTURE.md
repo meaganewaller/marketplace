@@ -35,26 +35,17 @@ Source: https://github.com/stripe/stripe-ruby (MIT License)
 
 ```text
 stripe-ruby/
-├── rbi/                      # Type definitions
-│   └── stripe/
-│       ├── resources/        # 96 resource type definitions
-│       │   ├── customer.rbi
-│       │   └── ...
-│       ├── services/         # 115 service type definitions
-│       │   ├── customer_service.rbi
-│       │   └── ...
-│       └── params/           # 324 parameter type definitions
-│           ├── customer_create_params.rbi
-│           └── ...
-└── lib/                      # Ruby source
+└── rbi/                      # Type definitions
     └── stripe/
-        ├── resources/
-        │   ├── customer.rb
+        ├── resources/        # 96 resource type definitions
+        │   ├── customer.rbi
         │   └── ...
-        ├── services/
-        │   ├── customer_service.rb
+        ├── services/         # 115 service type definitions
+        │   ├── customer_service.rbi
         │   └── ...
-        └── ...
+        └── params/           # 324 parameter type definitions
+            ├── customer_create_params.rbi
+            └── ...
 ```
 
 ### Resources
