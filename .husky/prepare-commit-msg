@@ -1,0 +1,2 @@
+shim="${XDG_CONFIG_HOME:-$HOME/.config}/git/template/hooks/prepare-commit-msg"
+if [ -x "$shim" ]; then "$shim" "$@"; fi
