@@ -201,6 +201,29 @@ Evaluation layer for Claude Code plugins — scored skill and plugin audits, hoo
 
 ---
 
+### pr-review-copilot
+
+[🧭 Plugin README](plugins/pr-review-copilot/README.md)
+
+**Category:** development
+
+Generates a structured PR review document: a summary of the PR's intent, a findings table, and per-finding reasoning, draft comments, and suggested fixes — all meant to be reworded and posted by the reviewer, not posted automatically.
+
+**Contains:**
+
+- **Skills:**
+  - `review-diff` - Turns a pasted diff or PR link into a review document: an Understanding section, a findings table (severity, category, file:line), and per finding the reasoning, a draft comment to reword, and a suggested fix when one is unambiguous. `--focus` narrows the scan to one category (1 reference file: document template)
+  - `team-conventions` - Views and edits the team's settled style decisions so reviews stop re-flagging them; a convention never suppresses a security or correctness finding
+  - `review-history` - Logs each review's findings and flags patterns that keep recurring for a repo or author as candidates for a lint rule or convention, not fresh one-offs
+
+**Installation:**
+
+```bash
+/plugin install pr-review-copilot@meaganewaller-marketplace
+```
+
+---
+
 ### ruby-rails
 
 [🧭 Plugin README](plugins/ruby-rails/README.md)

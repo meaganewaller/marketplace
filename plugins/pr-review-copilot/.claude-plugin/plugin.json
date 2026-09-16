@@ -1,0 +1,10 @@
+{
+	"author": {
+		"name": "meaganewaller"
+	},
+	"description": "Generates a structured PR review document: a summary of the PR's intent, a findings table, and per-finding reasoning, draft comments, and suggested fixes — all meant to be reworded and posted by the reviewer, not posted automatically.",
+	"keywords": ["code-review", "pull-request", "engineering", "lead-engineer"],
+	"license": "BlueOak-1.0.0",
+	"name": "pr-review-copilot",
+	"version": "0.1.0"
+}
