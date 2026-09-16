@@ -148,6 +148,28 @@
 				"name": "meaganewaller"
 			},
 			"category": "development",
+			"description": "Generates a structured PR review document: a summary of the PR's intent, a findings table, and per-finding reasoning, draft comments, and suggested fixes — all meant to be reworded and posted by the reviewer, not posted automatically.",
+			"name": "pr-review-copilot",
+			"source": "./plugins/pr-review-copilot",
+			"strict": true,
+			"tags": [
+				"code-review",
+				"pull-requests",
+				"diffs",
+				"findings",
+				"severity",
+				"conventions",
+				"recurrence",
+				"security",
+				"performance"
+			],
+			"version": "0.1.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
+			"category": "development",
 			"description": "Ruby 4+ and Rails 8+ expert skills: mise toolchain, Ruby LSP, RBS/Sorbet type signatures, Active Record, Hotwire, testing, security, performance, and Kamal deployment",
 			"name": "ruby-rails",
 			"source": "./plugins/ruby-rails",
