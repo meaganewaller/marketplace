@@ -21,6 +21,7 @@
 		".husky/_/**",
 		".beads/**",
 		".agents/**",
+		".superpowers/**",
 		"plugins/typescript-architect/skills/code-quality-audit/references/anti-patterns.md",
 		"plugins/ruby-rails/skills/generating-rbs/references/**",
 		"plugins/ruby-rails/skills/generating-rbs-inline/references/**",

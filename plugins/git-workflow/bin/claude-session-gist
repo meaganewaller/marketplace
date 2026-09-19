@@ -28,7 +28,7 @@ readonly SCRIPT_DIR="${0%/*}"
 readonly EXIT_BLOCKED=3
 
 log() {
-    printf '%s: %s\n' "${SCRIPT_NAME}" "$*" >&2
+	printf '%s: %s\n' "${SCRIPT_NAME}" "$*" >&2
 }
 
 # Lowercase a string.
@@ -42,13 +42,13 @@ log() {
 # test/claude-session-gist.bats does exactly that. LC_ALL=C keeps this to ASCII,
 # which is all a host or org name can contain.
 to_lower() {
-    printf '%s' "$1" | LC_ALL=C tr '[:upper:]' '[:lower:]'
+	printf '%s' "$1" | LC_ALL=C tr '[:upper:]' '[:lower:]'
 }
 
 # Print error and exit
 die() {
-    log "error: $*"
-    exit 1
+	log "error: $*"
+	exit 1
 }
 
 # Path to the settings file that stores plugin option values.
@@ -57,7 +57,7 @@ die() {
 # directory. Hardcoding ~/.claude would silently read nothing for anyone who
 # has moved it -- and "read nothing" means "block nothing".
 user_settings_path() {
-    printf '%s/settings.json' "${CLAUDE_CONFIG_DIR:-${HOME}/.claude}"
+	printf '%s/settings.json' "${CLAUDE_CONFIG_DIR:-${HOME}/.claude}"
 }
 
 # Resolve the raw blocklist string, in order of precedence:
@@ -72,33 +72,33 @@ user_settings_path() {
 #      that covers the normal /pr path. See the plugins reference: components
 #      that run in a shell are told to read the value from a config file.
 resolve_blocklist() {
-    if [[ -n "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST:-}" ]]; then
-        printf '%s' "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST}"
-        return 0
-    fi
+	if [[ -n "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST:-}" ]]; then
+		printf '%s' "${MW_MARKETPLACE_CLAUDE_SESSION_GIST_BLOCKLIST}"
+		return 0
+	fi
 
-    if [[ -n "${CLAUDE_PLUGIN_OPTION_GIST_BLOCKLIST:-}" ]]; then
-        printf '%s' "${CLAUDE_PLUGIN_OPTION_GIST_BLOCKLIST}"
-        return 0
-    fi
+	if [[ -n "${CLAUDE_PLUGIN_OPTION_GIST_BLOCKLIST:-}" ]]; then
+		printf '%s' "${CLAUDE_PLUGIN_OPTION_GIST_BLOCKLIST}"
+		return 0
+	fi
 
-    local settings
-    settings=$(user_settings_path)
-    [[ -r "${settings}" ]] || return 0
+	local settings
+	settings=$(user_settings_path)
+	[[ -r "${settings}" ]] || return 0
 
-    # Only jq parses this. A regex over JSON would return a confidently wrong
-    # answer on a control whose entire job is to not leak, so if the file
-    # mentions the option and jq is missing, refuse instead of guessing.
-    if ! command -v jq &>/dev/null; then
-        if grep -q 'gist_blocklist' "${settings}" 2>/dev/null; then
-            die "a gist blocklist is configured in ${settings} but jq is not installed to read it"
-        fi
-        return 0
-    fi
+	# Only jq parses this. A regex over JSON would return a confidently wrong
+	# answer on a control whose entire job is to not leak, so if the file
+	# mentions the option and jq is missing, refuse instead of guessing.
+	if ! command -v jq &>/dev/null; then
+		if grep -q 'gist_blocklist' "${settings}" 2>/dev/null; then
+			die "a gist blocklist is configured in ${settings} but jq is not installed to read it"
+		fi
+		return 0
+	fi
 
-    # The pluginConfigs key embeds a marketplace-dependent plugin id, so select
-    # by plugin name instead of assuming its exact format.
-    jq -r '
+	# The pluginConfigs key embeds a marketplace-dependent plugin id, so select
+	# by plugin name instead of assuming its exact format.
+	jq -r '
         (.pluginConfigs // {})
         | to_entries
         | map(select(.key | test("git-workflow")))
@@ -119,13 +119,13 @@ resolve_blocklist() {
 BLOCKED_REMOTE_PATTERNS=()
 blocklist_raw=$(resolve_blocklist)
 if [[ -n "${blocklist_raw}" ]]; then
-    read -ra BLOCKED_REMOTE_PATTERNS <<< "${blocklist_raw}"
+	read -ra BLOCKED_REMOTE_PATTERNS <<<"${blocklist_raw}"
 fi
 unset blocklist_raw
 readonly BLOCKED_REMOTE_PATTERNS
 
 usage() {
-    cat >&2 <<EOF
+	cat >&2 <<EOF
 Usage: ${SCRIPT_NAME} <session-id> [branch-name]
 
 Publish the current Claude session as a secret Gist, unless the current
@@ -144,7 +144,7 @@ Exit codes:
     3   Repository is blocklisted; nothing extracted or uploaded
     1   Error
 EOF
-    exit 1
+	exit 1
 }
 
 # Normalize a git remote URL to a canonical, lowercased `host/org/repo` form so
@@ -153,92 +153,91 @@ EOF
 #   git@github.com:Gusto/repo.git     -> github.com/gusto/repo.git
 #   ssh://git@github.com/Gusto/repo   -> github.com/gusto/repo
 normalize_remote() {
-    local url="$1"
-    local sep='/'
+	local url="$1"
+	local sep='/'
 
-    url="${url#*://}"   # strip scheme://
-    url="${url#*@}"     # strip user@
-    url="${url/:/$sep}" # scp-style host:path -> host/path
-    to_lower "${url}"
+	url="${url#*://}"   # strip scheme://
+	url="${url#*@}"     # strip user@
+	url="${url/:/$sep}" # scp-style host:path -> host/path
+	to_lower "${url}"
 }
-
 
 # Return 0 if the current repo has any remote matching the blocklist.
 repo_is_blocked() {
-    # No patterns configured -> nothing is ever blocked.
-    if [[ "${#BLOCKED_REMOTE_PATTERNS[@]}" -eq 0 ]]; then
-        return 1
-    fi
+	# No patterns configured -> nothing is ever blocked.
+	if [[ "${#BLOCKED_REMOTE_PATTERNS[@]}" -eq 0 ]]; then
+		return 1
+	fi
 
-    # Not a git repo (or no remotes) -> nothing to match against.
-    local remotes
-    if ! remotes=$(git remote 2>/dev/null) || [[ -z "${remotes}" ]]; then
-        return 1
-    fi
+	# Not a git repo (or no remotes) -> nothing to match against.
+	local remotes
+	if ! remotes=$(git remote 2>/dev/null) || [[ -z "${remotes}" ]]; then
+		return 1
+	fi
 
-    local remote url norm pattern pattern_lc
-    while IFS= read -r remote; do
-        [[ -z "${remote}" ]] && continue
-        url=$(git remote get-url "${remote}" 2>/dev/null) || continue
+	local remote url norm pattern pattern_lc
+	while IFS= read -r remote; do
+		[[ -z "${remote}" ]] && continue
+		url=$(git remote get-url "${remote}" 2>/dev/null) || continue
 
-        # Fail CLOSED. If a remote exists but cannot be normalized, we cannot
-        # prove it is safe to publish. A false block costs one missing PR link;
-        # a false pass leaks a work conversation log to a Gist.
-        norm=$(normalize_remote "${url}") || norm=''
-        if [[ -z "${norm}" ]]; then
-            log "blocked: could not normalize remote '${url}'"
-            return 0
-        fi
+		# Fail CLOSED. If a remote exists but cannot be normalized, we cannot
+		# prove it is safe to publish. A false block costs one missing PR link;
+		# a false pass leaks a work conversation log to a Gist.
+		norm=$(normalize_remote "${url}") || norm=''
+		if [[ -z "${norm}" ]]; then
+			log "blocked: could not normalize remote '${url}'"
+			return 0
+		fi
 
-        for pattern in "${BLOCKED_REMOTE_PATTERNS[@]}"; do
-            pattern_lc=$(to_lower "${pattern}")
-            # RHS must stay UNQUOTED so [[ == ]] treats it as a glob, not a
-            # literal; quoting it silently turns the blocklist into exact-match
-            # and lets work repos through.
-            # shellcheck disable=SC2053 # intentional glob match
-            if [[ "${norm}" == ${pattern_lc} ]]; then
-                log "blocked: remote '${url}' matches pattern '${pattern}'"
-                return 0
-            fi
-        done
-    done <<< "${remotes}"
+		for pattern in "${BLOCKED_REMOTE_PATTERNS[@]}"; do
+			pattern_lc=$(to_lower "${pattern}")
+			# RHS must stay UNQUOTED so [[ == ]] treats it as a glob, not a
+			# literal; quoting it silently turns the blocklist into exact-match
+			# and lets work repos through.
+			# shellcheck disable=SC2053 # intentional glob match
+			if [[ "${norm}" == ${pattern_lc} ]]; then
+				log "blocked: remote '${url}' matches pattern '${pattern}'"
+				return 0
+			fi
+		done
+	done <<<"${remotes}"
 
-    return 1
+	return 1
 }
 
 main() {
-  if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
-        usage
-    fi
+	if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+		usage
+	fi
 
-    if [[ $# -lt 1 || $# -gt 2 ]]; then
-        die "expected 1-2 arguments, got $#. Use --help for usage."
-    fi
+	if [[ $# -lt 1 || $# -gt 2 ]]; then
+		die "expected 1-2 arguments, got $#. Use --help for usage."
+	fi
 
-    local session_id="$1"
-    local branch="${2:-}"
+	local session_id="$1"
+	local branch="${2:-}"
 
-    # Refuse before touching the session for blocklisted repositories.
-    if repo_is_blocked; then
-        log "this repository's conversation log must not be published; skipping gist."
-        exit "${EXIT_BLOCKED}"
-    fi
+	# Refuse before touching the session for blocklisted repositories.
+	if repo_is_blocked; then
+		log "this repository's conversation log must not be published; skipping gist."
+		exit "${EXIT_BLOCKED}"
+	fi
 
-    if [[ -z "${branch}" ]]; then
-        branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || printf 'session')
-    fi
-    # Slashes are illegal in Gist filenames; flatten branch names like fix/foo.
-    local branch_safe="${branch//\//-}"
+	if [[ -z "${branch}" ]]; then
+		branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || printf 'session')
+	fi
+	# Slashes are illegal in Gist filenames; flatten branch names like fix/foo.
+	local branch_safe="${branch//\//-}"
 
-    local extract="${SCRIPT_DIR}/claude-extract-session"
-    [[ -x "${extract}" ]] || die "sibling shim not found or not executable: ${extract}"
+	local extract="${SCRIPT_DIR}/claude-extract-session"
+	[[ -x "${extract}" ]] || die "sibling shim not found or not executable: ${extract}"
 
-    command -v gh &>/dev/null || die "gh not found in PATH"
+	command -v gh &>/dev/null || die "gh not found in PATH"
 
-    # Extract -> secret Gist. gh prints the Gist URL to stdout, which becomes
-    # this script's only stdout.
-    "${extract}" "${session_id}" \
-        | gh gist create --filename "pr-conversation-${branch_safe}.md" -
+	# Extract -> secret Gist. gh prints the Gist URL to stdout, which becomes
+	# this script's only stdout.
+	"${extract}" "${session_id}" |
+		gh gist create --filename "pr-conversation-${branch_safe}.md" -
 }
 
 main "$@"
