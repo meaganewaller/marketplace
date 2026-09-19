@@ -37,6 +37,9 @@ tmp/
 # git worktrees created inside the repo (superpowers using-git-worktrees)
 .worktrees/
 
+# Scratch workspace for superpowers subagent-driven-development runs
+.superpowers/
+
 # Beads / Dolt files (added by bd init)
 .dolt/
 *.db
