@@ -31,5 +31,16 @@
 				"organizeImports": "on"
 			}
 		}
-	}
+	},
+	"overrides": [
+		{
+			"includes": [
+				".claude-plugin/marketplace.json",
+				"plugins/*/.claude-plugin/plugin.json"
+			],
+			"formatter": {
+				"enabled": false
+			}
+		}
+	]
 }
