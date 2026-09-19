@@ -39,8 +39,13 @@
 			"name": "debug-session-tracker",
 			"source": "./plugins/debug-session-tracker",
 			"strict": true,
-			"tags": ["debugging", "engineering", "incident", "troubleshooting"],
-			"version": "0.1.0"
+			"tags": [
+				"debugging",
+				"engineering",
+				"incident",
+				"troubleshooting"
+			],
+			"version": "0.2.0"
 		},
 		{
 			"author": {
