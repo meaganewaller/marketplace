@@ -1,11 +1,24 @@
 name: CI
 
+# A superseded pull request run is worth cancelling: a force-push makes the
+# earlier result meaningless. A superseded push to `main` is not, because
+# `${{ github.ref }}` collapses every merge into one group — two merges landing
+# minutes apart would cancel the first commit's run and leave `main` with no
+# green record for it.
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: true
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 on:
     pull_request:
+        # `edited` is load-bearing rather than tidy. This repository
+        # squash-merges and release-please reads the resulting subject, which
+        # GitHub seeds from the pull request title. Without a rerun on `edited`,
+        # a pull request can pass CI under a good title and be renamed to
+        # `chore:` before merge, silently suppressing a release behind a stale
+        # green check. It cuts the other way too: fixing a bad title should
+        # clear the check without needing a throwaway commit.
+        types: [opened, synchronize, reopened, edited]
         branches:
             - main
     push:
@@ -19,9 +32,15 @@ jobs:
     quality:
         name: Lint and test
         runs-on: ubuntu-latest
+        timeout-minutes: 10
         steps:
             - name: Check out the repository
               uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  # `bun install` below runs the root `prepare` script, which a
+                  # pull request author can change. Leave no job token in
+                  # `.git/config` for it to find.
+                  persist-credentials: false
 
             # mise.lock pins bun to 1.3.14 with per-platform checksums, so CI
             # resolves the same toolchain the developer runs.
@@ -39,19 +58,26 @@ jobs:
             # plus install. Report both results from one run rather than making
             # a lint failure hide the test outcome — but stay skipped if the
             # install itself never succeeded, where a test failure would be noise.
+            #
+            # An `if:` key already evaluates its value as an expression, so the
+            # `${{ }}` wrapper is redundant — but the quotes are not. A leading
+            # `!` is a YAML tag indicator, and unquoted this parses as the tag
+            # `!cancelled()` applied to the rest, dropping the negation.
             - name: Test
-              if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+              if: "!cancelled() && steps.install.outcome == 'success'"
               run: bun test
 
     commit-messages:
         name: Commit messages
         if: github.event_name == 'pull_request'
         runs-on: ubuntu-latest
+        timeout-minutes: 10
         steps:
             - name: Check out the full history
               uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
               with:
                   fetch-depth: 0
+                  persist-credentials: false
 
             - name: Install the pinned toolchain
               uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
