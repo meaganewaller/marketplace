@@ -1,6 +1,7 @@
 {
 	"plugins/dotfiles": "1.1.2",
 	"plugins/bun": "1.1.1",
+	"plugins/debug-session-tracker": "0.1.0",
 	"plugins/fnox": "1.0.2",
 	"plugins/git-workflow": "0.2.1",
 	"plugins/mise": "1.1.1",

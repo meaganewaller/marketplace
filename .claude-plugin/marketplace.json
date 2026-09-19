@@ -34,6 +34,18 @@
 			"author": {
 				"name": "meaganewaller"
 			},
+			"category": "development",
+			"description": "Tracks a debugging session's hypotheses, evidence, and status as you work a hard bug -- so nothing gets re-tried, a paused session can be resumed cleanly, and recurring root-cause patterns surface across sessions over time.",
+			"name": "debug-session-tracker",
+			"source": "./plugins/debug-session-tracker",
+			"strict": true,
+			"tags": ["debugging", "engineering", "incident", "troubleshooting"],
+			"version": "0.1.0"
+		},
+		{
+			"author": {
+				"name": "meaganewaller"
+			},
 			"category": "utility",
 			"description": "Chezmoi-managed dotfiles workflow: source-only edits, templates, run_onchange scripts, BATS tests, ADRs, and mise/Homebrew package routing",
 			"name": "dotfiles",
