@@ -56,6 +56,7 @@
 		"hsqs",
 		"LZMA",
 		"creds",
+		"dedup",
 		"xhigh",
 		"PRRT",
 		"unsubmitted",

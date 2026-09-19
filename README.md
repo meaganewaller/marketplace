@@ -36,6 +36,32 @@ Bun runtime, package management, testing, bundling, and standalone executables �
 
 ---
 
+### debug-session-tracker
+
+[🧭 Plugin README](plugins/debug-session-tracker/README.md)
+
+**Category:** development
+
+Tracks a debugging session's hypotheses, evidence, and status as you work a hard bug — so nothing gets re-tried, a paused session can be resumed cleanly, and recurring root-cause patterns surface across sessions over time.
+
+**Contains:**
+
+- **Skills:**
+  - `debug-session` - Starts, logs, and closes a session in `data/sessions/*.json` — symptom, each hypothesis with its status (untested/testing/ruled-out/confirmed) and evidence, and next steps. Checks a proposed hypothesis against the ones already ruled out instead of logging a duplicate (1 reference file: status format)
+  - `debug-recap` - Summarizes a session for resuming after a break or handing off with no prior context — what's ruled out, what's being tested, what's next. Flags a stale trail when an active session has sat untouched
+  - `debug-patterns` - Logs the confirmed root cause when a session resolves, then flags a new bug that resembles a past one — offered as a lead, not a conclusion. Groups the log by pattern slug on request, to surface what's worth fixing at the root rather than patching per instance
+- **Data:**
+  - `data/sessions/` - One JSON file per session, created as you go
+  - `data/patterns.json` - Append-only log of confirmed root causes, written when a session resolves
+
+**Installation:**
+
+```bash
+/plugin install debug-session-tracker@meaganewaller-marketplace
+```
+
+---
+
 ### dotfiles
 
 [🧭 Plugin README](plugins/dotfiles/README.md)

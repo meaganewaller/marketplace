@@ -1,0 +1,9 @@
+{
+	"name": "debug-session-tracker",
+	"version": "0.1.0",
+	"description": "Tracks a debugging session's hypotheses, evidence, and status as you work a hard bug -- so nothing gets re-tried, a paused session can be resumed cleanly, and recurring root-cause patterns surface across sessions over time.",
+	"author": {
+		"name": "meaganewaller"
+	},
+	"keywords": ["debugging", "engineering", "incident", "troubleshooting"]
+}
