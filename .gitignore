@@ -49,3 +49,6 @@ tmp/
 .beads/interactions.jsonl
 # Generated per-project; hooks come from init.templateDir instead.
 .beads/hooks/
+# Root-level gate lock: sits outside .beads/, so that directory's own
+# .gitignore (which already covers *.lock) cannot reach it.
+.beads.gate.lock
