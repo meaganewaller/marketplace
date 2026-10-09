@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/meaganewaller/marketplace/compare/meta-v1.1.1...meta-v1.1.2) (2026-10-09)
+
+
+### Bug Fixes
+
+* close review-diff workflow gaps and the checklist snippet :jigsaw: ([#49](https://github.com/meaganewaller/marketplace/issues/49)) ([73a166d](https://github.com/meaganewaller/marketplace/commit/73a166d2aee3e748fc56eac4679ab0fe5e736d04))
+
 ## [1.1.1](https://github.com/meaganewaller/marketplace/compare/meta-v1.1.0...meta-v1.1.1) (2026-08-12)
 
 
