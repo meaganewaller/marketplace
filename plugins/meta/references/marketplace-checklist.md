@@ -38,6 +38,11 @@ Add to `release-please-config.json` under `packages`:
       "jsonpath": "$.version",
       "path": ".claude-plugin/plugin.json",
       "type": "json"
+    },
+    {
+      "jsonpath": "$.plugins[?(@.name=='<plugin-name>')].version",
+      "path": "/.claude-plugin/marketplace.json",
+      "type": "json"
     }
   ],
   "initial-version": "1.0.0",
@@ -47,10 +52,19 @@ Add to `release-please-config.json` under `packages`:
 
 - [ ] Package entry sorted alphabetically by path
 - [ ] `component` matches plugin name
+- [ ] Both `extra-files` are present: `plugin.json` alone leaves the
+  marketplace entry frozen at its first version, and
+  `test/marketplace-versions.test.ts` fails without the second
+- [ ] The marketplace `jsonpath` filters by `name`, not by array index, so
+  reordering `marketplace.json` cannot redirect the update
+- [ ] The marketplace `path` keeps its leading slash (repo-root-relative;
+  release-please rejects `../`)
 
 Add to `.release-please-manifest.json`:
 
-- [ ] `"plugins/<plugin-name>": "1.0.0"` entry sorted alphabetically
+- [ ] `"plugins/<plugin-name>": "<version>"` entry sorted alphabetically,
+  where `<version>` is the `version` already in `plugin.json` (release-please
+  reads the manifest as the last released version)
 
 ## Lint and Format
 
