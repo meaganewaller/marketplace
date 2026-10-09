@@ -43,7 +43,7 @@ Just ask, in plain language:
 
 ## Connecting a git host (optional)
 
-Without a connector, paste a diff or a PR link Claude can fetch. If you add a GitHub or GitLab MCP connector to your session, `review-diff` will prefer it for pulling the diff, PR description, and surrounding file context automatically -- no plugin changes needed, it just uses whatever's connected.
+For GitHub, `review-diff` uses the `gh` CLI (`gh pr view`, `gh pr diff`) to pull the diff, PR description, and author -- give it a PR number or link. It can also review a local branch or uncommitted work via `git diff`, or a pasted diff. If you add a GitHub or GitLab MCP connector to your session, it uses that when `gh` isn't available or for GitLab MRs -- no plugin changes needed.
 
 ## Where it keeps state
 
@@ -58,7 +58,7 @@ Both files live in the project you're reviewing, not in the plugin. Each plugin 
 
 ## Known limitations
 
-- No git host connector bundled -- diff/link input only for now.
+- No git host connector bundled -- GitHub goes through `gh`; GitLab needs a connector or a pasted diff.
 - Recurrence detection depends on consistent pattern-slug naming; it's a best-effort signal, not a guarantee.
 - Severity tagging (Blocking/Should-fix/Nit) is Claude's judgment call and hasn't been calibrated against your specific bar yet -- expect to correct it a few times early on.
 
