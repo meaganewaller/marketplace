@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { Glob } from "bun";
 
 /**
  * marketplace.json advertises a version per plugin, but release-please only
@@ -18,6 +19,7 @@ const marketplace = JSON.parse(await readFile(MANIFEST_PATH, "utf8"));
 const releaseConfig = JSON.parse(
 	await readFile("release-please-config.json", "utf8"),
 );
+const biome = JSON.parse(await readFile("biome.json", "utf8"));
 
 const published: {
 	name: string;
@@ -118,5 +120,55 @@ describe("plugin sources resolve", () => {
 			"utf8",
 		);
 		expect(JSON.parse(manifest).name).toBe(name);
+	});
+});
+
+/**
+ * release-please rewrites these manifests with its own JSON serializer, which
+ * expands every array onto one element per line. Biome's formatter wants the
+ * short ones collapsed. Nothing reconciles the two: `json.formatter.expand`
+ * has no setting that satisfies both, because `always` also expands the short
+ * objects release-please leaves alone.
+ *
+ * So each release bot commit reformatted a manifest and the next lint run
+ * failed. It happened to pr-review-copilot in release #44 and to
+ * debug-session-tracker in #46 — the second one turned `main` red the moment
+ * CI existed to notice.
+ *
+ * The fix is to stop formatting the files release-please owns. Their content
+ * is still guarded, by the version and description tests above, and their
+ * layout is not worth breaking every release over. This test exists so the
+ * override is not removed as clutter: its cost would not show up until the
+ * next release.
+ */
+describe("biome does not format what release-please rewrites", () => {
+	const exempt: string[] = (biome.overrides ?? [])
+		.filter(
+			(o: { formatter?: { enabled?: boolean } }) =>
+				o.formatter?.enabled === false,
+		)
+		.flatMap((o: { includes?: string[] }) => o.includes ?? []);
+
+	/** Every file release-please rewrites, derived from its own config. */
+	const rewritten = Object.entries<{
+		"extra-files"?: { path?: string }[];
+	}>(releaseConfig.packages).flatMap(([dir, pkg]) =>
+		(pkg["extra-files"] ?? [])
+			.map((f) => f.path)
+			.filter((p): p is string => typeof p === "string")
+			// A leading slash is repo-root-relative; anything else is relative
+			// to the package directory.
+			.map((p) => (p.startsWith("/") ? p.slice(1) : join(dir, p))),
+	);
+
+	test("there are overrides exempting files from the formatter", () => {
+		expect(exempt.length).toBeGreaterThan(0);
+	});
+
+	test.each(
+		[...new Set(rewritten)].sort(),
+	)("%s is exempt from the formatter", (path) => {
+		const covered = exempt.some((pattern) => new Glob(pattern).match(path));
+		expect(covered).toBe(true);
 	});
 });
