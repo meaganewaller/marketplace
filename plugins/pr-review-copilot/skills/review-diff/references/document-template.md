@@ -59,7 +59,7 @@ export"). No tests were added for the new route.
 |---|-----------|----------|----------|---------|
 | 1 | routes/export.py:22 | Blocking | Security | No check that requester owns user_id |
 | 2 | routes/export.py:35 | Should-fix | Performance | Loads all records into memory before streaming |
-| 3 | routes/export.py | Nit | Maintainability | No test coverage for the new route |
+| 3 | routes/export.py | Should-fix | Tests | No test coverage for the new route |
 
 ## Finding Details
 
@@ -89,6 +89,20 @@ a bigger change than a one-line patch and depends on the ORM's streaming API.
 **Draft comment** (reword before posting):
 > This loads the full record set into memory before streaming starts --
 > might be worth switching to a cursor-based stream for large accounts.
+
+---
+
+### #3 — routes/export.py [Should-fix / Tests]
+**Reasoning:** The route is new and ships with no tests, so nothing pins down
+its contract -- in particular, nothing would catch a regression of #1 once it's
+fixed. This is a real gap rather than a style preference, so it's Should-fix,
+not Nit; it doesn't block merge on its own because the endpoint's behavior is
+otherwise straightforward. No suggested fix included -- the right tests depend
+on the project's fixtures and auth helpers.
+
+**Draft comment** (reword before posting):
+> Could we add a couple of tests for `/export` -- at least the happy path and
+> a request for another user's `user_id` that should be refused?
 
 ---
 ````

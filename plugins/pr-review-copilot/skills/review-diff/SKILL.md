@@ -22,11 +22,21 @@ Nothing gets posted automatically by this skill.
 
 Accept any of:
 
+- A GitHub PR number or URL — pull it with the `gh` CLI, which is how the rest
+  of this marketplace reaches GitHub:
+  - `gh pr view <pr> --json title,body,author,url,baseRefName,headRefName`
+    for the description, author, and link
+  - `gh pr diff <pr>` for the diff
+  - `gh repo view --json nameWithOwner -q .nameWithOwner` (or the URL's
+    `owner/repo`) for the repo name used in review history
+- A local branch or working tree — `git diff <base>...HEAD` for a branch,
+  `git diff` / `git diff --staged` for uncommitted work. Use the branch's
+  commit messages as the stated intent when there's no PR description.
 - A pasted diff (raw `diff`/`patch` text)
-- A PR/MR URL — fetch it with web_fetch if reachable, or ask the user to paste
-  the diff if it's behind auth this session can't reach
-- A GitHub/GitLab MCP connector, if one is active this session — prefer it
-  for pulling the diff, PR description, and file context automatically
+- A GitHub/GitLab MCP connector, if one is active this session — use it when
+  `gh` isn't installed or authenticated, or for a GitLab MR
+- Any other PR/MR URL — fetch it with WebFetch if it's publicly reachable;
+  otherwise ask the user to paste the diff
 
 If only a diff is given with no description, proceed without one and note in
 the "Understanding" section that intent is inferred from the diff alone.
@@ -70,11 +80,24 @@ the "Understanding" section that intent is inferred from the diff alone.
    concrete, unambiguous change — skip it for findings that need judgment
    calls (e.g. "consider renaming this").
 
-7. **Deliver** the document as a markdown artifact (this makes it easy to
-   scan the table and copy individual comments). Do not post anything to
-   GitHub/GitLab even if a connector with write access is available, unless
-   the user explicitly asks you to post a specific comment after reviewing
-   the document.
+7. **Deliver** the document inline in your response, so the reviewer can
+   scan the table and copy individual draft comments straight out of the
+   conversation. If the user asks for a file, write it where they ask
+   instead (default to the scratchpad directory, not the repo under review,
+   so it never lands in a commit). Do not post anything to GitHub/GitLab
+   even if `gh` or a connector with write access is available, unless the
+   user explicitly asks you to post a specific comment after reviewing the
+   document.
+
+8. **Log findings** — once the document is delivered, append every finding
+   to `.claude/pr-review-history.local.json` as described in the
+   `review-history` skill's "Logging" section. Do this on every run, not
+   only when asked; step 4's recurrence check has nothing to compare against
+   otherwise. Take `repo` and `author` from the PR metadata gathered under
+   Inputs; for a pasted diff or local branch with no PR, use the repo from
+   `git remote get-url origin` (or the directory name) and `"unknown"` for
+   the author rather than guessing. Skip logging only when the findings
+   table is empty.
 
 ## Output rules
 
