@@ -1,6 +1,6 @@
 ---
 name: generating-sorbet-inline
-description: This skill should be used when the user asks to "add sig blocks", "add Sorbet signatures to this class", "make this file typed: strict", "add T.let annotations", or "type this Ruby with Sorbet inline". Writes `sig { }` blocks and `# typed:` sigils directly into .rb source. For standalone .rbi shim files that leave the source untouched, use generating-sorbet; for RBS rather than Sorbet, use generating-rbs or generating-rbs-inline.
+description: 'This skill should be used when the user asks to "add sig blocks", "add Sorbet signatures to this class", "make this file typed: strict", "add T.let annotations", or "type this Ruby with Sorbet inline". Writes `sig { }` blocks and `# typed:` sigils directly into .rb source. For standalone .rbi shim files that leave the source untouched, use generating-sorbet; for RBS rather than Sorbet, use generating-rbs or generating-rbs-inline.'
 ---
 
 ## Defaults

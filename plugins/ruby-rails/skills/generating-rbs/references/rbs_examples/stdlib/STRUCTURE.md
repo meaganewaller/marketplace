@@ -9,7 +9,6 @@ Type signatures for Ruby standard library.
 - [bigdecimal-math/](bigdecimal-math/)
 - [cgi/](cgi/)
 - [cgi-escape/](cgi-escape/)
-- [coverage/](coverage/)
 - [csv/](csv/)
 - [date/](date/)
 - [dbm/](dbm/)
