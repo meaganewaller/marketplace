@@ -7,9 +7,9 @@ description: >
   and next steps. Use this skill whenever the user is working a hard or
   confusing bug and wants to track what's been tried, says things like
   "let's debug this," "start tracking this bug," "I think it might be X,"
-  "that wasn't it," "rule that out," "here's what I found," or "/debug
-  start" / "/debug log" / "/debug status". Prevents re-testing the same
-  hypothesis twice during a long session.
+  "that wasn't it," "rule that out," "here's what I found," or "where are
+  we on this." Prevents re-testing the same hypothesis twice during a long
+  session.
 ---
 
 # Debug Session
@@ -81,7 +81,7 @@ observed) -- not conclusions. Conclusions belong in `status`.
 
 ## Checking status
 
-On "/debug status" or "where are we on this," render the current session as
+On "where are we on this" or "what have we tried," render the current session as
 a short summary: symptom, hypotheses grouped by status, next steps. Use
 `references/status-format.md` for the exact layout.
 
