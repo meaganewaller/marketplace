@@ -18,5 +18,18 @@ jobs:
         name: Release Please
         runs-on: ubuntu-latest
         steps:
+            # The `main` ruleset requires CI on every pull request, but events
+            # raised with the default GITHUB_TOKEN never start workflows. A
+            # release pull request opened with it would wait on its required
+            # checks forever, so release-please acts as a GitHub App instead.
+            - name: Mint a GitHub App token
+              id: app-token
+              uses: actions/create-github-app-token@v2
+              with:
+                  app-id: ${{ vars.RELEASE_APP_ID }}
+                  private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+
             - name: Create Release
               uses: google-github-actions/release-please-action@v4
+              with:
+                  token: ${{ steps.app-token.outputs.token }}
