@@ -14,6 +14,7 @@
 	],
 	"scripts": {
 		"commitlint": "commitlint",
+		"eval": "claude plugin eval --ablation none --no-publish",
 		"fix": "run-s -sl \"fix:*\"",
 		"fix:biome": "bunx --bun @biomejs/biome lint --write",
 		"fix:markdown": "markdownlint-cli2 --fix \"**/*.md\"",
@@ -47,6 +48,9 @@
 		"typescript": "^5"
 	},
 	"knip": {
+		"ignoreBinaries": [
+			"claude"
+		],
 		"ignoreDependencies": [
 			"markdownlint-cli2-formatter-pretty"
 		],

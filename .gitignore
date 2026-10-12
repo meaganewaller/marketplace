@@ -52,3 +52,6 @@ tmp/
 # Root-level gate lock: sits outside .beads/, so that directory's own
 # .gitignore (which already covers *.lock) cannot reach it.
 .beads.gate.lock
+
+# claude plugin eval output (report.html, aggregate-result.json)
+plugins/*/evals/results/
