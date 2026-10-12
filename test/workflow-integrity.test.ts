@@ -16,8 +16,8 @@ import { join } from "node:path";
  * a SHA cannot. Renovate advances these pins, but nothing until now checked
  * that a hand-written workflow honored the policy in the first place.
  *
- * Scope is deliberately `ci.yml` alone. `release.yml` uses a bare `@v4`, and
- * pinning it is a separate decision that has been made and deferred.
+ * Most checks below are about `ci.yml` specifically. The pinning checks run
+ * over every workflow file, so a new workflow cannot opt out by omission.
  */
 
 const WORKFLOW_DIR = ".github/workflows";
@@ -234,7 +234,7 @@ describe("actions are pinned to immutable commits", () => {
 		expect(workflowFiles.length).toBeGreaterThan(0);
 	});
 
-	test.each(["ci.yml"])("%s pins every action to a SHA", async (name) => {
+	test.each(workflowFiles)("%s pins every action to a SHA", async (name) => {
 		const used = allSteps(await parseWorkflow(name)).filter(
 			({ step }) => step.uses,
 		);
@@ -252,9 +252,9 @@ describe("actions are pinned to immutable commits", () => {
 	 * and parsing discards comments — there is no parsed structure to assert it
 	 * from. Do not "fix" this to match the structural checks above.
 	 */
-	test.each([
-		"ci.yml",
-	])("%s records the version each SHA stands for", async (name) => {
+	test.each(
+		workflowFiles,
+	)("%s records the version each SHA stands for", async (name) => {
 		const text = await readWorkflow(name);
 		const uncommented = text
 			.split("\n")
