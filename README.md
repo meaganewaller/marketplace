@@ -392,19 +392,21 @@ bun test
 - `trigger` cases pass when the skill is invoked.
 - `near-miss` cases pass when the skill is **not** invoked and, when there is one, the neighboring skill is. cross-plugin near-misses load the neighbor plugin too, through the case's `plugins:` frontmatter.
 
-every run is a real model call billed to your account, and results vary run to run, so evals are not part of `bun test`, `bun run lint`, or CI. run them by hand after changing a skill's `description`:
+every run is a real model call billed to your account, and results vary run to run, so evals are not part of `bun test`, `bun run lint`, or CI. run them by hand after changing a skill's `description`.
+
+always point it at `plugins`, not at one plugin. a case may only load plugins inside the directory you run the eval against, so with `plugins/pr-review-copilot` as the target, every cross-plugin near-miss fails to load. narrow the run with `--case` or `--tag` instead:
 
 ```bash
-# one plugin, with-plugin arm only (the no-plugin baseline means nothing for trigger checks)
-bun run eval plugins/git-workflow
+# every suite, with-plugin arm only (the no-plugin baseline means nothing for trigger checks)
+bun run eval plugins
 
 # one skill's cases, one run each, while iterating on its description
-bun run eval plugins/pr-review-copilot --case 'review-diff-*' --runs 1
+bun run eval plugins --case 'review-diff-*' --runs 1
 
 # only the near-miss cases
-bun run eval plugins/debug-session-tracker --tag near-miss
+bun run eval plugins --tag near-miss
 ```
 
-`bun run eval` is `claude plugin eval --ablation none --no-publish`, so any other `claude plugin eval` flag can follow the target. put the target before `--tag`, which reads every word after it as a tag. the first run in a checkout asks you to trust the plugin directory, and reports land in `plugins/<name>/evals/results/` (gitignored).
+`bun run eval` is `claude plugin eval --ablation none --no-publish`, so any other `claude plugin eval` flag can follow the target. put the target before `--tag`, which reads every word after it as a tag. the first run in a checkout asks you to trust the plugin directory, and reports land in `plugins/evals/results/` (gitignored).
 
 `bun test` checks the suites for free: that every case would load, and that every grader names a skill that exists in a plugin the case loads, so renaming a skill without updating its evals fails the test suite.

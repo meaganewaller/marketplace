@@ -54,4 +54,4 @@ tmp/
 .beads.gate.lock
 
 # claude plugin eval output (report.html, aggregate-result.json)
-plugins/*/evals/results/
+plugins/**/evals/results/
