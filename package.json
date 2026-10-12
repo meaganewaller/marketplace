@@ -61,11 +61,11 @@
 	},
 	"lint-staged": {
 		"*.{ts,js,yml,json5}": [
-			"biome check --write",
+			"biome check --write --no-errors-on-unmatched",
 			"cspell lint --no-must-find-files"
 		],
 		"**/!(package-lock).json": [
-			"biome check --write ",
+			"biome check --write --no-errors-on-unmatched",
 			"cspell lint --no-must-find-files"
 		],
 		"*.md": [
