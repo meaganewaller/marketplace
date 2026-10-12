@@ -172,3 +172,34 @@ describe("biome does not format what release-please rewrites", () => {
 		expect(covered).toBe(true);
 	});
 });
+
+/**
+ * The marketplace checklist tells authors to add each new plugin in
+ * alphabetical order, but nothing checked it. All three registration files
+ * drifted: release-please-config.json had dotfiles ahead of bun with
+ * git-workflow tacked on last, and marketplace.json listed mise before meta.
+ * A checklist that describes an order the files don't have isn't followed.
+ *
+ * Reordering is safe. Lookups go by name or path, never by position, which
+ * the extra-files jsonpath test above enforces for marketplace.json.
+ */
+describe("registration files stay in alphabetical order", () => {
+	const sorted = (keys: string[]) => [...keys].sort();
+
+	test("marketplace.json lists plugins by name", () => {
+		const names = published.map((p) => p.name);
+		expect(names).toEqual(sorted(names));
+	});
+
+	test("release-please-config.json lists packages by path", () => {
+		const paths = Object.keys(releaseConfig.packages);
+		expect(paths).toEqual(sorted(paths));
+	});
+
+	test(".release-please-manifest.json lists packages by path", async () => {
+		const paths = Object.keys(
+			JSON.parse(await readFile(".release-please-manifest.json", "utf8")),
+		);
+		expect(paths).toEqual(sorted(paths));
+	});
+});

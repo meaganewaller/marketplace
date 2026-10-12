@@ -2,8 +2,8 @@
 	"$schema": "https://raw.githubusercontent.com/googleapis/release-please/refs/heads/main/schemas/config.json",
 	"include-component-in-tag": true,
 	"packages": {
-		"plugins/dotfiles": {
-			"component": "dotfiles",
+		"plugins/bun": {
+			"component": "bun",
 			"extra-files": [
 				{
 					"jsonpath": "$.version",
@@ -11,7 +11,7 @@
 					"type": "json"
 				},
 				{
-					"jsonpath": "$.plugins[?(@.name=='dotfiles')].version",
+					"jsonpath": "$.plugins[?(@.name=='bun')].version",
 					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
@@ -36,8 +36,8 @@
 			"initial-version": "0.1.0",
 			"release-type": "simple"
 		},
-		"plugins/bun": {
-			"component": "bun",
+		"plugins/dotfiles": {
+			"component": "dotfiles",
 			"extra-files": [
 				{
 					"jsonpath": "$.version",
@@ -45,7 +45,7 @@
 					"type": "json"
 				},
 				{
-					"jsonpath": "$.plugins[?(@.name=='bun')].version",
+					"jsonpath": "$.plugins[?(@.name=='dotfiles')].version",
 					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
@@ -70,8 +70,8 @@
 			"initial-version": "1.0.0",
 			"release-type": "simple"
 		},
-		"plugins/mise": {
-			"component": "mise",
+		"plugins/git-workflow": {
+			"component": "git-workflow",
 			"extra-files": [
 				{
 					"jsonpath": "$.version",
@@ -79,7 +79,7 @@
 					"type": "json"
 				},
 				{
-					"jsonpath": "$.plugins[?(@.name=='mise')].version",
+					"jsonpath": "$.plugins[?(@.name=='git-workflow')].version",
 					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
@@ -97,6 +97,23 @@
 				},
 				{
 					"jsonpath": "$.plugins[?(@.name=='meta')].version",
+					"path": "/.claude-plugin/marketplace.json",
+					"type": "json"
+				}
+			],
+			"initial-version": "1.0.0",
+			"release-type": "simple"
+		},
+		"plugins/mise": {
+			"component": "mise",
+			"extra-files": [
+				{
+					"jsonpath": "$.version",
+					"path": ".claude-plugin/plugin.json",
+					"type": "json"
+				},
+				{
+					"jsonpath": "$.plugins[?(@.name=='mise')].version",
 					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
@@ -165,23 +182,6 @@
 				},
 				{
 					"jsonpath": "$.plugins[?(@.name=='typescript-architect')].version",
-					"path": "/.claude-plugin/marketplace.json",
-					"type": "json"
-				}
-			],
-			"initial-version": "1.0.0",
-			"release-type": "simple"
-		},
-		"plugins/git-workflow": {
-			"component": "git-workflow",
-			"extra-files": [
-				{
-					"jsonpath": "$.version",
-					"path": ".claude-plugin/plugin.json",
-					"type": "json"
-				},
-				{
-					"jsonpath": "$.plugins[?(@.name=='git-workflow')].version",
 					"path": "/.claude-plugin/marketplace.json",
 					"type": "json"
 				}
