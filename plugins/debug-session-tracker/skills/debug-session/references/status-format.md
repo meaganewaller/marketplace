@@ -1,6 +1,6 @@
 # Status / Recap Rendering Format
 
-Used by both `debug-session` ("/debug status") and `debug-recap` (resuming
+Used by both `debug-session` (mid-session status checks) and `debug-recap` (resuming
 or handing off a session).
 
 ```markdown

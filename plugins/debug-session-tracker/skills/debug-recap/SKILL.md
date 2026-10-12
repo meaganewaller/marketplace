@@ -6,7 +6,7 @@ description: >
   currently being tested, and what's next. Use this skill when the user
   asks to resume a debugging session, says "where did I leave off," "catch
   me up on [bug]," "hand this off to [someone]," lists multiple active
-  sessions and asks which is which, or runs "/debug resume".
+  sessions and asks which is which, or asks to pick a session back up.
 ---
 
 # Debug Recap

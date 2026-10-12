@@ -22,8 +22,8 @@ Just describe what's happening, in plain language:
 - "Let's debug this -- checkout is 500ing under load" starts a session
 - "I think it might be the connection pool" logs a hypothesis
 - "Nope, pool's fine, 40/100 connections in use" rules it out with evidence
-- "Where are we on this?" / "/debug status" recaps the current state
-- "Catch me up on the checkout bug" / "/debug resume" picks it back up
+- "Where are we on this?" recaps the current state
+- "Catch me up on the checkout bug" picks it back up
 - "This is fixed -- it was the retry logic double-charging" closes it out
   and logs the root cause
 
