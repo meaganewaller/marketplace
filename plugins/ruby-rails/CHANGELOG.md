@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.3...ruby-rails-v1.4.4) (2026-10-12)
+
+
+### Bug Fixes
+
+* guard plugin structure and fix what it caught :shield: ([#56](https://github.com/meaganewaller/marketplace/issues/56)) ([3c866af](https://github.com/meaganewaller/marketplace/commit/3c866af753d7740056b8be241d51997aa93f269a))
+
 ## [1.4.3](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.2...ruby-rails-v1.4.3) (2026-10-12)
 
 

@@ -45,7 +45,7 @@
 				"incident",
 				"troubleshooting"
 			],
-			"version": "0.2.0"
+			"version": "0.2.1"
 		},
 		{
 			"author": {
@@ -211,7 +211,7 @@
 				"solid-queue",
 				"rails-8"
 			],
-			"version": "1.4.3"
+			"version": "1.4.4"
 		},
 		{
 			"author": {
