@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/meaganewaller/marketplace/compare/mise-v1.1.1...mise-v1.1.2) (2026-10-12)
+
+
+### Bug Fixes
+
+* test the plugin hooks and fix what they caught :test_tube: ([#54](https://github.com/meaganewaller/marketplace/issues/54)) ([5a299ac](https://github.com/meaganewaller/marketplace/commit/5a299ac7baadc2099525695ba0c9f1c41e7ace8b))
+
 ## [1.1.1](https://github.com/meaganewaller/marketplace/compare/mise-v1.1.0...mise-v1.1.1) (2026-08-12)
 
 
