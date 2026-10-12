@@ -10,10 +10,12 @@ ruby_lsp_available() {
 	command -v ruby-lsp &>/dev/null
 }
 
+# Arguments, if any, are a command prefix to run gem under (e.g. `mise exec --`).
+# "$@" rather than a local array: bash before 4.4 — /bin/bash on macOS — treats
+# an empty "${array[@]}" as unbound under `set -u`.
 install_ruby_lsp() {
-	local -a gem_cmd=("$@")
 	echo "$PREFIX Installing ruby-lsp..."
-	if "${gem_cmd[@]}" gem install ruby-lsp && ruby_lsp_available; then
+	if "$@" gem install ruby-lsp && ruby_lsp_available; then
 		echo "$PREFIX Installed successfully"
 		return 0
 	fi

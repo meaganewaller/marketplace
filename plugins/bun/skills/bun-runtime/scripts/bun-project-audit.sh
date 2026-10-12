@@ -64,8 +64,8 @@ for other in package-lock.json yarn.lock pnpm-lock.yaml; do
 done
 
 say "Config"
-[[ -f bunfig.toml ]] && kv "bunfig.toml" "present" || kv "bunfig.toml" "absent"
-[[ -f tsconfig.json ]] && kv "tsconfig.json" "present" || kv "tsconfig.json" "absent"
+if [[ -f bunfig.toml ]]; then kv "bunfig.toml" "present"; else kv "bunfig.toml" "absent"; fi
+if [[ -f tsconfig.json ]]; then kv "tsconfig.json" "present"; else kv "tsconfig.json" "absent"; fi
 [[ -f .npmrc ]] && kv ".npmrc" "present (registry/auth may come from here)"
 [[ -f mise.toml || -f .mise.toml ]] && kv "mise" "manages this project's toolchain"
 

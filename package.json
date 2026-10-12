@@ -26,6 +26,7 @@
 		"lint:markdown": "markdownlint-cli2 \"**/*.md\"",
 		"lint:check": "bunx --bun @biomejs/biome check",
 		"lint:shell": "git ls-files -z | xargs -0 shfmt -f | tr '\\n' '\\0' | xargs -0 -r shfmt -i 0 -d",
+		"lint:shellcheck": "git ls-files -z | xargs -0 shfmt -f | tr '\\n' '\\0' | xargs -0 -r shellcheck",
 		"lint:spelling": "cspell . \"./.*/**\"",
 		"lint:types": "tsc --noEmit",
 		"prepare": "husky",
