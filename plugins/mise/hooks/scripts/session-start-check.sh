@@ -39,9 +39,10 @@ if [[ "$found_config" == "false" ]]; then
 	exit 0
 fi
 
-# mise.toml found — run a quick doctor check
-DOCTOR_OUTPUT="$(mise doctor 2>&1)" || true
-DOCTOR_EXIT=$?
+# mise.toml found — run a quick doctor check. Capture the exit status in the
+# `||` branch: `|| true` followed by `$?` would always read true's 0.
+DOCTOR_EXIT=0
+DOCTOR_OUTPUT="$(mise doctor 2>&1)" || DOCTOR_EXIT=$?
 
 if [[ $DOCTOR_EXIT -ne 0 ]]; then
 	echo "mise doctor found issues:"
