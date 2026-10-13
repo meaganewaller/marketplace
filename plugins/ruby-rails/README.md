@@ -103,7 +103,7 @@ Each skill includes reference material for syntax and production examples. Pick 
 
 ### Hooks
 
-- **SessionStart**: Ensures [Ruby LSP](https://github.com/Shopify/ruby-lsp) is installed (via `mise exec -- gem install` when needed)
+- **SessionStart**: In a Ruby project (a `Gemfile`, `gems.rb`, `*.gemspec`, `.ruby-version`, or a mise/asdf pin for Ruby), ensures [Ruby LSP](https://github.com/Shopify/ruby-lsp) is installed. It installs only onto a mise-managed Ruby (`mise exec -- gem install ruby-lsp`) and otherwise prints how to install it, never touching the system Ruby. Outside a Ruby project it does nothing.
 
 ### LSP (Language Server)
 
@@ -123,7 +123,7 @@ mise exec -- which ruby-lsp
 # Prefer adding to Gemfile: gem "ruby-lsp", group: :development
 ```
 
-**PATH / mise note:** Claude Code may not inherit your shell PATH. This plugin installs `ruby-lsp` onto the active mise Ruby. If the server still does not start, create a local override at `~/.claude/plugins/local/ruby-lsp/plugin.json` with the absolute path from `mise exec -- which ruby-lsp` (see upstream plugin README).
+**PATH / mise note:** Claude Code may not inherit your shell PATH. In a Ruby project this plugin installs `ruby-lsp` onto the mise-managed Ruby. If the server still does not start, create a local override at `~/.claude/plugins/local/ruby-lsp/plugin.json` with the absolute path from `mise exec -- which ruby-lsp` (see upstream plugin README).
 
 ### MCP Servers
 
