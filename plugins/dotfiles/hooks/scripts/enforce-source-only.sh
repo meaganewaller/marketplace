@@ -56,13 +56,23 @@ else
 fi
 [[ -n "$SRC" ]] || exit 0
 
-# Emit a structured decision so Claude redirects the edit rather than retrying.
+# Deny with a reason so Claude redirects the edit rather than retrying. Exit 2
+# blocks on its own, so a malformed payload still fails closed. On exit 2 Claude
+# Code shows Claude the JSON decision's reason when it parses, and stderr when
+# it does not, so the reason goes to both.
+REASON="$FILE is Chezmoi-managed — edit the source instead: $SRC
+
+After editing the source, run \`chezmoi diff\` and \`chezmoi apply\` to update the destination."
+
 jq -n \
-	--arg file "$FILE" \
-	--arg suggested "$SRC" \
+	--arg reason "$REASON" \
 	'{
-		decision: "block",
-		reason: "\($file) is Chezmoi-managed — edit the source instead: \($suggested)\n\nAfter editing the source, run `chezmoi diff` and `chezmoi apply` to update the destination."
+		hookSpecificOutput: {
+			hookEventName: "PreToolUse",
+			permissionDecision: "deny",
+			permissionDecisionReason: $reason
+		}
 	}'
+printf '%s\n' "$REASON" >&2
 
 exit 2

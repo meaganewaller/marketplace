@@ -126,14 +126,21 @@ echo '${source}'`,
 		const source = "/src/dotfiles/home/dot_zshrc";
 		await stubChezmoi(dest, source);
 
-		const { code, stdout } = await sandbox.run(SCRIPT, { stdin: editOf(dest) });
+		const { code, stdout, stderr } = await sandbox.run(SCRIPT, {
+			stdin: editOf(dest),
+		});
 
-		// Exit 2 blocks the call; Claude Code shows the JSON reason to Claude.
+		// Exit 2 blocks the call even if the JSON is malformed. Claude Code
+		// shows Claude the JSON decision's reason, falling back to stderr.
 		expect(code).toBe(2);
-		const output = JSON.parse(stdout);
-		expect(output.decision).toBe("block");
-		expect(output.reason).toContain(`${dest} is Chezmoi-managed`);
-		expect(output.reason).toContain(source);
+		const { hookSpecificOutput: output } = JSON.parse(stdout);
+		expect(output.hookEventName).toBe("PreToolUse");
+		expect(output.permissionDecision).toBe("deny");
+		expect(output.permissionDecisionReason).toContain(
+			`${dest} is Chezmoi-managed`,
+		);
+		expect(output.permissionDecisionReason).toContain(source);
+		expect(stderr.trim()).toBe(output.permissionDecisionReason.trim());
 	});
 
 	test("expands a leading ~ before asking chezmoi", async () => {
