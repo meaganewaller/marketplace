@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { existsSync, statSync } from "node:fs";
-import { readdir, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { Glob } from "bun";
 
@@ -27,10 +27,20 @@ const published = new Set<string>(
  */
 const UNPUBLISHED = ["example-plugin"];
 
-const pluginDirs = (await readdir("plugins", { withFileTypes: true }))
-	.filter((entry) => entry.isDirectory())
-	.map((entry) => entry.name)
-	.sort();
+/**
+ * Directories under plugins/ that hold tracked files. Reading the disk instead
+ * would count gitignored output as a plugin: `bun run eval plugins` writes its
+ * reports to plugins/evals/results/.
+ */
+const pluginDirs = [
+	...new Set(
+		Bun.spawnSync(["git", "ls-files", "-z", "plugins"])
+			.stdout.toString()
+			.split("\0")
+			.map((path) => path.split("/")[1])
+			.filter((dir): dir is string => !!dir),
+	),
+].sort();
 
 const scan = async (pattern: string) => {
 	const files: string[] = [];
