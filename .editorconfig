@@ -1,13 +1,26 @@
 # editorconfig.org
+#
+# Mirrors what the formatters enforce, so an editor honoring this file does not
+# fight them: biome formats JSON/TS/JS with tabs, and `shfmt -i 0` formats shell
+# with tabs. Markdown and YAML stay on spaces — markdownlint rejects hard tabs
+# and enforces a 2-space list indent, and YAML does not allow tabs at all.
 root = true
 
 [*]
-indent_style = space
+indent_style = tab
 indent_size = 2
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+[*.{md,yml,yaml,toml}]
+indent_style = space
+indent_size = 2
+
+# The workflows are written with a 4-space indent.
+[.github/workflows/*.{yml,yaml}]
+indent_size = 4
 
 [*.md]
 trim_trailing_whitespace = false
