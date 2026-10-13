@@ -7,7 +7,7 @@
 	"plugins/meta": "1.1.2",
 	"plugins/mise": "1.1.2",
 	"plugins/pr-review-copilot": "0.2.1",
-	"plugins/ruby-rails": "1.4.6",
+	"plugins/ruby-rails": "1.4.7",
 	"plugins/sitegraph": "1.1.2",
 	"plugins/typescript-architect": "1.0.1"
 }
