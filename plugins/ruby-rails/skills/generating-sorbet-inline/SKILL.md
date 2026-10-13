@@ -35,7 +35,7 @@ Sorbet Inline Generation Progress:
 - You MUST NOT use `T.unsafe` - it bypasses type checking entirely.
 - You MUST NOT use `T.cast` - it forces types without verification.
 - You MUST ask the user to provide more details if something is not clear.
-- You MUST prepend any command with `bundle exec` if the project has Gemfile.
+- You MUST run commands on the project's toolchain: `mise exec -- bundle exec <command>` when the project has a Gemfile (see [conventions](../../references/conventions.md)).
 - You MUST use `sig { }` block syntax for method signatures.
 - You MUST add `extend T::Sig` to classes/modules before using `sig`.
 - You MUST focus on method signatures only. Skip local variables, intermediate expressions, and other non-method annotations.
@@ -173,13 +173,7 @@ Always perform this step.
 Run Sorbet type checker to validate signatures:
 
 ```bash
-srb tc
-```
-
-Or with bundle:
-
-```bash
-bundle exec srb tc
+mise exec -- bundle exec srb tc
 ```
 
 This checks:

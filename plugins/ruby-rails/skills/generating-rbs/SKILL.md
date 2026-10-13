@@ -36,7 +36,7 @@ There are several rules that you MUST follow while performing this skill:
 - You MUST not run Ruby code of the project.
 - You MUST not use `untyped`. Infer the proper type instead.
 - You MUST ask the user to provide more details if something is not clear.
-- You MUST prepend any command with `bundle exec` if the project has Gemfile.
+- You MUST run commands on the project's toolchain: `mise exec -- bundle exec <command>` when the project has a Gemfile (see [conventions](../../references/conventions.md)).
 - You MUST use the tracking file when processing multiple files to ensure no files are missed.
 
 ## Multi-File Processing

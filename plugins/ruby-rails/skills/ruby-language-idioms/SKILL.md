@@ -33,14 +33,14 @@ command forms, and type-system pairing before running project commands.
 
 6. **Deprecations**: Ruby 4 continues tightening semantics — run the test suite after language upgrades.
 
-7. **RuboCop**: Run `bundle exec rubocop` (or `mise run lint`) before large refactors.
+7. **RuboCop**: Run `mise exec -- bin/rubocop` (or `mise exec -- bundle exec rubocop` without the Rails 8 binstub, or `mise run lint`) before large refactors.
 
 ## Quick Commands
 
 ```bash
 mise exec -- ruby -e 'puts RUBY_VERSION'
-mise exec -- bundle exec rubocop
-mise exec -- bundle exec ruby -wc lib/
+mise exec -- bin/rubocop
+mise exec -- ruby -wc lib/my_gem.rb  # syntax and warnings for one file
 ```
 
 ## Anti-Patterns

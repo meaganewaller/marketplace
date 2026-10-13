@@ -34,7 +34,7 @@ RBS-Inline Generation Progress:
 - You MUST NOT run Ruby code of the project.
 - You MUST NOT use `untyped`. Infer the proper type instead.
 - You MUST ask the user to provide more details if something is not clear.
-- You MUST prepend any command with `bundle exec` if the project has Gemfile.
+- You MUST run commands on the project's toolchain: `mise exec -- bundle exec <command>` when the project has a Gemfile (see [conventions](../../references/conventions.md)).
 - You MUST use `# @rbs` comment syntax for inline annotations.
 - You MUST NOT use regular RBS signatures and `.rbs` files in the project.
 - You MUST use the tracking file when processing multiple files to ensure no files are missed.
@@ -160,7 +160,7 @@ rbs-inline is a transpiler - it generates RBS files from inline annotations. Val
 1. Generate RBS files from annotations:
 
    ```bash
-   rbs-inline --output lib
+   mise exec -- bundle exec rbs-inline --output lib
    ```
 
    This generates `.rbs` files in `sig/generated/` directory.
@@ -168,7 +168,7 @@ rbs-inline is a transpiler - it generates RBS files from inline annotations. Val
 2. Validate the generated RBS files:
 
    ```bash
-   rbs validate
+   mise exec -- bundle exec rbs validate
    ```
 
    This checks syntax, name resolution, inheritance, and type applications.
@@ -184,13 +184,13 @@ Steep works on RBS files, not directly on inline annotations. The RBS files must
 1. Ensure RBS files are generated from annotations:
 
    ```bash
-   rbs-inline --output lib
+   mise exec -- bundle exec rbs-inline --output lib
    ```
 
 2. Run Steep type checker:
 
    ```bash
-   steep check
+   mise exec -- bundle exec steep check
    ```
 
 3. Fix any errors reported by `steep check`.
