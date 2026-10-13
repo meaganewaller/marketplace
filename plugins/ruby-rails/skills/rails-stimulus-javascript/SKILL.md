@@ -25,7 +25,7 @@ command forms, and type-system pairing before running project commands.
 
 2. **Targets and values** API for DOM binding; keep controllers under ~100 lines.
 
-3. **importmap-pin** gems instead of npm when possible for Rails-default stack.
+3. **Importmap**: pin JavaScript packages with `bin/importmap pin <package>`, which downloads the npm package into `vendor/javascript`, rather than adding a Node build to the Rails-default stack. Importmap apps register Stimulus controllers automatically (`eagerLoadControllersFrom`); `stimulus:manifest:update` is only for `jsbundling-rails` apps.
 
 4. **Testing**: System tests for critical interactions; unit test pure functions if extracted.
 
@@ -34,7 +34,7 @@ command forms, and type-system pairing before running project commands.
 ## Quick Commands
 
 ```bash
-mise exec -- bin/rails stimulus:manifest:update
+mise exec -- bin/importmap pin <package>
 mise exec -- bin/importmap json
 ```
 

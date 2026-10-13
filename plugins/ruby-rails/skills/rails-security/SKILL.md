@@ -21,7 +21,7 @@ command forms, and type-system pairing before running project commands.
 
 ## Core Guidance
 
-1. **Brakeman**: `bundle exec brakeman` in CI.
+1. **Brakeman**: `mise exec -- bin/brakeman` in CI.
 
 2. **CSRF** enabled for HTML; API uses token or OAuth appropriately.
 

@@ -27,7 +27,7 @@ command forms, and type-system pairing before running project commands.
 
 3. **Test**: RSpec or Minitest in gem; include Rails engine dummy only if needed.
 
-4. **Release**: `bundle exec rake release` with 2FA on RubyGems.
+4. **Release**: `mise exec -- bundle exec rake release` with 2FA on RubyGems.
 
 5. **Ruby 4**: Declare required_ruby_version in gemspec.
 
@@ -35,7 +35,7 @@ command forms, and type-system pairing before running project commands.
 
 ```bash
 mise exec -- bundle gem my_gem
-cd my_gem && mise use ruby@4.0 && bundle exec rake spec
+cd my_gem && mise use ruby@4.0 && mise exec -- bundle exec rake spec
 ```
 
 ## Anti-Patterns

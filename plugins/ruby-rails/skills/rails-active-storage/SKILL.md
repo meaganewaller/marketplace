@@ -23,7 +23,7 @@ command forms, and type-system pairing before running project commands.
 
 1. **Direct uploads** to S3-compatible service in production.
 
-2. **Variants** via `has_rich_text` / `has_one_attached` with explicit prewarming in jobs for large images.
+2. **Variants** are declared on the attachment — `has_one_attached :avatar do |a| a.variant :thumb, resize_to_limit: [100, 100], preprocessed: true end`. `preprocessed: true` (Rails 7.1+) generates them in a background job after upload instead of on first request.
 
 3. **Validations** on content type and size in model.
 

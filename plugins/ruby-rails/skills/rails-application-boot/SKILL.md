@@ -25,7 +25,7 @@ command forms, and type-system pairing before running project commands.
 
 ```bash
 mise use ruby@4.0
-gem install rails -v "~> 8.0"
+mise exec -- gem install rails -v "~> 8.0"
 mise exec -- rails new myapp --database=postgresql
 ```
 

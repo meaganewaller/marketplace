@@ -27,7 +27,9 @@ mise exec -- bin/rspec spec/models/user_spec.rb
 mise exec -- bundle exec rubocop
 ```
 
-- Use `bin/rails`, `bin/rspec`, and `bin/rake` when the binstubs exist.
+- Use `bin/rails`, `bin/rspec`, and `bin/rake` when the binstubs exist. Rails 8
+  apps also generate `bin/rubocop`, `bin/brakeman`, and `bin/kamal`; prefer
+  those over `bundle exec`.
 - Prefix with `mise exec --` when the project uses mise.
 - Prefer `mise exec -- bundle exec` over bare `bundle exec` when a `Gemfile` is
   present.

@@ -34,9 +34,9 @@ command forms, and type-system pairing before running project commands.
 ## Quick Commands
 
 ```bash
-mise exec -- kamal setup
-mise exec -- kamal deploy
-mise exec -- kamal app logs
+mise exec -- bin/kamal setup
+mise exec -- bin/kamal deploy
+mise exec -- bin/kamal app logs
 ```
 
 ## Anti-Patterns

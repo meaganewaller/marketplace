@@ -23,11 +23,11 @@ command forms, and type-system pairing before running project commands.
 
 1. **ViewComponent** for reusable UI with tests in `spec/components` or `test/components`.
 
-2. **Partials** require explicit locals (Ruby 3.1+ keyword locals warning).
+2. **Partials** declare their locals with Rails 7.1+ strict locals — a `<%# locals: (title:, count: 0) -%>` magic comment at the top — so a missing or misspelled local raises instead of rendering `nil`.
 
 3. **Helpers** stay presentation-only; no DB queries.
 
-4. **Forms**: `form_with` defaults to remote Turbo behavior — set `local: true` only when needed.
+4. **Forms**: `form_with` renders a normal form, and Turbo Drive submits it over `fetch`. Opt a form out of Turbo with `data: { turbo: false }`; `local: true` is a rails-ujs option and does nothing under Turbo.
 
 5. **I18n** for user-visible strings.
 
@@ -35,7 +35,7 @@ command forms, and type-system pairing before running project commands.
 
 ```bash
 mise exec -- bin/rails generate component Card title:string
-mise exec -- bundle exec erblint app/views  # if configured
+mise exec -- bundle exec erb_lint --lint-all  # if configured
 ```
 
 ## Anti-Patterns
