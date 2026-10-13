@@ -193,7 +193,7 @@ Fix any errors reported and repeat until validation passes.
 # References
 
 - [syntax.md](references/syntax.md) - Sorbet RBI syntax guide
-- [references/](references/references/STRUCTURE.md) - Real-world RBI examples from stripe-ruby
+- [stripe-ruby examples](references/stripe-ruby/STRUCTURE.md) - Real-world RBI examples from stripe-ruby
 - [Sorbet RBI documentation](https://sorbet.org/docs/rbi) - Official RBI docs
 
 ## See Also
