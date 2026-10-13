@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/meaganewaller/marketplace/compare/debug-session-tracker-v0.2.1...debug-session-tracker-v0.2.2) (2026-10-12)
+
+
+### Bug Fixes
+
+* **debug-session-tracker:** stop advertising /debug commands :ghost: ([#60](https://github.com/meaganewaller/marketplace/issues/60)) ([4330245](https://github.com/meaganewaller/marketplace/commit/4330245fc96e7302797f32a35e05c6ac9b03bbc4))
+
 ## [0.2.1](https://github.com/meaganewaller/marketplace/compare/debug-session-tracker-v0.2.0...debug-session-tracker-v0.2.1) (2026-10-12)
 
 
