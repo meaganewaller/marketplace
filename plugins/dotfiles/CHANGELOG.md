@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/meaganewaller/marketplace/compare/dotfiles-v1.1.2...dotfiles-v1.1.3) (2026-10-13)
+
+
+### Bug Fixes
+
+* **dotfiles:** block managed-file edits with the current hook schema :construction: ([#63](https://github.com/meaganewaller/marketplace/issues/63)) ([93ce87c](https://github.com/meaganewaller/marketplace/commit/93ce87c171491a6151f5f86ae818ca034648193d))
+
 ## [1.1.2](https://github.com/meaganewaller/marketplace/compare/dotfiles-v1.1.1...dotfiles-v1.1.2) (2026-08-12)
 
 
