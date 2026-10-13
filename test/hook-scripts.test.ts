@@ -29,7 +29,7 @@ const ROOT = resolve(import.meta.dir, "..");
 const BASH = Bun.which("bash") ?? "/bin/bash";
 
 /** Real utilities the hook scripts (and stubs) shell out to. Anything else is a stub. */
-const UTILITIES = ["awk", "cat", "chmod", "dirname", "jq", "tr"];
+const UTILITIES = ["awk", "cat", "chmod", "dirname", "grep", "jq", "tr"];
 
 type Sandbox = {
 	dir: string;
@@ -383,8 +383,23 @@ describe("ruby-rails: check-ruby-lsp.sh", () => {
 chmod +x '${sandbox.bin}/ruby-lsp'`,
 		);
 
-	test("does nothing when ruby-lsp is already installed", async () => {
-		await sandbox.stub("ruby-lsp");
+	/** mise that reports a managed Ruby (or none) and runs `exec --` commands. */
+	const stubMise = (managesRuby: boolean) =>
+		sandbox.stub(
+			"mise",
+			`case "$1" in
+which) ${managesRuby ? "echo /mise/installs/ruby/bin/ruby" : "exit 1"} ;;
+exec) shift 2; exec "$@" ;;
+esac`,
+		);
+
+	const rubyProject = () => writeFile(join(sandbox.home, "Gemfile"), "");
+
+	// The hook runs on every SessionStart in every repo. Outside a Ruby project
+	// it must not install anything, or even look: an install there took up to
+	// the hook's 120-second timeout for nothing.
+	test("does nothing outside a Ruby project", async () => {
+		await stubMise(true);
 		await stubInstallingGem();
 
 		const { code, stdout } = await sandbox.run(SCRIPT);
@@ -394,8 +409,50 @@ chmod +x '${sandbox.bin}/ruby-lsp'`,
 		expect(await sandbox.calls()).toEqual([]);
 	});
 
-	test("installs ruby-lsp through mise when mise is available", async () => {
-		await sandbox.stub("mise", 'shift 2; exec "$@"');
+	test.each([
+		["Gemfile", "Gemfile", ""],
+		["gems.rb", "gems.rb", ""],
+		["a gemspec", "widget.gemspec", ""],
+		[".ruby-version", ".ruby-version", "3.4.1\n"],
+		["mise.toml with ruby", "mise.toml", '[tools]\nruby = "3.4"\n'],
+		[".tool-versions with ruby", ".tool-versions", "ruby 3.4.1\n"],
+	])("treats a directory with %s as a Ruby project", async (_, file, body) => {
+		await writeFile(join(sandbox.home, file), body);
+		await stubMise(true);
+		await stubInstallingGem();
+
+		const { stdout } = await sandbox.run(SCRIPT);
+
+		expect(stdout).toContain("Installed successfully");
+	});
+
+	test("ignores a mise.toml that does not pin Ruby", async () => {
+		await writeFile(join(sandbox.home, "mise.toml"), '[tools]\nnode = "22"\n');
+		await stubMise(true);
+		await stubInstallingGem();
+
+		const { stdout } = await sandbox.run(SCRIPT);
+
+		expect(stdout).toBe("");
+		expect(await sandbox.calls()).toEqual([]);
+	});
+
+	test("does nothing when ruby-lsp is already installed", async () => {
+		await rubyProject();
+		await sandbox.stub("ruby-lsp");
+		await stubMise(true);
+		await stubInstallingGem();
+
+		const { code, stdout } = await sandbox.run(SCRIPT);
+
+		expect(code).toBe(0);
+		expect(stdout).toBe("");
+		expect(await sandbox.calls()).toEqual([]);
+	});
+
+	test("installs ruby-lsp onto the mise-managed Ruby", async () => {
+		await rubyProject();
+		await stubMise(true);
 		await stubInstallingGem();
 
 		const { code, stdout } = await sandbox.run(SCRIPT);
@@ -403,18 +460,21 @@ chmod +x '${sandbox.bin}/ruby-lsp'`,
 		expect(code).toBe(0);
 		expect(stdout).toContain("Installed successfully");
 		expect(await sandbox.calls()).toEqual([
+			"mise which ruby",
 			"mise exec -- gem install ruby-lsp",
 			"gem install ruby-lsp",
 		]);
 	});
 
-	// The hook runs as `bash <script>`, which on a stock Mac is /bin/bash 3.2.
-	// Bash before 4.4 treats an empty "${array[@]}" as unbound under `set -u`,
-	// so this is the path that breaks there — run it under that shell when the
-	// machine has one, as well as under the bash on PATH.
+	// conventions.md: never `gem install` into the system Ruby. Without a
+	// mise-managed Ruby, `mise exec -- gem` and a bare `gem` both resolve to
+	// whatever Ruby is on PATH, so the hook only explains how to install.
+	// Run under /bin/bash too: it is bash 3.2 on a stock Mac.
 	const shells = [...new Set([BASH, "/bin/bash"])].filter(existsSync);
 	for (const shell of shells) {
-		test(`falls back to gem on PATH without mise (${shell})`, async () => {
+		test(`never installs into a Ruby mise does not manage (${shell})`, async () => {
+			await rubyProject();
+			await stubMise(false);
 			await stubInstallingGem();
 
 			const { code, stdout, stderr } = await sandbox.run(SCRIPT, {
@@ -423,16 +483,22 @@ chmod +x '${sandbox.bin}/ruby-lsp'`,
 
 			expect(stderr).toBe("");
 			expect(code).toBe(0);
-			expect(stdout).toContain("Installed successfully");
-			expect(await sandbox.calls()).toEqual(["gem install ruby-lsp"]);
+			expect(stdout).toContain("ruby-lsp is not installed.");
+			expect(await sandbox.calls()).toEqual(["mise which ruby"]);
+		});
+
+		test(`never installs with a bare gem when mise is absent (${shell})`, async () => {
+			await rubyProject();
+			await stubInstallingGem();
+
+			const { code, stdout, stderr } = await sandbox.run(SCRIPT, {
+				bash: shell,
+			});
+
+			expect(stderr).toBe("");
+			expect(code).toBe(0);
+			expect(stdout).toContain("ruby-lsp is not installed.");
+			expect(await sandbox.calls()).toEqual([]);
 		});
 	}
-
-	test("prints install instructions when neither mise nor gem exists", async () => {
-		const { code, stdout } = await sandbox.run(SCRIPT);
-
-		expect(code).toBe(0);
-		expect(stdout).toContain("ruby-lsp is not installed.");
-		expect(stdout).toContain("gem install ruby-lsp");
-	});
 });
