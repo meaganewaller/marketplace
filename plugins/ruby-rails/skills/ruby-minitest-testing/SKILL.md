@@ -45,7 +45,7 @@ mise exec -- bin/rails test test/models/user_test.rb
 ```bash
 mise exec -- bin/rails test
 mise exec -- bin/rails test:system
-mise exec -- PARALLEL_WORKERS=4 bin/rails test
+PARALLEL_WORKERS=4 mise exec -- bin/rails test
 ```
 
 ## Anti-Patterns
