@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Use when committing code changes. Enforces intentional file selection, conventional commits, and why-focused messages.
+description: Use when committing code changes, including amending the last commit or adding files to it. Enforces intentional file selection, conventional commits, and why-focused messages.
 argument-hint: "[message | --amend | files...]"
 allowed-tools:
     - Bash(git status:*)
