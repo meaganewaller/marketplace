@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/meaganewaller/marketplace/compare/debug-session-tracker-v0.2.2...debug-session-tracker-v0.2.3) (2026-10-13)
+
+
+### Bug Fixes
+
+* **git-workflow:** send amends through the commit skill :pencil: ([#65](https://github.com/meaganewaller/marketplace/issues/65)) ([394cf73](https://github.com/meaganewaller/marketplace/commit/394cf7353346eb087a65f5bf13a3060c1381de74))
+
 ## [0.2.2](https://github.com/meaganewaller/marketplace/compare/debug-session-tracker-v0.2.1...debug-session-tracker-v0.2.2) (2026-10-12)
 
 
