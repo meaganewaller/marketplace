@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/meaganewaller/marketplace/compare/sitegraph-v1.1.1...sitegraph-v1.1.2) (2026-10-13)
+
+
+### Bug Fixes
+
+* **sitegraph:** refuse to overwrite a config it cannot parse :lock: ([#67](https://github.com/meaganewaller/marketplace/issues/67)) ([06bf3f9](https://github.com/meaganewaller/marketplace/commit/06bf3f98830a45fa48f5044530ce1e418a3d7502))
+
 ## [1.1.1](https://github.com/meaganewaller/marketplace/compare/sitegraph-v1.1.0...sitegraph-v1.1.1) (2026-08-12)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/meaganewaller/marketplace/compare/dotfiles-v1.1.3...dotfiles-v1.1.4) (2026-10-13)
+
+
+### Bug Fixes
+
+* **dotfiles:** fire the chezmoi diff reminder from the source dir :bell: ([#68](https://github.com/meaganewaller/marketplace/issues/68)) ([b0921c8](https://github.com/meaganewaller/marketplace/commit/b0921c8a09546248074f9ae707d31d5bf0dc9d4e))
+
 ## [1.1.3](https://github.com/meaganewaller/marketplace/compare/dotfiles-v1.1.2...dotfiles-v1.1.3) (2026-10-13)
 
 
