@@ -170,3 +170,44 @@ describe("I/O failures degrade to warnings", () => {
 		expect(home).toContain("<!-- sitegraph:nav:start -->");
 	});
 });
+
+describe("a broken config is reported, never overwritten", () => {
+	const configPath = () => join(site, "sitegraph.config.json");
+
+	test("a malformed config fails the run and stays as written", async () => {
+		const typo = '{ "title": "My Site", }\n';
+		await writeFile(configPath(), typo, "utf8");
+		const page = await readFile(join(site, "index.html"), "utf8");
+
+		const { exitCode, stderr } = await runNav(site);
+
+		expect(exitCode).not.toBe(0);
+		expect(stderr).toContain("sitegraph.config.json");
+		expect(await readFile(configPath(), "utf8")).toBe(typo);
+		expect(await readFile(join(site, "index.html"), "utf8")).toBe(page);
+	});
+
+	test.skipIf(CANNOT_TEST_PERMISSIONS)(
+		"an unreadable config fails the run instead of being replaced",
+		async () => {
+			const custom = '{ "title": "My Site" }\n';
+			await writeFile(configPath(), custom, "utf8");
+			await chmod(configPath(), 0o000);
+			try {
+				const { exitCode } = await runNav(site);
+				expect(exitCode).not.toBe(0);
+			} finally {
+				await chmod(configPath(), 0o644);
+			}
+			expect(await readFile(configPath(), "utf8")).toBe(custom);
+		},
+	);
+
+	test("a missing config is still bootstrapped with defaults", async () => {
+		const { exitCode } = await runNav(site);
+
+		expect(exitCode).toBe(0);
+		const written = JSON.parse(await readFile(configPath(), "utf8"));
+		expect(written.sitemapFile).toBe("sitemap.html");
+	});
+});
