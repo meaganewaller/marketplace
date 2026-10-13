@@ -236,9 +236,23 @@ echo '${source}'`,
 describe("dotfiles: chezmoi-diff-reminder.sh", () => {
 	const SCRIPT = "plugins/dotfiles/hooks/scripts/chezmoi-diff-reminder.sh";
 
-	test("reminds about chezmoi diff after editing the source tree", async () => {
+	/**
+	 * A dotfiles repo whose source state lives in home/, named by .chezmoiroot —
+	 * the layout this plugin targets. `chezmoi source-path` reports the home/
+	 * directory itself, not the repo root.
+	 */
+	const chezmoiRootRepo = async () => {
 		const repo = join(sandbox.dir, "dotfiles");
-		await mkdir(repo);
+		await mkdir(join(repo, "home"), { recursive: true });
+		await writeFile(join(repo, ".chezmoiroot"), "home\n");
+		return repo;
+	};
+
+	const reminded = (stdout: string, edited: string) =>
+		expect(JSON.parse(stdout).systemMessage).toContain(`Edited ${edited}`);
+
+	test("reminds after editing the source tree named by .chezmoiroot", async () => {
+		const repo = await chezmoiRootRepo();
 		await writeSettings(sandbox.home, repo);
 		const edited = join(repo, "home", "dot_zshrc");
 
@@ -247,16 +261,66 @@ describe("dotfiles: chezmoi-diff-reminder.sh", () => {
 		});
 
 		expect(code).toBe(0);
-		expect(JSON.parse(stdout).systemMessage).toContain(`Edited ${edited}`);
+		reminded(stdout, edited);
 	});
 
-	test("stays quiet for edits outside the source tree", async () => {
-		const repo = join(sandbox.dir, "dotfiles");
-		await mkdir(repo);
+	test("stays quiet for repo files outside the .chezmoiroot source tree", async () => {
+		const repo = await chezmoiRootRepo();
 		await writeSettings(sandbox.home, repo);
 
 		const { code, stdout } = await sandbox.run(SCRIPT, {
 			stdin: editOf(join(repo, "README.md")),
+		});
+
+		expect(code).toBe(0);
+		expect(stdout).toBe("");
+	});
+
+	// With no settings file the hook asks chezmoi, whose source-path already
+	// ends in the .chezmoiroot directory. Appending home/ again meant the
+	// reminder never fired for anyone relying on chezmoi's own config.
+	test("reminds using chezmoi source-path when no settings file exists", async () => {
+		const repo = await chezmoiRootRepo();
+		await sandbox.stub("chezmoi", `echo '${join(repo, "home")}'`);
+		const edited = join(repo, "home", "dot_zshrc");
+
+		const { code, stdout } = await sandbox.run(SCRIPT, {
+			stdin: editOf(edited),
+		});
+
+		expect(code).toBe(0);
+		reminded(stdout, edited);
+	});
+
+	test("stays quiet outside chezmoi source-path when no settings file exists", async () => {
+		const repo = await chezmoiRootRepo();
+		await sandbox.stub("chezmoi", `echo '${join(repo, "home")}'`);
+
+		const { code, stdout } = await sandbox.run(SCRIPT, {
+			stdin: editOf(join(repo, "README.md")),
+		});
+
+		expect(code).toBe(0);
+		expect(stdout).toBe("");
+	});
+
+	test("treats the repo root as the source tree when there is no .chezmoiroot", async () => {
+		const repo = join(sandbox.dir, "dotfiles");
+		await mkdir(repo);
+		await writeSettings(sandbox.home, repo);
+		const edited = join(repo, "dot_zshrc");
+
+		const { code, stdout } = await sandbox.run(SCRIPT, {
+			stdin: editOf(edited),
+		});
+
+		expect(code).toBe(0);
+		reminded(stdout, edited);
+	});
+
+	test("stays quiet when neither settings nor chezmoi can locate the repo", async () => {
+		const { code, stdout } = await sandbox.run(SCRIPT, {
+			stdin: editOf(join(sandbox.dir, "dotfiles", "home", "dot_zshrc")),
 		});
 
 		expect(code).toBe(0);

@@ -32,7 +32,11 @@ Notes about local overrides go here.
 1. **Project file** — `.claude/dotfiles.local.md`'s `repo_path`
 2. **Global file** — `~/.claude/dotfiles.local.md`'s `repo_path`
 3. **Convention check** — `~/src/github.com/meaganewaller/dotfiles` if it exists *and* contains `.chezmoiroot` or a top-level `home/` directory
-4. **Chezmoi default** — `chezmoi source-path` if the binary is on PATH
+4. **Chezmoi default** — if the binary is on PATH, the repo root is
+   `git -C "$(chezmoi source-path)" rev-parse --show-toplevel`. Do not use
+   `chezmoi source-path` directly: it returns the source directory *inside*
+   the repo (the one `.chezmoiroot` names, e.g. `<repo>/home`), which fails
+   the verification below and points callers one level too deep.
 5. **Prompt** — Use `AskUserQuestion` to ask, then write the answer to the global settings file
 
 Always expand `~` to `$HOME` before using the path. Verify the resolved path exists and looks like a Chezmoi source tree (has `home/` or `.chezmoiroot`) before returning it.

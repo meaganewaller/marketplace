@@ -29,17 +29,28 @@ for candidate in \
 	fi
 done
 
-if [[ -z "$REPO_PATH" ]] && command -v chezmoi >/dev/null 2>&1; then
-	REPO_PATH=$(chezmoi source-path 2>/dev/null || true)
+# Work out the source directory chezmoi reads. A configured repo_path is the
+# repo root, so descend into whatever .chezmoiroot names (the repo root itself
+# when there is none). `chezmoi source-path` already returns that directory —
+# appending home/ to it again is why the reminder once never fired.
+SOURCE_DIR=""
+if [[ -n "$REPO_PATH" ]]; then
+	SOURCE_DIR="$REPO_PATH"
+	if [[ -f "$REPO_PATH/.chezmoiroot" ]]; then
+		read -r CHEZMOI_ROOT <"$REPO_PATH/.chezmoiroot" || true
+		[[ -n "${CHEZMOI_ROOT:-}" ]] && SOURCE_DIR="$REPO_PATH/$CHEZMOI_ROOT"
+	fi
+elif command -v chezmoi >/dev/null 2>&1; then
+	SOURCE_DIR=$(chezmoi source-path 2>/dev/null || true)
 fi
 
-if [[ -z "$REPO_PATH" ]]; then
+if [[ -z "$SOURCE_DIR" ]]; then
 	exit 0
 fi
 
-# Only nudge for edits inside the source tree's home/ directory.
+# Only nudge for edits inside the source directory.
 case "$FILE" in
-"$REPO_PATH"/home/*) ;;
+"${SOURCE_DIR%/}"/*) ;;
 *) exit 0 ;;
 esac
 
