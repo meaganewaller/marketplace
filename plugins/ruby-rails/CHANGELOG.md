@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.5](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.4...ruby-rails-v1.4.5) (2026-10-13)
+
+
+### Bug Fixes
+
+* **ruby-rails:** stop the startup hook installing outside Ruby :gem: ([#70](https://github.com/meaganewaller/marketplace/issues/70)) ([a119d27](https://github.com/meaganewaller/marketplace/commit/a119d27aa509055b96c9568b7a3a5f7a5f37533d))
+
 ## [1.4.4](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.3...ruby-rails-v1.4.4) (2026-10-12)
 
 
