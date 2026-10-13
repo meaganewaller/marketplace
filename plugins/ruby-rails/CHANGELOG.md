@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.6](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.5...ruby-rails-v1.4.6) (2026-10-13)
+
+
+### Bug Fixes
+
+* **ruby-rails:** correct Rails facts and command forms :books: ([#72](https://github.com/meaganewaller/marketplace/issues/72)) ([682dede](https://github.com/meaganewaller/marketplace/commit/682dedec7aefa99c7a9b10ce3515896f518c6fa1))
+
 ## [1.4.5](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.4...ruby-rails-v1.4.5) (2026-10-13)
 
 
