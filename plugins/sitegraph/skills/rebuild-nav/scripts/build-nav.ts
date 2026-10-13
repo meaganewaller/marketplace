@@ -125,9 +125,28 @@ async function loadOrInitConfig(
 	checkOnly: boolean,
 ): Promise<Config> {
 	const configPath = join(siteRoot, "sitegraph.config.json");
+
+	// Only a missing config is bootstrapped. Any other failure — a JSON typo,
+	// unreadable permissions — stops the run: writing defaults over it would
+	// silently destroy the user's settings.
+	let raw: string | null = null;
 	try {
-		const raw = await readFile(configPath, "utf8");
-		const parsed = JSON.parse(raw);
+		raw = await readFile(configPath, "utf8");
+	} catch (err) {
+		if ((err as NodeJS.ErrnoException).code !== "ENOENT") {
+			throw new Error(`cannot read ${configPath}: ${(err as Error).message}`);
+		}
+	}
+
+	if (raw !== null) {
+		let parsed: Partial<Config>;
+		try {
+			parsed = JSON.parse(raw);
+		} catch (err) {
+			throw new Error(
+				`${configPath} is not valid JSON (${(err as Error).message}); fix it or delete it to regenerate the defaults`,
+			);
+		}
 		return {
 			title: parsed.title ?? humanize(basename(siteRoot)),
 			cssUrl: parsed.cssUrl ?? null,
@@ -135,23 +154,23 @@ async function loadOrInitConfig(
 			sitemapTitle: parsed.sitemapTitle ?? "Sitemap",
 			ignore: Array.isArray(parsed.ignore) ? parsed.ignore : DEFAULT_IGNORE,
 		};
-	} catch {
-		const defaults: Config = {
-			title: humanize(basename(siteRoot)),
-			cssUrl: null,
-			sitemapFile: "sitemap.html",
-			sitemapTitle: "Sitemap",
-			ignore: DEFAULT_IGNORE,
-		};
-		if (!checkOnly) {
-			await writeFile(
-				configPath,
-				`${JSON.stringify(defaults, null, 2)}\n`,
-				"utf8",
-			);
-		}
-		return defaults;
 	}
+
+	const defaults: Config = {
+		title: humanize(basename(siteRoot)),
+		cssUrl: null,
+		sitemapFile: "sitemap.html",
+		sitemapTitle: "Sitemap",
+		ignore: DEFAULT_IGNORE,
+	};
+	if (!checkOnly) {
+		await writeFile(
+			configPath,
+			`${JSON.stringify(defaults, null, 2)}\n`,
+			"utf8",
+		);
+	}
+	return defaults;
 }
 
 async function derivePinnedCssUrl(): Promise<string> {
