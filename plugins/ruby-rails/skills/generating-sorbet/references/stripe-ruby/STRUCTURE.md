@@ -29,16 +29,26 @@ rbi/
 
 ## stripe-ruby Examples
 
-Source: https://github.com/stripe/stripe-ruby (MIT License), copied from
-commit [`566a84df30c6708f87f02ced51c4427904d19214`](https://github.com/stripe/stripe-ruby/tree/566a84df30c6708f87f02ced51c4427904d19214/rbi)
+Source: https://github.com/stripe/stripe-ruby (MIT License, see
+[LICENSE](LICENSE)), copied from commit
+[`566a84df30c6708f87f02ced51c4427904d19214`](https://github.com/stripe/stripe-ruby/tree/566a84df30c6708f87f02ced51c4427904d19214/rbi)
 ("Update generated code", #1744, 2025-12-15).
 
 This is a curated sample of 13 files, not the whole generated tree. The
 upstream `rbi/` holds roughly 950 files that repeat the same few patterns, so
 one or two of each kind teaches as much as all of them. The sample keeps the
 three files linked below, small and nested-namespace examples of each kind,
-and one file from the newer `v2` API. To refresh a file, fetch it from the
-commit above (or a newer one) at the same path under `rbi/stripe/`.
+and one file from the newer `v2` API.
+
+To refresh, set `rev` to a newer commit or tag and run from this directory. It
+re-fetches the same 13 paths; to change the sample, edit the tree below too.
+
+```bash
+rev=566a84df30c6708f87f02ced51c4427904d19214
+for f in $(find rbi -name '*.rbi') LICENSE; do
+  curl -fsSL "https://raw.githubusercontent.com/stripe/stripe-ruby/$rev/$f" -o "$f"
+done
+```
 
 ### stripe-ruby Directory Structure
 
