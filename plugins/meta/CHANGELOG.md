@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/meaganewaller/marketplace/compare/meta-v1.1.2...meta-v1.1.3) (2026-10-14)
+
+
+### Bug Fixes
+
+* **ruby-rails:** drop the unloaded plugin CLAUDE.md :wastebasket: ([#78](https://github.com/meaganewaller/marketplace/issues/78)) ([339d54d](https://github.com/meaganewaller/marketplace/commit/339d54d5257b6b1261efce005fc195f53d5a5699))
+
 ## [1.1.2](https://github.com/meaganewaller/marketplace/compare/meta-v1.1.1...meta-v1.1.2) (2026-10-09)
 
 

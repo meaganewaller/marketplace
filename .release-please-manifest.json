@@ -4,10 +4,10 @@
 	"plugins/dotfiles": "1.1.4",
 	"plugins/fnox": "1.0.2",
 	"plugins/git-workflow": "0.2.2",
-	"plugins/meta": "1.1.2",
+	"plugins/meta": "1.1.3",
 	"plugins/mise": "1.1.2",
 	"plugins/pr-review-copilot": "0.2.1",
-	"plugins/ruby-rails": "1.4.7",
+	"plugins/ruby-rails": "1.4.8",
 	"plugins/sitegraph": "1.1.2",
 	"plugins/typescript-architect": "1.0.1"
 }

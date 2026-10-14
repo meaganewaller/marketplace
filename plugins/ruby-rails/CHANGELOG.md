@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.8](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.7...ruby-rails-v1.4.8) (2026-10-14)
+
+
+### Bug Fixes
+
+* **ruby-rails:** drop the unloaded plugin CLAUDE.md :wastebasket: ([#78](https://github.com/meaganewaller/marketplace/issues/78)) ([339d54d](https://github.com/meaganewaller/marketplace/commit/339d54d5257b6b1261efce005fc195f53d5a5699))
+* **ruby-rails:** route Rails Sorbet work through Tapioca :railway_track: ([#76](https://github.com/meaganewaller/marketplace/issues/76)) ([6f2e230](https://github.com/meaganewaller/marketplace/commit/6f2e230d8f40dc3248e9ebd51d67946bbd8fd8f8))
+
 ## [1.4.7](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.6...ruby-rails-v1.4.7) (2026-10-13)
 
 
