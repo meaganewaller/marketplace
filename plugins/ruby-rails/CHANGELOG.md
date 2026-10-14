@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.7](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.6...ruby-rails-v1.4.7) (2026-10-13)
+
+
+### Performance Improvements
+
+* **ruby-rails:** ship 13 stripe RBI examples, not 958 :scissors: ([#74](https://github.com/meaganewaller/marketplace/issues/74)) ([5ea4018](https://github.com/meaganewaller/marketplace/commit/5ea4018d22ead9a6034e657dc997ac677da6482a))
+
 ## [1.4.6](https://github.com/meaganewaller/marketplace/compare/ruby-rails-v1.4.5...ruby-rails-v1.4.6) (2026-10-13)
 
 
