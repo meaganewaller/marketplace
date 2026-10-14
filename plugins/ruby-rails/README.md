@@ -48,7 +48,7 @@ Adapted from [ruby-type-signature-skills](https://github.com/DmitryPogrebnoy/rub
 | ----- | ----- |
 | **generating-rbs** | `sig/**/*.rbs` signatures for Steep/RBS |
 | **generating-rbs-inline** | `# @rbs` / rbs-inline comments in `.rb` files |
-| **generating-sorbet** | `rbi/**/*.rbi` shim files without editing source |
+| **generating-sorbet** | `.rbi` shims without editing source; Rails DSL methods via `tapioca dsl` |
 | **generating-sorbet-inline** | `sig { }` blocks and `# typed:` sigils in source |
 
 Each skill includes reference material for syntax and production examples. Pick **one** system per project (RBS vs Sorbet; inline vs separate files).

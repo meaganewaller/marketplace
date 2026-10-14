@@ -43,7 +43,7 @@ system, and whether signatures live in the source or beside it:
 | | Separate files | Inline in `.rb` |
 |---|---|---|
 | **RBS** | `generating-rbs` (`sig/**/*.rbs`) | `generating-rbs-inline` (`# @rbs`) |
-| **Sorbet** | `generating-sorbet` (`rbi/**/*.rbi`) | `generating-sorbet-inline` (`sig { }`) |
+| **Sorbet** | `generating-sorbet` (`sorbet/rbi/shims/`; `rbi/` in gems) | `generating-sorbet-inline` (`sig { }`) |
 
 Follow whatever the project already uses. **Never mix both systems in one
 file**, and never mix inline and separate signatures for the same constant —
