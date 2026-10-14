@@ -131,7 +131,7 @@ mise exec -- which ruby-lsp
 
 ## Usage
 
-Skills activate automatically when you work on matching Ruby/Rails tasks (routing, migrations, Hotwire, etc.). For project-wide defaults, the plugin includes `CLAUDE.md` scoped to common Ruby/Rails file globs.
+Skills activate automatically when you work on matching Ruby/Rails tasks (routing, migrations, Hotwire, etc.). Every skill reads the shared defaults (toolchain, versions, command forms, and type-system pairing) from `references/conventions.md`. To set defaults for one project, put them in that project's own `CLAUDE.md`.
 
 With this plugin installed, Claude Code starts Ruby LSP on session start for Ruby files when the gem is available.
 

@@ -15,7 +15,7 @@ suite.
 ```text
 /meta:rules-eval .cursor/rules
 /meta:rules-eval CLAUDE.md
-/meta:rules-eval plugins/ruby-rails/CLAUDE.md medium
+/meta:rules-eval AGENTS.md medium
 /meta:rules-eval .
 ```
 
