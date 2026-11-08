@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.3](https://github.com/meaganewaller/marketplace/compare/git-workflow-v0.2.2...git-workflow-v0.2.3) (2026-11-08)
+
+
+### Bug Fixes
+
+* **git-workflow:** gist only the requested session :lock: ([#81](https://github.com/meaganewaller/marketplace/issues/81)) ([0138559](https://github.com/meaganewaller/marketplace/commit/0138559e82d686c3ade9441c8bec030d6bd1efef))
+* **git-workflow:** gist only the session that was asked for :lock: ([0138559](https://github.com/meaganewaller/marketplace/commit/0138559e82d686c3ade9441c8bec030d6bd1efef)), closes [#80](https://github.com/meaganewaller/marketplace/issues/80)
+
 ## [0.2.2](https://github.com/meaganewaller/marketplace/compare/git-workflow-v0.2.1...git-workflow-v0.2.2) (2026-10-13)
 
 
