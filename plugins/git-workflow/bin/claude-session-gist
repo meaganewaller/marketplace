@@ -234,10 +234,23 @@ main() {
 
 	command -v gh &>/dev/null || die "gh not found in PATH"
 
-	# Extract -> secret Gist. gh prints the Gist URL to stdout, which becomes
-	# this script's only stdout.
-	"${extract}" "${session_id}" |
-		gh gist create --filename "pr-conversation-${branch_safe}.md" -
+	# Extract fully before uploading anything. Piping the extractor straight into
+	# gh starts the upload regardless of how the extractor exits, so a session
+	# it refuses to vouch for would still reach a Gist. Expand $transcript at
+	# trap registration for the same reason claude-extract-session does.
+	local transcript
+	transcript=$(mktemp) || die "failed to create temporary file"
+	# shellcheck disable=SC2064
+	trap "rm -f -- '${transcript}'" EXIT
+
+	if ! "${extract}" "${session_id}" >"${transcript}"; then
+		die "failed to extract session '${session_id}'; nothing uploaded"
+	fi
+	[[ -s "${transcript}" ]] || die "extracted session '${session_id}' is empty; nothing uploaded"
+
+	# Secret Gist. gh prints the Gist URL to stdout, which becomes this
+	# script's only stdout.
+	gh gist create --filename "pr-conversation-${branch_safe}.md" - <"${transcript}"
 }
 
 main "$@"

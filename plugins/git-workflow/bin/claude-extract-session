@@ -66,21 +66,49 @@ validate_session_id() {
 	fi
 }
 
-# Find session number from claude-extract --list output
-find_session_number() {
+# How many times to re-list and re-extract before giving up. claude-extract
+# only selects by list position, and the list is ordered by modification time,
+# so any session that writes to its log between our --list and its --extract
+# shifts the positions. Each attempt verifies what came out, so a retry costs
+# time, never correctness.
+readonly MAX_ATTEMPTS=3
+
+# Fail unless exactly one transcript on disk carries the full session ID.
+#
+# The list shows only eight characters of each ID, which is not enough to tell
+# sessions apart -- agent IDs all share "agent-" and leave two hex digits. The
+# full ID is the transcript's filename, so check that first.
+require_transcript() {
 	local target_id="$1"
-	local session_prefix
+	local projects_dir="${CLAUDE_CONFIG_DIR:-${HOME}/.claude}/projects"
+	local matches count
 
-	# Extract first 8 characters for matching (claude-extract truncates IDs)
-	session_prefix="${target_id:0:8}"
+	[[ -d "${projects_dir}" ]] || die "no Claude projects directory at ${projects_dir}"
 
-	log "searching for session starting with '${session_prefix}'..."
+	matches=$(find "${projects_dir}" -type f -name "${target_id}.jsonl" 2>/dev/null)
+	count=$(printf '%s' "${matches}" | grep -c . || true)
 
-	# Parse claude-extract --list output to find matching session
-	# Format:
-	#   N. <folder>
-	#      Session: <truncated-id>...
+	if [[ "${count}" -eq 0 ]]; then
+		die "no transcript named ${target_id}.jsonl under ${projects_dir}"
+	fi
+	if [[ "${count}" -gt 1 ]]; then
+		log "transcripts found:"
+		printf '%s\n' "${matches}" >&2
+		die "more than one transcript is named ${target_id}.jsonl"
+	fi
+}
+
+# Print the list positions whose truncated ID matches the target's first
+# eight characters, one per line, from claude-extract --list output.
+#
+# Format:
+#   N. <folder>
+#      Session: <truncated-id>...
+find_candidates() {
+	local target_id="$1"
+	local session_prefix="${target_id:0:8}"
 	local list_output
+
 	if ! list_output=$(claude-extract --list 2>&1); then
 		log "claude-extract --list failed; output was:"
 		printf '%s\n' "${list_output}" >&2
@@ -88,8 +116,6 @@ find_session_number() {
 	fi
 
 	local current_number=""
-	local found_number=""
-
 	while IFS= read -r line; do
 		# Match numbered entry line (e.g., "1. <folder>")
 		if [[ "${line}" =~ ^[[:space:]]*([0-9]+)\. ]]; then
@@ -98,24 +124,57 @@ find_session_number() {
 
 		# Match session line (e.g., "   Session: 907cd44d...")
 		if [[ "${line}" =~ Session:[[:space:]]*([^.]+) ]]; then
-			local session_id="${BASH_REMATCH[1]}"
-			if [[ "${session_id}" == "${session_prefix}"* ]]; then
-				found_number="${current_number}"
-				break
+			if [[ "${BASH_REMATCH[1]}" == "${session_prefix}" ]]; then
+				printf '%s\n' "${current_number}"
 			fi
 		fi
 	done <<<"${list_output}"
-
-	if [[ -z "${found_number}" ]]; then
-		die "session '${target_id}' not found in claude-extract list"
-	fi
-
-	printf '%s' "${found_number}"
 }
 
-# Extract session to temp directory and output markdown
-extract_session() {
+# Return 0 if the markdown file's header names exactly this session.
+#
+# Only the header counts: the body is the conversation itself, and a session
+# that discusses another session's ID would otherwise pass for it.
+is_session() {
+	local file="$1"
+	local target_id="$2"
+
+	head -n 4 "${file}" | grep -qxF "Session ID: ${target_id}"
+}
+
+# Extract the list entry at one position into a fresh directory, and print the
+# markdown file's path if it is the target session.
+extract_candidate() {
 	local session_number="$1"
+	local target_id="$2"
+	local outdir="$3"
+
+	mkdir -p "${outdir}" || die "failed to create ${outdir}"
+
+	# Run claude-extract with detailed output
+	if ! claude-extract \
+		--detailed \
+		--extract "${session_number}" \
+		--output "${outdir}" \
+		>&2; then
+		die "failed to extract session"
+	fi
+
+	local file
+	for file in "${outdir}"/*.md; do
+		[[ -f "${file}" ]] || continue
+		if is_session "${file}" "${target_id}"; then
+			printf '%s' "${file}"
+			return 0
+		fi
+	done
+	return 1
+}
+
+# Extract the target session and print its markdown, or exit non-zero having
+# printed nothing to stdout.
+extract_session() {
+	local target_id="$1"
 	local tmpdir
 
 	# Create temporary directory for extraction
@@ -127,31 +186,30 @@ extract_session() {
 	# shellcheck disable=SC2064
 	trap "rm -rf -- '${tmpdir}'" EXIT
 
-	log "extracting session #${session_number}..."
+	local attempt candidates session_number file
+	for ((attempt = 1; attempt <= MAX_ATTEMPTS; attempt++)); do
+		candidates=$(find_candidates "${target_id}")
+		if [[ -z "${candidates}" ]]; then
+			log "attempt ${attempt}: no listed session starts with '${target_id:0:8}'"
+			continue
+		fi
 
-	# Run claude-extract with detailed output
-	if ! claude-extract \
-		--detailed \
-		--extract "${session_number}" \
-		--output "${tmpdir}" \
-		>&2; then
-		die "failed to extract session"
-	fi
+		# One extraction per candidate, each into its own directory: the
+		# extractor names files by date and the same eight characters, so
+		# candidates extracted together can overwrite each other.
+		while IFS= read -r session_number; do
+			log "attempt ${attempt}: extracting session #${session_number}..."
+			if file=$(extract_candidate "${session_number}" "${target_id}" \
+				"${tmpdir}/${attempt}-${session_number}"); then
+				cat "${file}"
+				return 0
+			fi
+		done <<<"${candidates}"
 
-	# Find the generated markdown file
-	local md_files
-	md_files=("${tmpdir}"/*.md)
+		log "attempt ${attempt}: the list moved before extraction; no extracted file is session ${target_id}"
+	done
 
-	if [[ ! -f "${md_files[0]}" ]]; then
-		die "no markdown file found in extraction output"
-	fi
-
-	if [[ "${#md_files[@]}" -gt 1 ]]; then
-		log "warning: multiple markdown files found, using first"
-	fi
-
-	# Output markdown content to stdout
-	cat "${md_files[0]}"
+	die "could not extract session ${target_id} after ${MAX_ATTEMPTS} attempts"
 }
 
 main() {
@@ -177,14 +235,10 @@ main() {
 		die "claude-extract not found in PATH"
 	fi
 
-	# Find session number from list
-	local session_number
-	session_number=$(find_session_number "${session_id}")
-
-	log "found session at index #${session_number}"
+	require_transcript "${session_id}"
 
 	# Extract and output
-	extract_session "${session_number}"
+	extract_session "${session_id}"
 }
 
 main "$@"
